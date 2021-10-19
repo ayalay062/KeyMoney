@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KeyMoneyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Amuta">
+          <Key>
+            <PropertyRef Name="id_amuta" />
+          </Key>
+          <Property Name="id_amuta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_amuta" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ribit" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Amuta_deposits">
+          <Key>
+            <PropertyRef Name="id_deposit" />
+          </Key>
+          <Property Name="id_deposit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_amuta" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="sum" Type="int" Nullable="false" />
+          <Property Name="dateOfDeposit" Type="date" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="id_expense" />
+          </Key>
+          <Property Name="id_expense" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_expense" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="id_income" />
+          </Key>
+          <Property Name="id_income" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_income" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kinds">
+          <Key>
+            <PropertyRef Name="id_kind" />
+          </Key>
+          <Property Name="id_kind" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_kind" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="id_loan" />
+          </Key>
+          <Property Name="id_loan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="date_ofLoan" Type="date" Nullable="false" />
+          <Property Name="sum" Type="int" Nullable="false" />
+          <Property Name="prisa" Type="int" Nullable="false" />
+          <Property Name="ribit" Type="float" Nullable="false" />
+          <Property Name="days_toGetMailAlert" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="name_user" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="tel" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="misgeret" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_expense">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_expense" Type="int" Nullable="false" />
+          <Property Name="id_kind" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="sum" Type="int" Nullable="false" />
+          <Property Name="expense_date" Type="date" />
+        </EntityType>
+        <EntityType Name="User_income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_income" Type="int" Nullable="false" />
+          <Property Name="id_kind" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="sum" Type="int" Nullable="false" />
+          <Property Name="income_date" Type="date" />
+        </EntityType>
+        <Association Name="FK__Amuta_dep__id_am__33D4B598">
+          <End Role="Amuta" Type="Self.Amuta" Multiplicity="1" />
+          <End Role="Amuta_deposits" Type="Self.Amuta_deposits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amuta">
+              <PropertyRef Name="id_amuta" />
+            </Principal>
+            <Dependent Role="Amuta_deposits">
+              <PropertyRef Name="id_amuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Amuta_dep__id_us__34C8D9D1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Amuta_deposits" Type="Self.Amuta_deposits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Amuta_deposits">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__id_user__35BCFE0A">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_ex__37A5467C">
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
+          <End Role="User_expense" Type="Self.User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="id_expense" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_expense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_ki__36B12243">
+          <End Role="Kinds" Type="Self.Kinds" Multiplicity="1" />
+          <End Role="User_expense" Type="Self.User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kinds">
+              <PropertyRef Name="id_kind" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_kind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_us__38996AB5">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_expense" Type="Self.User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_in__398D8EEE">
+          <End Role="Income" Type="Self.Income" Multiplicity="1" />
+          <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Income">
+              <PropertyRef Name="id_income" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_income" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_ki__3A81B327">
+          <End Role="Kinds" Type="Self.Kinds" Multiplicity="1" />
+          <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kinds">
+              <PropertyRef Name="id_kind" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_kind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_us__3B75D760">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KeyMoneyModelStoreContainer">
+          <EntitySet Name="Amuta" EntityType="Self.Amuta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Amuta_deposits" EntityType="Self.Amuta_deposits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kinds" EntityType="Self.Kinds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loans" EntityType="Self.Loans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_expense" EntityType="Self.User_expense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_income" EntityType="Self.User_income" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Amuta_dep__id_am__33D4B598" Association="Self.FK__Amuta_dep__id_am__33D4B598">
+            <End Role="Amuta" EntitySet="Amuta" />
+            <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Amuta_dep__id_us__34C8D9D1" Association="Self.FK__Amuta_dep__id_us__34C8D9D1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__id_user__35BCFE0A" Association="Self.FK__Loans__id_user__35BCFE0A">
+            <End Role="User" EntitySet="User" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_ex__37A5467C" Association="Self.FK__User_expe__id_ex__37A5467C">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_ki__36B12243" Association="Self.FK__User_expe__id_ki__36B12243">
+            <End Role="Kinds" EntitySet="Kinds" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_us__38996AB5" Association="Self.FK__User_expe__id_us__38996AB5">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_in__398D8EEE" Association="Self.FK__User_inco__id_in__398D8EEE">
+            <End Role="Income" EntitySet="Income" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_ki__3A81B327" Association="Self.FK__User_inco__id_ki__3A81B327">
+            <End Role="Kinds" EntitySet="Kinds" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_us__3B75D760" Association="Self.FK__User_inco__id_us__3B75D760">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KeyMoneyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KeyMoneyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Amuta" EntityType="KeyMoneyModel.Amuta" />
+          <EntitySet Name="Amuta_deposits" EntityType="KeyMoneyModel.Amuta_deposits" />
+          <EntitySet Name="Expenses" EntityType="KeyMoneyModel.Expenses" />
+          <EntitySet Name="Income" EntityType="KeyMoneyModel.Income" />
+          <EntitySet Name="Kinds" EntityType="KeyMoneyModel.Kinds" />
+          <EntitySet Name="Loans" EntityType="KeyMoneyModel.Loans" />
+          <EntitySet Name="User" EntityType="KeyMoneyModel.User" />
+          <EntitySet Name="User_expense" EntityType="KeyMoneyModel.User_expense" />
+          <EntitySet Name="User_income" EntityType="KeyMoneyModel.User_income" />
+          <AssociationSet Name="FK__Amuta_dep__id_am__33D4B598" Association="KeyMoneyModel.FK__Amuta_dep__id_am__33D4B598">
+            <End Role="Amuta" EntitySet="Amuta" />
+            <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Amuta_dep__id_us__34C8D9D1" Association="KeyMoneyModel.FK__Amuta_dep__id_us__34C8D9D1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_ex__37A5467C" Association="KeyMoneyModel.FK__User_expe__id_ex__37A5467C">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_in__398D8EEE" Association="KeyMoneyModel.FK__User_inco__id_in__398D8EEE">
+            <End Role="Income" EntitySet="Income" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_ki__36B12243" Association="KeyMoneyModel.FK__User_expe__id_ki__36B12243">
+            <End Role="Kinds" EntitySet="Kinds" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_ki__3A81B327" Association="KeyMoneyModel.FK__User_inco__id_ki__3A81B327">
+            <End Role="Kinds" EntitySet="Kinds" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__id_user__35BCFE0A" Association="KeyMoneyModel.FK__Loans__id_user__35BCFE0A">
+            <End Role="User" EntitySet="User" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_expe__id_us__38996AB5" Association="KeyMoneyModel.FK__User_expe__id_us__38996AB5">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_expense" EntitySet="User_expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_inco__id_us__3B75D760" Association="KeyMoneyModel.FK__User_inco__id_us__3B75D760">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_income" EntitySet="User_income" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Amuta">
+          <Key>
+            <PropertyRef Name="id_amuta" />
+          </Key>
+          <Property Name="id_amuta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_amuta" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ribit" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Amuta_deposits" Relationship="KeyMoneyModel.FK__Amuta_dep__id_am__33D4B598" FromRole="Amuta" ToRole="Amuta_deposits" />
+        </EntityType>
+        <EntityType Name="Amuta_deposits">
+          <Key>
+            <PropertyRef Name="id_deposit" />
+          </Key>
+          <Property Name="id_deposit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_amuta" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <Property Name="dateOfDeposit" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Amuta" Relationship="KeyMoneyModel.FK__Amuta_dep__id_am__33D4B598" FromRole="Amuta_deposits" ToRole="Amuta" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__Amuta_dep__id_us__34C8D9D1" FromRole="Amuta_deposits" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="id_expense" />
+          </Key>
+          <Property Name="id_expense" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_expense" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_ex__37A5467C" FromRole="Expenses" ToRole="User_expense" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="id_income" />
+          </Key>
+          <Property Name="id_income" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_income" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_in__398D8EEE" FromRole="Income" ToRole="User_income" />
+        </EntityType>
+        <EntityType Name="Kinds">
+          <Key>
+            <PropertyRef Name="id_kind" />
+          </Key>
+          <Property Name="id_kind" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_kind" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_ki__36B12243" FromRole="Kinds" ToRole="User_expense" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3A81B327" FromRole="Kinds" ToRole="User_income" />
+        </EntityType>
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="id_loan" />
+          </Key>
+          <Property Name="id_loan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="date_ofLoan" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <Property Name="prisa" Type="Int32" Nullable="false" />
+          <Property Name="ribit" Type="Double" Nullable="false" />
+          <Property Name="days_toGetMailAlert" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__Loans__id_user__35BCFE0A" FromRole="Loans" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="name_user" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="misgeret" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Amuta_deposits" Relationship="KeyMoneyModel.FK__Amuta_dep__id_us__34C8D9D1" FromRole="User" ToRole="Amuta_deposits" />
+          <NavigationProperty Name="Loans" Relationship="KeyMoneyModel.FK__Loans__id_user__35BCFE0A" FromRole="User" ToRole="Loans" />
+          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_us__38996AB5" FromRole="User" ToRole="User_expense" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_us__3B75D760" FromRole="User" ToRole="User_income" />
+        </EntityType>
+        <EntityType Name="User_expense">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_expense" Type="Int32" Nullable="false" />
+          <Property Name="id_kind" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <Property Name="expense_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Expenses" Relationship="KeyMoneyModel.FK__User_expe__id_ex__37A5467C" FromRole="User_expense" ToRole="Expenses" />
+          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_expe__id_ki__36B12243" FromRole="User_expense" ToRole="Kinds" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_expe__id_us__38996AB5" FromRole="User_expense" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User_income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_income" Type="Int32" Nullable="false" />
+          <Property Name="id_kind" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <Property Name="income_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Income" Relationship="KeyMoneyModel.FK__User_inco__id_in__398D8EEE" FromRole="User_income" ToRole="Income" />
+          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3A81B327" FromRole="User_income" ToRole="Kinds" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_inco__id_us__3B75D760" FromRole="User_income" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Amuta_dep__id_am__33D4B598">
+          <End Type="KeyMoneyModel.Amuta" Role="Amuta" Multiplicity="1" />
+          <End Type="KeyMoneyModel.Amuta_deposits" Role="Amuta_deposits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amuta">
+              <PropertyRef Name="id_amuta" />
+            </Principal>
+            <Dependent Role="Amuta_deposits">
+              <PropertyRef Name="id_amuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Amuta_dep__id_us__34C8D9D1">
+          <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
+          <End Type="KeyMoneyModel.Amuta_deposits" Role="Amuta_deposits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Amuta_deposits">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_ex__37A5467C">
+          <End Type="KeyMoneyModel.Expenses" Role="Expenses" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="id_expense" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_expense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_in__398D8EEE">
+          <End Type="KeyMoneyModel.Income" Role="Income" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Income">
+              <PropertyRef Name="id_income" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_income" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_ki__36B12243">
+          <End Type="KeyMoneyModel.Kinds" Role="Kinds" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kinds">
+              <PropertyRef Name="id_kind" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_kind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_ki__3A81B327">
+          <End Type="KeyMoneyModel.Kinds" Role="Kinds" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kinds">
+              <PropertyRef Name="id_kind" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_kind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__id_user__35BCFE0A">
+          <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
+          <End Type="KeyMoneyModel.Loans" Role="Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_expe__id_us__38996AB5">
+          <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="User_expense">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_inco__id_us__3B75D760">
+          <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
+          <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="User_income">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KeyMoneyModelStoreContainer" CdmEntityContainer="KeyMoneyEntities">
+          <EntitySetMapping Name="Amuta">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Amuta">
+              <MappingFragment StoreEntitySet="Amuta">
+                <ScalarProperty Name="ribit" ColumnName="ribit" />
+                <ScalarProperty Name="name_amuta" ColumnName="name_amuta" />
+                <ScalarProperty Name="id_amuta" ColumnName="id_amuta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Amuta_deposits">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Amuta_deposits">
+              <MappingFragment StoreEntitySet="Amuta_deposits">
+                <ScalarProperty Name="dateOfDeposit" ColumnName="dateOfDeposit" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_amuta" ColumnName="id_amuta" />
+                <ScalarProperty Name="id_deposit" ColumnName="id_deposit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Expenses">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="name_expense" ColumnName="name_expense" />
+                <ScalarProperty Name="id_expense" ColumnName="id_expense" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Income">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Income">
+              <MappingFragment StoreEntitySet="Income">
+                <ScalarProperty Name="name_income" ColumnName="name_income" />
+                <ScalarProperty Name="id_income" ColumnName="id_income" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kinds">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Kinds">
+              <MappingFragment StoreEntitySet="Kinds">
+                <ScalarProperty Name="name_kind" ColumnName="name_kind" />
+                <ScalarProperty Name="id_kind" ColumnName="id_kind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="KeyMoneyModel.Loans">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="days_toGetMailAlert" ColumnName="days_toGetMailAlert" />
+                <ScalarProperty Name="ribit" ColumnName="ribit" />
+                <ScalarProperty Name="prisa" ColumnName="prisa" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="date_ofLoan" ColumnName="date_ofLoan" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_loan" ColumnName="id_loan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="KeyMoneyModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="misgeret" ColumnName="misgeret" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="name_user" ColumnName="name_user" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_expense">
+            <EntityTypeMapping TypeName="KeyMoneyModel.User_expense">
+              <MappingFragment StoreEntitySet="User_expense">
+                <ScalarProperty Name="expense_date" ColumnName="expense_date" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_kind" ColumnName="id_kind" />
+                <ScalarProperty Name="id_expense" ColumnName="id_expense" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_income">
+            <EntityTypeMapping TypeName="KeyMoneyModel.User_income">
+              <MappingFragment StoreEntitySet="User_income">
+                <ScalarProperty Name="income_date" ColumnName="income_date" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_kind" ColumnName="id_kind" />
+                <ScalarProperty Name="id_income" ColumnName="id_income" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

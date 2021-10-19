@@ -1,0 +1,54 @@
+<!-- הוצאות קבועות
+הוצאות משתנות
+סרגל של שנים
+סה"כ
+התנתק -->
+
+<div style="margin: 60px;direction: rtl; ">
+
+    <div style="overflow: auto;">
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="ListData" matSort>
+                <mat-header-row *matHeaderRowDef="displayedColumns" style=" font-family: 'Rubik', sans-serif;
+                direction: rtl;"></mat-header-row>
+                <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+
+                <ng-container matColumnDef="Options">
+                    <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-icon-button (click)="onEdit(row.id_user)">
+                            <!-- איזה id מקבל? -->
+                            <mat-icon>launch</mat-icon>
+                        </button>
+
+                        <button mat-icon-button color="warn" (click)="onDelete(row.id_user)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="usually_expense">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>הוצאות קבועות</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{element.usually_expense}}</mat-header-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{element.date}}</mat-header-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="sum">
+                    <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{element.sum}}</mat-header-cell>
+                </ng-container>
+
+            </mat-table>
+        </div>
+    </div>
+
+    <!-- <button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" style=" font-family: 'Rubik', sans-serif;
+    direction: rtl;"> הוספת משתמש</button> -->
+
+</div>
+
+<label>סה"כ:</label>

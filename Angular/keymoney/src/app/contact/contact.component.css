@@ -1,0 +1,63 @@
+#lg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    position: relative;
+    margin-top: 30px;
+}
+
+p,
+input,
+i,
+label,
+h2 {
+    /* font-family: 'Arimo', sans-serif, 'Montserrat'; */
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+    direction: rtl;
+    color: rgb(46, 44, 44);
+}
+
+form {
+    padding: 30px;
+}
+
+.submit {
+    background-color: transparent;
+    color: #262626;
+    width: 150px;
+    padding: 10px;
+    ;
+    margin: 10px;
+    /* font-family: 'Arimo', sans-serif, 'Montserrat'; */
+    font-family: 'Rubik', sans-serif;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.submit:hover {
+    border-color: coral;
+    color: coral;
+    text-decoration: none;
+}
+
+.submit:link {
+    text-decoration: none;
+}
+
+.submit:visited {
+    text-decoration: none;
+}
+
+.submit:active {
+    text-decoration: none;
+}
+
+.md-form {}
+
+small {
+    color: red;
+    display: block;
+    right: 0;
+}

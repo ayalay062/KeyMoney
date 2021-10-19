@@ -1,0 +1,87 @@
+<form class="add_patient" [formGroup]="myForm" (ngSubmit)="save()">
+    <h5>טופס הוספת הלוואה</h5>
+    <button type="button" class="close" aria-label="Close" (click)="OnClose()">
+        <span aria-hidden="true">×</span>
+      </button>
+ 
+    <div style="margin-top: 5px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="sum">
+            <label for="form1" style="font-size: 14px;">סכום</label>
+            <div *ngIf="myForm.controls['sum'].touched&&myForm.controls['sum'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 5px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="prisa">
+            <label for="form1" style="font-size: 14px;">פריסה</label>
+            <div *ngIf="myForm.controls['prisa'].touched&&myForm.controls['prisa'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 5px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="ribit">
+            <label for="form1" style="font-size: 14px;">ריבית</label>
+            <div *ngIf="myForm.controls['ribit'].touched&&myForm.controls['ribit'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 5px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="days_toGetMailAlert">
+            <label for="form1" style="font-size: 14px;">מספר ימים לקבלת התראה</label>
+            <div *ngIf="myForm.controls['days_toGetMailAlert'].touched&&myForm.controls['days_toGetMailAlert'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+<!-- צריך להציג את הקטגוריות כמילים, ולשלוח את הid? -->
+<!-- id_loan, id_user האם להציג כreadonly? -->
+    <!-- <div style="margin-top: 10px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="id_category">
+            <label for="form1" style="font-size: 14px;">קטגוריה</label>
+            <div *ngIf="myForm.controls['id_category'].touched&&myForm.controls['id_category'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div> -->
+
+    <div style="margin-top: 5px;">
+        <select class="browser-default custom-select" style="font-size: 14px;" id="id_category" 
+        formControlName="id_category" [(ngModel)]="myLoan.id_category">
+            <option value="" selected hidden>קטגוריה</option>
+            <option *ngFor="let c of allCategory" value="{{c.id_expense}}">{{c.name_expense}}</option>
+        </select>
+        <errorMessage [control]="myForm.get('id_category')"></errorMessage>
+    </div>
+
+    <div style="margin-top: 5px;">
+        <div class="md-form">
+            <input type="text" id="form1" class="form-control" formControlName="date_OfLoan">
+            <label for="form1" style="font-size: 14px;">תאריך הלוואה</label>
+            <div *ngIf="myForm.controls['date_OfLoan'].touched&&myForm.controls['date_OfLoan'].errors"
+            class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+
+    <input type="submit" [disabled]="!myForm.valid"  value="הוספה">
+</form>
+
+<!-- id_loan:number;
+id_category:number;
+id_user:string ;
+date_OfLoan:Date;
+sum:number;   
+prisa:number;
+ribit:number; // float?
+days_toGetMailAlert:number;//?להשתמש בחישוב לשליחה? -->

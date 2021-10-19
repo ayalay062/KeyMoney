@@ -1,0 +1,23 @@
+<form class="add_patient" #form="ngForm" (submit)="onSubmit(form)">
+    <h5> עריכת וירוס</h5>
+    <button type="button" class="close" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">×</span>
+    </button>
+    <!-- ת"ז -->
+    <div style="margin: 10px;">
+
+        <div class="md-form">
+            <label for="form1" style="font-size: 14px;">קוד וירוס</label>
+            <input placeholder="" readonly="readonly" type="text" class="form-control" name="id_loan" #id_loan="ngModel" [(ngModel)]="formData.id_loan">
+        </div>
+
+        <div class="md-form">
+          <label for="form1" style="font-size: 14px;">קטגוריה</label>  
+          <input type="text" class="form-control" name="id_category" #id_category="ngModel" [(ngModel)]="formData.id_category">
+            <div *ngIf="myForm.controls['id_category'].touched&&myForm.controls['id_category'].errors" class="sadeHova">
+                *שדה חובה</div>
+        </div>
+    </div>
+
+    <input type="submit" [disabled]="!myForm.valid" value="עריכה">
+</form>

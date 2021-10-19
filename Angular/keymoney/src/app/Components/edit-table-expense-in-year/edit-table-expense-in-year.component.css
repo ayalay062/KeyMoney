@@ -1,0 +1,30 @@
+.editExp{
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    text-align: right;
+    margin: auto;
+    margin-top: 50px;
+    width: 30%;
+    
+    }
+    input{text-align: left;}
+    .md-form label {
+        position: absolute;
+        right: 0!important;
+        left:unset;
+      }
+    h5{    
+        color: #e6b980;
+        text-align: center;
+    }
+    button{
+        font-family: 'Rubik', sans-serif;
+        font-size: 14px;    
+    }
+    .sadeHova{
+direction: rtl;
+color:#e6b980;
+    }
+    
+    
+    
