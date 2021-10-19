@@ -65,7 +65,27 @@ body .custom-select {
 button:focus,
 span:focus,
 input:focus {
-    outline: none!important;
+    outline: none !important;
+}
+
+button.btn {
+    background: #f09819;
+    background-color: #f09819 !important;
+    padding: .34rem 1.14rem!important;
+    color: white!important;
+}
+
+.modal-content {
+    border: 10px solid #f09819;
+    border-radius: 10px;
+    max-width: 450px;
+}
+
+.mat-dialog-container {
+    border: 10px solid #f09819;
+    border-radius: 10px;
+    max-width: 450px;
+    margin: auto;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -101,7 +121,7 @@ body .custom-select {
 .footer-wrapper,
 .header-wrapper {
     text-align: center;
-    width: 100%
+    width: 100%;
 }
 
 .cdk-overlay-pane {
@@ -116,10 +136,10 @@ body .custom-select {
 .md-form .prefix~.text-success,
 .modal-body .md-form .prefix~.text-danger,
 .modal-body .md-form .prefix~.text-success {
-    left: 2.5rem!important;
-    right: 0!important;
-    left: auto!important;
-    float: right!important;
+    left: 2.5rem !important;
+    right: 0 !important;
+    left: auto !important;
+    float: right !important;
 }
 
 .mat-table:not(table) .mat-row,
@@ -131,5 +151,4 @@ body .custom-select {
 .icon {
     cursor: pointer;
     font-weight: bold;
-    ;
 }

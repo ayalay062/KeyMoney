@@ -59,6 +59,12 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    var user = this.userSer.getU();
+    if (user != null) this.isUser = true;
+    this.userSer.user.subscribe((x) => {
+      user = this.userSer.getU();
+      if (user != null) this.isUser = true;
+    });
     this.lang = localStorage.getItem('lang') || 'en';
 
     this.forgetForm = this.fb.group({

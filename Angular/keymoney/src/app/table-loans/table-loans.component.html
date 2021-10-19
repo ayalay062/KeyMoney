@@ -8,7 +8,10 @@
     <mat-form-field style="font-family: 'Rubik', sans-serif; direction: rtl; text-align: right">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="מסנן" />
     </mat-form-field>
-
+    <br>
+    <button class="btn mt-2" mat-raised-button (click)="onAdd()" color="primary" style="font-family: 'Rubik', sans-serif; direction: rtl">
+        הוספת הלוואה
+      </button>
     <div style="overflow: auto">
         <div class="mat-elevation-z8">
             <mat-table [dataSource]="ListData">
@@ -67,7 +70,5 @@
         </div>
     </div>
 
-    <button class="btn mt-2" mat-raised-button (click)="onAdd()" color="primary" style="font-family: 'Rubik', sans-serif; direction: rtl">
-    הוספת הלוואה
-  </button>
+
 </div>

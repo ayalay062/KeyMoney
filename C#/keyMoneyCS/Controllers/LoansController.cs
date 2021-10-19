@@ -59,7 +59,7 @@ namespace keyMoneyCS.Controllers
         }
         [HttpDelete]
         [Route("DeleteLoans/{id}")]
-        public IHttpActionResult DeleteLoans(string id)
+        public IHttpActionResult DeleteLoans(int id)
         {
             var res = LoansBLL.DeleteLoans(id);
             return Ok(res);

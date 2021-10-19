@@ -79,11 +79,11 @@ namespace BLL
             }
         }
    
-       public static bool DeleteLoans(string id)
+       public static bool DeleteLoans(int id)
         {
             using (var db = new KeyMoneyEntities())
             {
-                Loans a = db.Loans.FirstOrDefault(u => u.id_user == id);
+                Loans a = db.Loans.FirstOrDefault(u => u.id_loan == id);
                 if (a != null)
                 {
                     db.Loans.Remove(a);

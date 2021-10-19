@@ -16,14 +16,11 @@
                 <ng-container matColumnDef="Options">
                     <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <button mat-icon-button (click)="onEdit(row.id_user)">
-                            <!-- איזה id מקבל? -->
-                            <mat-icon>launch</mat-icon>
-                        </button>
+                        <!-- איזה id מקבל? -->
+                        <mat-icon class="icon" (click)="onEdit(row.id_user)">launch</mat-icon>
 
-                        <button mat-icon-button color="warn" (click)="onDelete(row.id_user)">
-                            <mat-icon>delete_outline</mat-icon>
-                        </button>
+                        <mat-icon class="icon" (click)="onDelete(row.id_user)">delete_outline</mat-icon>
+
                     </mat-cell>
                 </ng-container>
 

@@ -41,11 +41,12 @@ li a:hover {
     /*  border-bottom: 1px solid orange;*/
 }
 
-button {
+
+/* button {
     background: #f09819;
     background: -webkit-linear-gradient(to right, #edde5d, #f09819);
     background: linear-gradient(to right, #edde5d, #f09819);
-}
+} */
 
 label,
 .md-form label {

@@ -1,19 +1,20 @@
-div{
-margin-top:50px;
-font-family: 'Rubik', sans-serif;
-text-align: center;
-background-color: peachpuff;
-border-radius: 20px;
-padding: 20px;
+div {
+    margin-top: 50px;
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+    background-color: peachpuff;
+    border-radius: 20px;
+    padding: 20px;
 }
 
-button{
-   background-color: transparent;
-   border: 2px solid black;
-   border-radius: 20px;
-   padding: 10px;
+button {
+    background-color: transparent!important;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px!important;
 }
-button:hover{
+
+button:hover {
     color: white;
-    border: 2px solid white ;
+    border: 2px solid white;
 }

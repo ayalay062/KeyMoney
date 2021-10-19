@@ -123,7 +123,7 @@ const routs: Routes = [
     TableEditLoanComponent,
     TableAddLoanComponent,
     TableLoansComponent,
-    CategoryComponent
+    CategoryComponent, 
   ],
   imports: [
     CdkTableModule,
@@ -173,7 +173,8 @@ const routs: Routes = [
     EmailServiceService,HttpClient
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA
+    ,NO_ERRORS_SCHEMA]
 
 })
 export class AppModule { }

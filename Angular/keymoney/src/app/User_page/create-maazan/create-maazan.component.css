@@ -1,11 +1,6 @@
-div{
+div {
     font-family: 'Rubik', sans-serif;
     text-align: center;
     direction: rtl;
     /* color: rgb(46, 44, 44); */
-}
-
-button{
-    background-color: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
-    color: white;
 }

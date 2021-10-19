@@ -10,6 +10,7 @@ import { TableEditLoanComponent } from '../table-edit-loan/table-edit-loan.compo
 import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
 import { User } from '../Models/User';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'table_loans',
   templateUrl: './table-loans.component.html',
@@ -56,32 +57,44 @@ export class TableLoansComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '70%';
+    dialogConfig.width = '50%';
     console.log(dep);
     dialogConfig.data = {
       id_loan: dep,
     };
-    this.dialog.open(TableEditLoanComponent, dialogConfig);
+    const dialogRef = this.dialog.open(TableEditLoanComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.refreshAuthoList();
+    });
   }
 
   onDelete(id: string) {
-    console.log(id);
-    
-    if (confirm('are you sure to delete?')) {
-      this.service.deleteLo(id).subscribe((res) => {
-        this.refreshAuthoList();
-        this.snackBar.open(res.toString(), '', {
-          duration: 5000,
-          verticalPosition: 'top',
+    var self=this;
+    Swal.fire({
+      title: 'מחיקת הלוואה',
+      text: 'האם את/ה בטוח/ה שאת/ה רוצה למחוק את ההלוואה?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'מחק',
+      cancelButtonText: 'ביטול',
+    }).then(function (result) {
+      if (result.value) {
+        self.service.deleteLo(id).subscribe((res) => {
+          self.refreshAuthoList();
+          Swal.fire('הי', 'המחיקה בוצעה בהצלחה', 'success');
         });
-      });
-    }
+      }
+    });
   }
   onAdd() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
+    dialogConfig.width = '50%';
     dialogConfig.height = '90%';
     const dialogRef = this.dialog.open(TableAddLoanComponent, dialogConfig);
 
