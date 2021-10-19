@@ -43,6 +43,7 @@ namespace BLL
             {
                 var ad = User_expenseConvertion.convertToUser_expense(a);
                 var ads = db.User_expense.Add(ad);
+                db.SaveChanges();
                 return User_expenseConvertion.convertToDto(ads);
 
             }

@@ -4,13 +4,14 @@ import { Email } from '../Models/Email';
 import { User } from '../Models/User';
 import { ValidationService } from '../Service/validation.service';
 import Swal from 'sweetalert2';
+import { EmailServiceService } from '../Service/email-service.service';
 @Component({
   selector: 'contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'],
 })
 export class ContactComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private service: EmailServiceService) {}
 
   myForm: FormGroup;
   submitted = false;
@@ -28,17 +29,17 @@ export class ContactComponent implements OnInit {
     });
   }
   sendMsg(u) {
-    console.log(this.myForm);
+  
     this.submitted = true;
-   
     // איך מקבל את הפרטים של המשתמש המחובר?
-    let emailData = new Email();
-    emailData.message = u.msg;
-    emailData.toemail = u.email;
+    let emailData = <Email>(this.myForm.value);
+    emailData.message = emailData.msg;
+    emailData.toemail = emailData.email;
     emailData.subject = 'you can login';
-    emailData.toname = u.name_user;
-
-    Swal.fire('הי','המייל נשלח בהצלחה','success');
-    this.myForm.reset();
+    emailData.toname = emailData.fullName;
+    this.service.sendEmail(emailData).subscribe((x) => {
+      Swal.fire('הי', 'המייל נשלח בהצלחה', 'success');
+      this.myForm.reset();
+    });
   }
 }

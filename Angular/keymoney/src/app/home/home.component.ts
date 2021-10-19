@@ -14,16 +14,20 @@ export class HomeComponent implements OnInit {
     private service: UserService,
     private actRoute: ActivatedRoute
   ) {}
-  userLogin = false;
   lang;
   isUser: boolean;
+  user: User;
   private id: string;
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en';
 
-    var user = this.service.getU();
-    if (user == null) this.isUser = true;
+    this.user = this.service.getU();
+    if (this.user != null) this.isUser = true;
+    this.service.user.subscribe((x) => {
+      this.user = this.service.getU();
+      if (this.user != null) this.isUser = true;
+    });
   }
 
   changeLang(lang) {

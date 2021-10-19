@@ -46,6 +46,7 @@ namespace BLL
             {
                 var ad = Amuta_depositsConvertion.convertToAmuta_deposits(a);
                 var ads = db.Amuta_deposits.Add(ad);
+                db.SaveChanges();
                 return Amuta_depositsConvertion.convertToDto(ads);
 
             }

@@ -1,6 +1,12 @@
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Email } from '../Models/Email';
 import { User } from '../Models/User';
@@ -11,108 +17,149 @@ import { UserDetails } from '../Models/UserDetails';
 import { BehaviorSubject } from 'rxjs';
 import { ValidationService } from '../Service/validation.service';
 import { Amuta } from '../Models/Amuta';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   lang;
   isUser: boolean;
   private id: string;
 
   new_user: User;
   validatingForm: FormGroup;
-  myUser = new UserDetails(null, null, null, null, null, null, null, null,null);
+  myUser = new UserDetails(
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  );
   forgetForm: FormGroup;
   error: any = null;
   success: boolean = false;
   user = new BehaviorSubject<User>(null);
   // ???
-  //והוא לא היה קיים כאן, צריך לאתחל אותו בנתונים (לכאורה לשלוף מהסרבר) HTML כי משתמשים בו ב allAmutot הוספתי את המשתנה 
+  //והוא לא היה קיים כאן, צריך לאתחל אותו בנתונים (לכאורה לשלוף מהסרבר) HTML כי משתמשים בו ב allAmutot הוספתי את המשתנה
   allAmutot: Amuta[] = [];
 
   @ViewChild('frame', { static: true }) frame: ModalContainerComponent;
-  constructor(private userSer: UserService, private emailSer: EmailServiceService,
-    private router: Router, private fb: FormBuilder) { }
+  constructor(
+    private userSer: UserService,
+    private emailSer: EmailServiceService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en';
 
     this.forgetForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    })
+      email: ['', [Validators.required, Validators.email]],
+    });
 
     this.validatingForm = new FormGroup({
-      loginFormModalEmail: new FormControl('', Validators.compose([Validators.required, ValidationService.emailValidator])),
-      loginFormModalPassword: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)])),
-      loginFormModalId: new FormControl('', Validators.compose([Validators.required,ValidationService.numbersValidator])),
-      loginFormModalName:new FormControl('', Validators.compose([Validators.required])),
-      loginFormModalTel:new FormControl('', Validators.compose([Validators.required,ValidationService.numbersValidator])),
-      loginFormModalMisgeret:new FormControl('', Validators.compose([Validators.required]))
- 
+      loginFormModalEmail: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          ValidationService.emailValidator,
+        ])
+      ),
+      loginFormModalPassword: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(9)])
+      ),
+      // loginFormModalId: new FormControl(
+      //   '',
+      //   Validators.compose([
+      //     Validators.required,
+      //     ValidationService.numbersValidator,
+      //   ])
+      // ),
+      loginFormModalName: new FormControl(
+        '',
+        Validators.compose([Validators.required])
+      ),
+      loginFormModalTel: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          ValidationService.numbersValidator,
+        ])
+      ),
+      loginFormModalMisgeret: new FormControl(
+        '',
+        Validators.compose([Validators.required])
+      ),
     });
-    
+
     this.resetForm();
   }
 
   changeLang(lang) {
-
     console.log(lang);
     localStorage.setItem('lang', lang);
     window.location.reload();
   }
 
   resetForm(form?: NgForm) {
-    if (form != null)
-      form.reset();
+    if (form != null) form.reset();
     this.new_user = {
       name_user: '',
       tel: '',
       id_user: null,
       misgeret: null,
-      email:''
-    }
+      email: '',
+    };
   }
 
-  //כניסה 
+  //כניסה
   login() {
     var email = this.validatingForm.get('loginFormModalEmail');
     var pass = this.validatingForm.get('loginFormModalPassword');
-    this.userSer.login(email.value, pass.value).subscribe(data => {
-      this.userSer.setU(data);
-      this.frame.hide();
-      this.router.navigateByUrl('/user-account');
-    },
-      err => {
-        alert("מייל או סיסמה לא נכונים");
-      })
+    this.userSer.login(email.value, pass.value).subscribe(
+      (data) => {
+        Swal.fire('הי', 'התחברת בהצלחה', 'success');
+
+        this.userSer.setU(data);
+        this.frame.hide();
+        // this.router.navigateByUrl('/user-account');
+      },
+      (err) => {
+        Swal.fire('Ooops', 'מייל או סיסמה לא נכונים', 'error');
+      }
+    );
   }
 
   sign() {
     //save the new user and send email to the admin
     let newUser = new User();
-    let emailData = new Email();
-    emailData.message = 'please check the user'
-    emailData.toemail = 'Haiaattias@gmail.com'
-    emailData.subject = 'New user want login'
-
-
+    // let emailData = new Email();
+    // emailData.message = 'please check the user';
+    // emailData.toemail = 'Haiaattias@gmail.com';
+    // emailData.subject = 'New user want login';
     newUser.name_user = this.validatingForm.get('loginFormModalName').value;
     newUser.id_user = this.validatingForm.get('loginFormModalPassword').value;
     newUser.email = this.validatingForm.get('loginFormModalEmail').value;
     newUser.tel = this.validatingForm.get('loginFormModalTel').value;
     newUser.misgeret = this.validatingForm.get('loginFormModalMisgeret').value;
-   
-    
-    this.userSer.addUser(newUser).subscribe(success => {
-      this.emailSer.sendEmail(emailData).subscribe(success => {
-        alert('נרשמת בהצלחה')
-      });
-    })
+    this.userSer.addUser(newUser).subscribe((success) => {
+      this.userSer.setU(success);
+      
+      // this.emailSer.sendEmail(emailData).subscribe((success) => {
+      Swal.fire('הי', 'נרשמת בהצלחה', 'success');
+      this.frame.hide();
+      //   this.router.navigateByUrl('/user-account');
+      //   });//312121212
+    });
   }
 
   onSignOut() {
@@ -131,18 +178,15 @@ export class HeaderComponent implements OnInit {
           console.log(err);
           this.error = err;
         }
-      )
-    }
-    else {
+      );
+    } else {
       let key = Object.keys(this.forgetForm.controls);
-      key.filter(data => {
+      key.filter((data) => {
         let control = this.forgetForm.controls[data];
         if (control.errors != null) {
           control.markAsTouched();
         }
-      }
-
-      )
+      });
     }
   }
 
@@ -155,14 +199,13 @@ export class HeaderComponent implements OnInit {
   get loginFormModalName() {
     return this.validatingForm.get('loginFormModalName');
   }
-  get loginFormModalId() {
-    return this.validatingForm.get('loginFormModalId');
-  }
+  // get loginFormModalId() {
+  //   return this.validatingForm.get('loginFormModalId');
+  // }
   get loginFormModalMisgeret() {
     return this.validatingForm.get('loginFormModalMisgeret');
   }
   get loginFormModalTel() {
     return this.validatingForm.get('loginFormModalTel');
   }
-  
 }

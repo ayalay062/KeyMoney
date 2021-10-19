@@ -25,6 +25,17 @@ namespace keyMoneyCS.Controllers
 
         public IHttpActionResult GetByUserId(string id)
         {
+            var ad = LoansBLL.GetByUserId(id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The Loans aren't defined"));
+        }
+        [Route("GetById/{id}")]
+
+        public IHttpActionResult GetById(int id)
+        {
             var ad = LoansBLL.GetById(id);
             if (ad != null)
             {
@@ -32,7 +43,6 @@ namespace keyMoneyCS.Controllers
             }
             return InternalServerError(new Exception("The Loans aren't defined"));
         }
-
         [HttpPost]
         [Route("AddLoans")]
         public IHttpActionResult AddLoans(LoansDto ad)

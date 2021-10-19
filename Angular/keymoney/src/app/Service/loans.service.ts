@@ -4,31 +4,33 @@ import { Observable, Subject } from 'rxjs';
 import { Loans } from '../Models/Loans';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoansService {
-
-  constructor(private http:HttpClient) { }
-  readonly APIUrl="https://localhost:44327/api";
+  constructor(private http: HttpClient) {}
+  readonly APIUrl = 'https://localhost:44327/api/Loans';
 
   formData: Loans;
 
-// ?פונקציה שמציגה רשימת הלוואות לפי משתמש שנשלח כפרמטר
+  // ?פונקציה שמציגה רשימת הלוואות לפי משתמש שנשלח כפרמטר
 
-  getLoansList():Observable<Loans[]>{
-    return this.http.get<Loans[]>(this.APIUrl+'/Loans')
+  getLoansList(): Observable<Loans[]> {
+    return this.http.get<Loans[]>(this.APIUrl + '/GetAll');
   }
-  addLoans(dep:Loans){
-    return this.http.post(this.APIUrl+'/Loans',dep)
+  addLoans(dep: Loans) {
+    return this.http.post(this.APIUrl + '/AddLoans', dep);
   }
   deleteLo(id: string) {
-    return this.http.delete(this.APIUrl + '/Loans?id=' + id);
+    return this.http.delete(this.APIUrl + '/DeleteLoans/' + id);
   }
   updateLo(dep: Loans) {
-    return this.http.put(this.APIUrl + '/Loans', dep)
+    return this.http.put(this.APIUrl + '/UpdateLoans', dep);
   }
-  getLoanById(id:number):Observable<Loans>{
-    return this.http.get<Loans>(this.APIUrl + '/Loans?id=' + id);
+  getLoansByUserId(userid: string): Observable<Loans[]> {
+    return this.http.get<Loans[]>(this.APIUrl + '/GetByUserId/' + userid);
+  }
+  getLoanById(id: number): Observable<Loans> {
+    return this.http.get<Loans>(this.APIUrl + '/GetById/' + id);
   }
   private _listners = new Subject<any>();
   listen(): Observable<any> {
@@ -37,6 +39,4 @@ export class LoansService {
   filter(filterBy: string) {
     this._listners.next(filterBy);
   }
-
-  
 }

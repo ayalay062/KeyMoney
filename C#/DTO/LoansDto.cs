@@ -13,7 +13,8 @@ namespace DTO
         public int prisa { get; set; }
         public double ribit { get; set; }
         public int days_toGetMailAlert { get; set; }
-    
+        public int id_expense { get; set; }
         public  UserDto User { get; set; }
+        public  ExpensesDto Expenses { get; set; }
     }
 }

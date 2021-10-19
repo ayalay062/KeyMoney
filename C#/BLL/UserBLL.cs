@@ -55,6 +55,7 @@ namespace BLL
             {
                 var ad = UserConvertion.convertToUser(a);
                 var ads = db.User.Add(ad);
+                db.SaveChanges();
                 return UserConvertion.convertToDto(ads);
 
             }
@@ -82,7 +83,7 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
-                User userDB = db.User.FirstOrDefault(u => u.email == user.email && u.id_user == user.id_user);
+                User userDB = db.User.FirstOrDefault(u => (u.email == user.email || u.name_user == user.email) && u.id_user == user.id_user);
                 if (userDB == null) return null;
                 return UserConvertion.convertToDto(userDB);
 

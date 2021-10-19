@@ -14,6 +14,13 @@ namespace DTO
             newLoans.prisa = loan.prisa;
             newLoans.ribit = loan.ribit;
             newLoans.sum = loan.sum;
+            newLoans.id_expense = loan.id_expense;
+            newLoans.days_toGetMailAlert = loan.days_toGetMailAlert;
+            newLoans.date_ofLoan = loan.date_ofLoan;
+            if (loan.Expenses != null) {
+
+                newLoans.Expenses = ExpensesConvertion.convertToDto(loan.Expenses);
+            }
             return newLoans;
         }
 
@@ -36,6 +43,9 @@ namespace DTO
             newLoans.prisa = loan.prisa;
             newLoans.ribit = loan.ribit;
             newLoans.sum = loan.sum;
+            newLoans.id_expense = loan.id_expense;
+            newLoans.days_toGetMailAlert = loan.days_toGetMailAlert;
+            newLoans.date_ofLoan = loan.date_ofLoan;
             return newLoans;
 
         }

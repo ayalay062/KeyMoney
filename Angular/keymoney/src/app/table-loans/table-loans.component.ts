@@ -9,32 +9,43 @@ import { TableAddLoanComponent } from '../table-add-loan/table-add-loan.componen
 import { TableEditLoanComponent } from '../table-edit-loan/table-edit-loan.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
+import { User } from '../Models/User';
 @Component({
   selector: 'table_loans',
   templateUrl: './table-loans.component.html',
-  styleUrls: ['./table-loans.component.css']
+  styleUrls: ['./table-loans.component.css'],
 })
 export class TableLoansComponent implements OnInit {
-
-  constructor(private service: LoansService,
+  userId: string;
+  constructor(
+    private service: LoansService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar
+  ) {
     this.service.listen().subscribe((m: any) => {
       console.log(m);
       this.refreshAuthoList();
-    })
+    });
   }
 
   ngOnInit(): void {
+    this.userId = (<User>JSON.parse(localStorage.getItem('user'))).id_user;
     this.refreshAuthoList();
   }
 
   ListData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Options', 'id_loan', 'id_category', 'date', 'sum', 'prisa', 'alert'];
+  displayedColumns: string[] = [
+    'Options',
+    'id_loan',
+    'id_expense',
+    'date',
+    'sum',
+    'prisa',
+    'alert',
+  ];
 
   // @ViewChild(MatSort, null) sort: MatSort;
   @ViewChild(MatSort) sort: MatSort;
-
 
   applyFilter(filtervalue: string) {
     this.ListData.filter = filtervalue.trim().toLocaleLowerCase();
@@ -45,21 +56,23 @@ export class TableLoansComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "70%";
+    dialogConfig.width = '70%';
     console.log(dep);
     dialogConfig.data = {
-      id_loan: dep
-    }
+      id_loan: dep,
+    };
     this.dialog.open(TableEditLoanComponent, dialogConfig);
   }
 
   onDelete(id: string) {
     console.log(id);
+    
     if (confirm('are you sure to delete?')) {
-      this.service.deleteLo(id).subscribe(res => {
+      this.service.deleteLo(id).subscribe((res) => {
         this.refreshAuthoList();
         this.snackBar.open(res.toString(), '', {
-          duration: 5000, verticalPosition: 'top'
+          duration: 5000,
+          verticalPosition: 'top',
         });
       });
     }
@@ -68,18 +81,23 @@ export class TableLoansComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "90%";
-    this.dialog.open(TableAddLoanComponent, dialogConfig);
+    dialogConfig.width = '60%';
+    dialogConfig.height = '90%';
+    const dialogRef = this.dialog.open(TableAddLoanComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.refreshAuthoList();
+    });
   }
 
   refreshAuthoList() {
-    this.service.getLoansList().subscribe(data => {
+    this.service.getLoansByUserId(this.userId).subscribe((data) => {
       this.ListData = new MatTableDataSource(data);
       // this.ListData.sort = this.sort;
-    })
+    });
   }
-
-
-
 }

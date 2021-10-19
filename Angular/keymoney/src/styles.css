@@ -1,7 +1,135 @@
 /* You can add global styles to this file, and also import other style files */
 
+html,
+body {
+    height: 100%;
+    text-align: right;
+    direction: rtl;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~mdb-ui-kit/css/mdb.min.css';
+@import "~mdb-ui-kit/css/mdb.min.css";
+.mat-table:not(table) .mat-header-row {
+    flex-direction: row-reverse;
+    text-align: right;
+    direction: rtl;
+}
+
+.mat-table,
+.mat-cel {
+    text-align: right;
+    direction: rtl;
+}
+
+body .mat-body,
+body .mat-body-1,
+body .mat-typography,
+body .mat-table,
+body .mat-list-item,
+body .mat-h1,
+body .mat-headline,
+body .mat-typography h1,
+body .mat-toolbar,
+body .mat-toolbar h1,
+body .mat-toolbar h2,
+body .mat-toolbar h3,
+body .mat-toolbar h4,
+body .mat-toolbar h5,
+body .mat-toolbar h6,
+body span,
+body strong,
+body .mat-input-element,
+body .custom-select {
+    font-family: ass, Roboto, "Helvetica Neue", sans-serif;
+    direction: rtl;
+}
+
+.md-form label {
+    right: 0;
+}
+
+.mat-form-field,
+.mat-form-field {
+    display: block;
+    width: 200px;
+    text-align: right;
+    direction: rtl;
+    margin: auto;
+}
+
+button:focus,
+span:focus,
+input:focus {
+    outline: none!important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+}
+
+.mat-radio-group {
+    direction: rtl;
+}
+
+.mat-toolbar a:hover {
+    color: white;
+    font-weight: bold;
+    /* border-bottom: 1px solid; */
+    text-decoration: underline;
+}
+
+.active_link {
+    font-weight: bold;
+}
+
+.mat-select-panel .mat-optgroup-label,
+.mat-select-panel .mat-option,
+body .custom-select {
+    direction: rtl;
+    text-align: right;
+}
+
+.mat-radio-label-content {
+    margin-right: 3px;
+}
+
+.footer-wrapper,
+.header-wrapper {
+    text-align: center;
+    width: 100%
+}
+
+.cdk-overlay-pane {
+    max-width: 450px;
+    width: 40%;
+    height: 80%;
+}
+
+.md-form .prefix~.error-message,
+.md-form .prefix~.success-message,
+.md-form .prefix~.text-danger,
+.md-form .prefix~.text-success,
+.modal-body .md-form .prefix~.text-danger,
+.modal-body .md-form .prefix~.text-success {
+    left: 2.5rem!important;
+    right: 0!important;
+    left: auto!important;
+    float: right!important;
+}
+
+.mat-table:not(table) .mat-row,
+.mat-table:not(table) .mat-header-row,
+.mat-table:not(table) .mat-footer-row {
+    flex-direction: row-reverse !important;
+}
+
+.icon {
+    cursor: pointer;
+    font-weight: bold;
+    ;
+}

@@ -1,21 +1,48 @@
-.add_patient{
+.add_patient {
     font-family: 'Rubik', sans-serif;
     font-size: 14px;
     text-align: right;
     margin: auto;
-    margin-top: 50px;
-    width: 30%;
-    }
-    
-    h5{    
-        color: coral;
-        text-align: center;
-    }
-    button{
-        font-family: 'Rubik', sans-serif;
-        font-size: 14px;    
-    }
-    .sadeHova{direction: rtl;color:coral;}
-    
-    
-    
+    margin-top: 15px;
+    width: 50%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: -0px;
+    float: left;
+    left: 10px;
+}
+
+h5 {
+    color: coral;
+    text-align: center;
+}
+
+button {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+}
+
+.sadeHova {
+    direction: rtl;
+    color: coral;
+}
+
+label,
+.md-form label {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+input {
+    text-align: left;
+    direction: ltr;
+    margin-left: 0px;
+}
+
+i {
+    margin-right: -2rem;
+}

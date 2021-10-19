@@ -20,8 +20,10 @@ namespace DAL
         public int sum { get; set; }
         public int prisa { get; set; }
         public double ribit { get; set; }
+        public int id_expense { get; set; }
         public int days_toGetMailAlert { get; set; }
     
+        public virtual Expenses Expenses { get; set; }
         public virtual User User { get; set; }
     }
 }

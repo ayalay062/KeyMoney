@@ -54,6 +54,7 @@
           <Property Name="sum" Type="int" Nullable="false" />
           <Property Name="prisa" Type="int" Nullable="false" />
           <Property Name="ribit" Type="float" Nullable="false" />
+          <Property Name="id_expense" Type="int" Nullable="false" />
           <Property Name="days_toGetMailAlert" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -112,6 +113,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Loans__id_expens__36B12243">
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="id_expense" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="id_expense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Loans__id_user__35BCFE0A">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
@@ -136,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_expe__id_ki__36B12243">
+        <Association Name="FK__User_expe__id_ki__38996AB5">
           <End Role="Kinds" Type="Self.Kinds" Multiplicity="1" />
           <End Role="User_expense" Type="Self.User_expense" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_expe__id_us__38996AB5">
+        <Association Name="FK__User_expe__id_us__398D8EEE">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="User_expense" Type="Self.User_expense" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_in__398D8EEE">
+        <Association Name="FK__User_inco__id_in__3A81B327">
           <End Role="Income" Type="Self.Income" Multiplicity="1" />
           <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_ki__3A81B327">
+        <Association Name="FK__User_inco__id_ki__3B75D760">
           <End Role="Kinds" Type="Self.Kinds" Multiplicity="1" />
           <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_us__3B75D760">
+        <Association Name="FK__User_inco__id_us__3C69FB99">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="User_income" Type="Self.User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,6 +227,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
           </AssociationSet>
+          <AssociationSet Name="FK__Loans__id_expens__36B12243" Association="Self.FK__Loans__id_expens__36B12243">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
           <AssociationSet Name="FK__Loans__id_user__35BCFE0A" Association="Self.FK__Loans__id_user__35BCFE0A">
             <End Role="User" EntitySet="User" />
             <End Role="Loans" EntitySet="Loans" />
@@ -222,23 +239,23 @@
             <End Role="Expenses" EntitySet="Expenses" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_expe__id_ki__36B12243" Association="Self.FK__User_expe__id_ki__36B12243">
+          <AssociationSet Name="FK__User_expe__id_ki__38996AB5" Association="Self.FK__User_expe__id_ki__38996AB5">
             <End Role="Kinds" EntitySet="Kinds" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_expe__id_us__38996AB5" Association="Self.FK__User_expe__id_us__38996AB5">
+          <AssociationSet Name="FK__User_expe__id_us__398D8EEE" Association="Self.FK__User_expe__id_us__398D8EEE">
             <End Role="User" EntitySet="User" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_in__398D8EEE" Association="Self.FK__User_inco__id_in__398D8EEE">
+          <AssociationSet Name="FK__User_inco__id_in__3A81B327" Association="Self.FK__User_inco__id_in__3A81B327">
             <End Role="Income" EntitySet="Income" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_ki__3A81B327" Association="Self.FK__User_inco__id_ki__3A81B327">
+          <AssociationSet Name="FK__User_inco__id_ki__3B75D760" Association="Self.FK__User_inco__id_ki__3B75D760">
             <End Role="Kinds" EntitySet="Kinds" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_us__3B75D760" Association="Self.FK__User_inco__id_us__3B75D760">
+          <AssociationSet Name="FK__User_inco__id_us__3C69FB99" Association="Self.FK__User_inco__id_us__3C69FB99">
             <End Role="User" EntitySet="User" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
@@ -265,19 +282,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="Amuta_deposits" EntitySet="Amuta_deposits" />
           </AssociationSet>
+          <AssociationSet Name="FK__Loans__id_expens__36B12243" Association="KeyMoneyModel.FK__Loans__id_expens__36B12243">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
           <AssociationSet Name="FK__User_expe__id_ex__37A5467C" Association="KeyMoneyModel.FK__User_expe__id_ex__37A5467C">
             <End Role="Expenses" EntitySet="Expenses" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_in__398D8EEE" Association="KeyMoneyModel.FK__User_inco__id_in__398D8EEE">
+          <AssociationSet Name="FK__User_inco__id_in__3A81B327" Association="KeyMoneyModel.FK__User_inco__id_in__3A81B327">
             <End Role="Income" EntitySet="Income" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_expe__id_ki__36B12243" Association="KeyMoneyModel.FK__User_expe__id_ki__36B12243">
+          <AssociationSet Name="FK__User_expe__id_ki__38996AB5" Association="KeyMoneyModel.FK__User_expe__id_ki__38996AB5">
             <End Role="Kinds" EntitySet="Kinds" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_ki__3A81B327" Association="KeyMoneyModel.FK__User_inco__id_ki__3A81B327">
+          <AssociationSet Name="FK__User_inco__id_ki__3B75D760" Association="KeyMoneyModel.FK__User_inco__id_ki__3B75D760">
             <End Role="Kinds" EntitySet="Kinds" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
@@ -285,11 +306,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_expe__id_us__38996AB5" Association="KeyMoneyModel.FK__User_expe__id_us__38996AB5">
+          <AssociationSet Name="FK__User_expe__id_us__398D8EEE" Association="KeyMoneyModel.FK__User_expe__id_us__398D8EEE">
             <End Role="User" EntitySet="User" />
             <End Role="User_expense" EntitySet="User_expense" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_inco__id_us__3B75D760" Association="KeyMoneyModel.FK__User_inco__id_us__3B75D760">
+          <AssociationSet Name="FK__User_inco__id_us__3C69FB99" Association="KeyMoneyModel.FK__User_inco__id_us__3C69FB99">
             <End Role="User" EntitySet="User" />
             <End Role="User_income" EntitySet="User_income" />
           </AssociationSet>
@@ -321,6 +342,7 @@
           </Key>
           <Property Name="id_expense" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_expense" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Loans" Relationship="KeyMoneyModel.FK__Loans__id_expens__36B12243" FromRole="Expenses" ToRole="Loans" />
           <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_ex__37A5467C" FromRole="Expenses" ToRole="User_expense" />
         </EntityType>
         <EntityType Name="Income">
@@ -329,7 +351,7 @@
           </Key>
           <Property Name="id_income" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_income" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_in__398D8EEE" FromRole="Income" ToRole="User_income" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_in__3A81B327" FromRole="Income" ToRole="User_income" />
         </EntityType>
         <EntityType Name="Kinds">
           <Key>
@@ -337,8 +359,8 @@
           </Key>
           <Property Name="id_kind" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_kind" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_ki__36B12243" FromRole="Kinds" ToRole="User_expense" />
-          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3A81B327" FromRole="Kinds" ToRole="User_income" />
+          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_ki__38996AB5" FromRole="Kinds" ToRole="User_expense" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3B75D760" FromRole="Kinds" ToRole="User_income" />
         </EntityType>
         <EntityType Name="Loans">
           <Key>
@@ -350,7 +372,9 @@
           <Property Name="sum" Type="Int32" Nullable="false" />
           <Property Name="prisa" Type="Int32" Nullable="false" />
           <Property Name="ribit" Type="Double" Nullable="false" />
+          <Property Name="id_expense" Type="Int32" Nullable="false" />
           <Property Name="days_toGetMailAlert" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Expenses" Relationship="KeyMoneyModel.FK__Loans__id_expens__36B12243" FromRole="Loans" ToRole="Expenses" />
           <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__Loans__id_user__35BCFE0A" FromRole="Loans" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
@@ -364,8 +388,8 @@
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Amuta_deposits" Relationship="KeyMoneyModel.FK__Amuta_dep__id_us__34C8D9D1" FromRole="User" ToRole="Amuta_deposits" />
           <NavigationProperty Name="Loans" Relationship="KeyMoneyModel.FK__Loans__id_user__35BCFE0A" FromRole="User" ToRole="Loans" />
-          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_us__38996AB5" FromRole="User" ToRole="User_expense" />
-          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_us__3B75D760" FromRole="User" ToRole="User_income" />
+          <NavigationProperty Name="User_expense" Relationship="KeyMoneyModel.FK__User_expe__id_us__398D8EEE" FromRole="User" ToRole="User_expense" />
+          <NavigationProperty Name="User_income" Relationship="KeyMoneyModel.FK__User_inco__id_us__3C69FB99" FromRole="User" ToRole="User_income" />
         </EntityType>
         <EntityType Name="User_expense">
           <Key>
@@ -378,8 +402,8 @@
           <Property Name="sum" Type="Int32" Nullable="false" />
           <Property Name="expense_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Expenses" Relationship="KeyMoneyModel.FK__User_expe__id_ex__37A5467C" FromRole="User_expense" ToRole="Expenses" />
-          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_expe__id_ki__36B12243" FromRole="User_expense" ToRole="Kinds" />
-          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_expe__id_us__38996AB5" FromRole="User_expense" ToRole="User" />
+          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_expe__id_ki__38996AB5" FromRole="User_expense" ToRole="Kinds" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_expe__id_us__398D8EEE" FromRole="User_expense" ToRole="User" />
         </EntityType>
         <EntityType Name="User_income">
           <Key>
@@ -391,9 +415,9 @@
           <Property Name="id_user" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
           <Property Name="sum" Type="Int32" Nullable="false" />
           <Property Name="income_date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Income" Relationship="KeyMoneyModel.FK__User_inco__id_in__398D8EEE" FromRole="User_income" ToRole="Income" />
-          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3A81B327" FromRole="User_income" ToRole="Kinds" />
-          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_inco__id_us__3B75D760" FromRole="User_income" ToRole="User" />
+          <NavigationProperty Name="Income" Relationship="KeyMoneyModel.FK__User_inco__id_in__3A81B327" FromRole="User_income" ToRole="Income" />
+          <NavigationProperty Name="Kinds" Relationship="KeyMoneyModel.FK__User_inco__id_ki__3B75D760" FromRole="User_income" ToRole="Kinds" />
+          <NavigationProperty Name="User" Relationship="KeyMoneyModel.FK__User_inco__id_us__3C69FB99" FromRole="User_income" ToRole="User" />
         </EntityType>
         <Association Name="FK__Amuta_dep__id_am__33D4B598">
           <End Type="KeyMoneyModel.Amuta" Role="Amuta" Multiplicity="1" />
@@ -419,6 +443,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Loans__id_expens__36B12243">
+          <End Type="KeyMoneyModel.Expenses" Role="Expenses" Multiplicity="1" />
+          <End Type="KeyMoneyModel.Loans" Role="Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="id_expense" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="id_expense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__User_expe__id_ex__37A5467C">
           <End Type="KeyMoneyModel.Expenses" Role="Expenses" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
@@ -431,7 +467,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_in__398D8EEE">
+        <Association Name="FK__User_inco__id_in__3A81B327">
           <End Type="KeyMoneyModel.Income" Role="Income" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -443,7 +479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_expe__id_ki__36B12243">
+        <Association Name="FK__User_expe__id_ki__38996AB5">
           <End Type="KeyMoneyModel.Kinds" Role="Kinds" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
           <ReferentialConstraint>
@@ -455,7 +491,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_ki__3A81B327">
+        <Association Name="FK__User_inco__id_ki__3B75D760">
           <End Type="KeyMoneyModel.Kinds" Role="Kinds" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -479,7 +515,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_expe__id_us__38996AB5">
+        <Association Name="FK__User_expe__id_us__398D8EEE">
           <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_expense" Role="User_expense" Multiplicity="*" />
           <ReferentialConstraint>
@@ -491,7 +527,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_inco__id_us__3B75D760">
+        <Association Name="FK__User_inco__id_us__3C69FB99">
           <End Type="KeyMoneyModel.User" Role="User" Multiplicity="1" />
           <End Type="KeyMoneyModel.User_income" Role="User_income" Multiplicity="*" />
           <ReferentialConstraint>
@@ -557,6 +593,7 @@
             <EntityTypeMapping TypeName="KeyMoneyModel.Loans">
               <MappingFragment StoreEntitySet="Loans">
                 <ScalarProperty Name="days_toGetMailAlert" ColumnName="days_toGetMailAlert" />
+                <ScalarProperty Name="id_expense" ColumnName="id_expense" />
                 <ScalarProperty Name="ribit" ColumnName="ribit" />
                 <ScalarProperty Name="prisa" ColumnName="prisa" />
                 <ScalarProperty Name="sum" ColumnName="sum" />

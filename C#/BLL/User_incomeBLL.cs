@@ -43,6 +43,7 @@ namespace BLL
             {
                 var ad = User_incomeConvertion.convertToUser_income(a);
                 var ads = db.User_income.Add(ad);
+                db.SaveChanges();
                 return User_incomeConvertion.convertToDto(ads);
 
             }

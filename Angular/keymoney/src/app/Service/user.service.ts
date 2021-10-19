@@ -17,7 +17,7 @@ import { Email } from '../Models/Email';
 export class UserService {
   readonly APIUrl = 'https://localhost:44327/api';
   formData: User;
-  user = new BehaviorSubject<User>(null);
+  public user = new BehaviorSubject<User>(null);
   errorData = {};
 
   httpOptions = {
@@ -74,7 +74,7 @@ export class UserService {
     return this.http.get<User[]>(this.APIUrl + '/User/GetAll');
   }
   addUser(dep: User) {
-    return this.http.post(this.APIUrl + '/User/AddUser', dep);
+    return this.http.post<User>(this.APIUrl + '/User/AddUser', dep);
   }
   deleteUser(id: number) {
     return this.http.delete(this.APIUrl + '/User/' + id);

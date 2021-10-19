@@ -55,6 +55,7 @@ namespace BLL
             {
                 var ad = KindsConvertion.convertToKinds(a);
                 var ads = db.Kinds.Add(ad);
+                db.SaveChanges();
                 return KindsConvertion.convertToDto(ads);
 
             }

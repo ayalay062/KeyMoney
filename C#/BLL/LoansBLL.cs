@@ -15,17 +15,30 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.Loans.ToList();
+                var ads = db.Loans.Include("Expenses").ToList();
+                return LoansConvertion.convertToListDto(ads);
+     
+    }
+        }
+
+       public static List<LoansDto> GetByUserId(string id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var ads = db.Loans.Where(r => r.id_user == id).ToList() ;
+                if (ads == null)
+                {
+                    return null;
+                }
                 return LoansConvertion.convertToListDto(ads);
 
             }
         }
-
-       public static LoansDto GetById(string id)
+        public static LoansDto GetById(int id)
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.Loans.FirstOrDefault(r => r.id_user == id);
+                var ads = db.Loans.FirstOrDefault(r => r.id_loan == id);
                 if (ads == null)
                 {
                     return null;
@@ -34,12 +47,13 @@ namespace BLL
 
             }
         }
-       public static LoansDto AddLoans(LoansDto a)
+        public static LoansDto AddLoans(LoansDto a)
         {
             using (var db = new KeyMoneyEntities())
             {
                 var ad = LoansConvertion.convertToLoans(a);
                 var ads = db.Loans.Add(ad);
+                db.SaveChanges();
                 return LoansConvertion.convertToDto(ads);
 
             }
@@ -54,6 +68,9 @@ namespace BLL
                     l.prisa = loan.prisa;
                     l.ribit = loan.ribit;
                     l.sum = loan.sum;
+                    l.date_ofLoan = loan.date_ofLoan;
+                    l.days_toGetMailAlert = loan.days_toGetMailAlert;
+                    l.id_expense = loan.id_expense;
                     db.SaveChanges();
                     return LoansConvertion.convertToDto(l);
                 }

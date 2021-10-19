@@ -11,7 +11,8 @@ import { GraphService } from 'src/app/Service/graph.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  constructor(private graph: GraphService, private actRoute: ActivatedRoute, private userExpSer: User_expense,
+  constructor(private graph: GraphService, private actRoute: ActivatedRoute,
+     private userExpSer: User_expense,
     private service:ExpensesService) { }
   // peopleInVirus: number;
   allExpenses: Expenses[];

@@ -1,72 +1,73 @@
-<div style="margin-left: 300px;margin-right: 300px;margin-top: 60px;
-direction: rtl; ">
-
-    <mat-form-field style=" font-family: 'Rubik', sans-serif; direction: rtl;">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="מסנן">
+<div style="
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 60px;
+    direction: rtl;
+    text-align: right;
+  ">
+    <mat-form-field style="font-family: 'Rubik', sans-serif; direction: rtl; text-align: right">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="מסנן" />
     </mat-form-field>
 
-
-    <div style="overflow: auto;">
+    <div style="overflow: auto">
         <div class="mat-elevation-z8">
             <mat-table [dataSource]="ListData">
-                <mat-header-row *matHeaderRowDef="displayedColumns" style=" font-family: 'Rubik', sans-serif;
-                direction: rtl;"></mat-header-row>
-                <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+                <mat-header-row *matHeaderRowDef="displayedColumns" style="font-family: 'Rubik', sans-serif; direction: rtl"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
                 <ng-container matColumnDef="Options">
                     <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <button mat-icon-button (click)="onEdit(row.id_loan)">
-                            <mat-icon>launch</mat-icon>
-                        </button>
 
-                        <button mat-icon-button color="warn" (click)="onDelete(row.id_loan)">
-                            <mat-icon>delete_outline</mat-icon>
-                        </button>
+                        <mat-icon (click)="onEdit(row.id_loan)" class="icon">launch</mat-icon>
+
+
+
+                        <mat-icon (click)="onDelete(row.id_loan)" class="icon">delete_outline</mat-icon>
+
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="id_loan">
                     <mat-header-cell *matHeaderCellDef>קוד הלוואה</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.id_loan}}</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{ element.id_loan }}
+                    </mat-header-cell>
                 </ng-container>
                 <!-- איך להציג את השם של הקטגוריה? -->
-                <ng-container matColumnDef="id_category">
+                <ng-container matColumnDef="id_expense">
                     <mat-header-cell *matHeaderCellDef>קטגוריה</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.id_category}}
+                    <mat-header-cell *matCellDef="let element">{{ element.Expenses ? element.Expenses.name_expense : "" }}
                     </mat-header-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
                     <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.date}}
+                    <mat-header-cell *matCellDef="let element">{{ element.date_OfLoan }}
                     </mat-header-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="sum">
                     <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.sum}}
+                    <mat-header-cell *matCellDef="let element">{{ element.sum }}
                     </mat-header-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="prisa">
                     <mat-header-cell *matHeaderCellDef>פריסה</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.prisa}}
+                    <mat-header-cell *matCellDef="let element">{{ element.prisa }}
                     </mat-header-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="alert">
                     <mat-header-cell *matHeaderCellDef>ימים להתראה</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.alert}}
+                    <mat-header-cell *matCellDef="let element">{{ element.days_toGetMailAlert }}
                     </mat-header-cell>
                 </ng-container>
-
             </mat-table>
         </div>
     </div>
 
-    <button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" style=" font-family: 'Rubik', sans-serif;
-    direction: rtl;"> הוספת הלוואה</button>
-
-
+    <button class="btn mt-2" mat-raised-button (click)="onAdd()" color="primary" style="font-family: 'Rubik', sans-serif; direction: rtl">
+    הוספת הלוואה
+  </button>
 </div>

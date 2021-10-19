@@ -29,7 +29,7 @@ namespace BLL
             mail.Body = createEmailBody(objData.toname, objData.message);
             SmtpServer.UseDefaultCredentials = false;
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("haiaattias@gmail.com", "p1stat1r");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("statist.project.it@gmail.com", "p1stat1r");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);

@@ -4,18 +4,16 @@ import { Observable } from 'rxjs';
 import { Expenses } from '../Models/Expenses';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExpensesService {
+  constructor(private http: HttpClient) {}
+  readonly APIUrl = 'https://localhost:44327/api/Expenses';
 
-  constructor(private http:HttpClient) { }
-  readonly APIUrl="https://localhost:44327/api";
-
-  getExpensesList():Observable<Expenses[]>{
-    return this.http.get<Expenses[]>(this.APIUrl+'/Expenses')
+  getExpensesList(): Observable<Expenses[]> {
+    return this.http.get<Expenses[]>(this.APIUrl + '/GetAll');
   }
-  addExpenses(dep:Expenses){
-    return this.http.post(this.APIUrl+'/Expenses',dep)
+  addExpenses(dep: Expenses) {
+    return this.http.post(this.APIUrl + '/AddExpenses', dep);
   }
-  
 }

@@ -1,5 +1,6 @@
-
-p, h5,pre{ 
+p,
+h5,
+pre {
     /* font-family: 'Arimo', sans-serif, 'Montserrat'; */
     /* font-family: 'Montserrat', sans-serif; */
     text-align: center;
@@ -7,23 +8,30 @@ p, h5,pre{
     color: rgb(46, 44, 44);
     font-family: 'Rubik', sans-serif;
 }
-a{
+
+a {
     font-size: 13px;
     color: rgb(46, 44, 44);
     font-weight: bold;
     float: right;
 }
-a:hover{color: rgb(247, 245, 242);} /*a:hover{color: orange;}  */
 
-.div_about{
-   /* background-size: cover; */
-   /* background-position:top center; */
+a:hover {
+    color: rgb(114, 110, 104);
+}
 
+
+/*a:hover{color: orange;}  */
+
+.div_about {
+    /* background-size: cover; */
+    /* background-position:top center; */
     height: 75%;
     color: rgb(46, 44, 44);
     font-family: 'Rubik', sans-serif;
 }
-.ishi{
+
+.ishi {
     background-color: #fadf9d;
     color: rgb(46, 44, 44);
     font-family: 'Rubik', sans-serif;
@@ -31,22 +39,22 @@ a:hover{color: rgb(247, 245, 242);} /*a:hover{color: orange;}  */
     margin-right: 150px;
     margin-left: 150px;
     border-radius: 20px;
-
 }
 
-h1{
-    padding-top: 50px;
+h1,
+h2 {
+    padding-top: 10px;
     /* font-family: 'Arimo', sans-serif, 'Montserrat'; */
     font-family: 'Rubik', sans-serif;
-
-    font-weight: 400; 
+    font-weight: 400;
     text-align: center;
 }
+
 #logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     position: relative;
-    margin-top:27px;
-  }
+    margin-top: 27px;
+}
