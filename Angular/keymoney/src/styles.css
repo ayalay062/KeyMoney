@@ -152,3 +152,26 @@ body .custom-select {
     cursor: pointer;
     font-weight: bold;
 }
+
+
+.form-wrapper,
+.form-wrapper-100 {
+    text-align: center;
+    margin: 0px auto;
+    border: 10px solid #f09819;
+    background-color: #fff;
+    padding: 30px;
+    direction: ltr;
+    color: #f09819!important;
+ 
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    position: relative;
+    font-size: 16px;
+    line-height: 28px;
+    max-width: 400px;
+    min-width: 300px;
+    opacity: 0.8;
+    height: calc(90% - 124px);
+    top: 5%;
+}

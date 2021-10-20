@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     null,
     null
   );
-  forgetForm: FormGroup;
+ 
   error: any = null;
   success: boolean = false;
   user = new BehaviorSubject<User>(null);
@@ -51,13 +51,17 @@ export class HeaderComponent implements OnInit {
   allAmutot: Amuta[] = [];
 
   @ViewChild('frame', { static: true }) frame: ModalContainerComponent;
+
+  @ViewChild('frame2', { static: true }) frame2: ModalContainerComponent;
+
+  @ViewChild('frame3', { static: true }) frame3: ModalContainerComponent;
   constructor(
     private userSer: UserService,
     private emailSer: EmailServiceService,
     private router: Router,
     private fb: FormBuilder
   ) {}
-
+ 
   ngOnInit(): void {
     var user = this.userSer.getU();
     if (user != null) this.isUser = true;
@@ -66,10 +70,6 @@ export class HeaderComponent implements OnInit {
       if (user != null) this.isUser = true;
     });
     this.lang = localStorage.getItem('lang') || 'en';
-
-    this.forgetForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
 
     this.validatingForm = new FormGroup({
       loginFormModalEmail: new FormControl(
@@ -110,6 +110,23 @@ export class HeaderComponent implements OnInit {
     this.resetForm();
   }
 
+  resetValidForm(){
+    this.validatingForm = new FormGroup({
+      loginFormModalEmail: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          ValidationService.emailValidator,
+        ])
+      ),
+
+      loginFormModalName: new FormControl(
+        '',
+        Validators.compose([Validators.required])
+      ),
+ 
+    });
+  }
   changeLang(lang) {
     console.log(lang);
     localStorage.setItem('lang', lang);
@@ -146,26 +163,23 @@ export class HeaderComponent implements OnInit {
   }
 
   sign() {
-    //save the new user and send email to the admin
     let newUser = new User();
-    // let emailData = new Email();
-    // emailData.message = 'please check the user';
-    // emailData.toemail = 'Haiaattias@gmail.com';
-    // emailData.subject = 'New user want login';
     newUser.name_user = this.validatingForm.get('loginFormModalName').value;
     newUser.id_user = this.validatingForm.get('loginFormModalPassword').value;
     newUser.email = this.validatingForm.get('loginFormModalEmail').value;
     newUser.tel = this.validatingForm.get('loginFormModalTel').value;
     newUser.misgeret = this.validatingForm.get('loginFormModalMisgeret').value;
-    this.userSer.addUser(newUser).subscribe((success) => {
-      this.userSer.setU(success);
-      
-      // this.emailSer.sendEmail(emailData).subscribe((success) => {
-      Swal.fire('הי', 'נרשמת בהצלחה', 'success');
-      this.frame.hide();
-      //   this.router.navigateByUrl('/user-account');
-      //   });//312121212
-    });
+    this.userSer.addUser(newUser).subscribe(
+      (success) => {
+        this.userSer.setU(success);
+
+        Swal.fire('הי', 'נרשמת בהצלחה', 'success');
+        this.frame3.hide();
+      },
+      (err) => {
+        Swal.fire('Ooops', 'משתמש קיים במערכת', 'error');
+      }
+    );
   }
 
   onSignOut() {
@@ -173,27 +187,27 @@ export class HeaderComponent implements OnInit {
   }
 
   onForgetSubmit() {
-    if (this.forgetForm.valid) {
-      // console.log(this.forgetForm.value);
-      this.userSer.forgetPassword(this.forgetForm.value).subscribe(
-        (res) => {
-          console.log(res);
-          this.success = true;
-        },
-        (err) => {
-          console.log(err);
-          this.error = err;
-        }
-      );
-    } else {
-      let key = Object.keys(this.forgetForm.controls);
-      key.filter((data) => {
-        let control = this.forgetForm.controls[data];
-        if (control.errors != null) {
-          control.markAsTouched();
-        }
-      });
-    }
+    let emailData = new Email();
+    emailData.message = 'הסיסמא שלך לאתר היא ';
+    emailData.toemail = this.validatingForm.get('loginFormModalEmail').value;
+    emailData.subject = ' הסיסמא שלך לאתר ';
+    emailData.toname = ' הי ' +  this.validatingForm.get('loginFormModalName').value;
+    emailData.isResetPassword = true;
+    this.emailSer.sendEmail(emailData).subscribe(
+      (x) => {
+        Swal.fire('הי', 'המייל נשלח בהצלחה', 'success');
+        this.validatingForm.reset();
+        this.frame2.hide();
+      },
+      (err) => {
+        Swal.fire('Oooops', 'שליחת המייל נכשלה, פנה למנהל המערכת', 'error');
+     
+        console.log(err);
+        this.error = err;
+      }
+    );
+
+ 
   }
 
   get loginFormModalEmail() {
@@ -205,9 +219,7 @@ export class HeaderComponent implements OnInit {
   get loginFormModalName() {
     return this.validatingForm.get('loginFormModalName');
   }
-  // get loginFormModalId() {
-  //   return this.validatingForm.get('loginFormModalId');
-  // }
+
   get loginFormModalMisgeret() {
     return this.validatingForm.get('loginFormModalMisgeret');
   }

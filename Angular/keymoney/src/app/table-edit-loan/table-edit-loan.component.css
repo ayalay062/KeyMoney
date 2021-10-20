@@ -1,0 +1,42 @@
+.add_patient {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    text-align: right;
+    margin: auto;
+    margin-top: 15px;
+    width: 50%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: -12px;
+    float: left;
+    left: -50px;
+}
+h5 {
+    color: coral;
+    text-align: center;
+}
+
+.sadeHova {
+    direction: rtl;
+    color: coral;
+}
+
+label,
+.md-form label {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+input {
+    text-align: left;
+    direction: ltr;
+    margin-left: 0px;
+}
+
+i {
+    margin-right: -2rem;
+}

@@ -6,27 +6,51 @@ using System.Net.Http;
 using System.Net.Mail;
 
 
-using DAL;using DTO;
+using DAL;
+using DTO;
 namespace BLL
 {
-   public  class EmailModel
+    public class EmailModel
     {
-       public  string toname { get; set; }
-       public  string toemail { get; set; }
-       public  string subject { get; set; }
-       public  string message { get; set; }
+        public bool isResetPassword { get; set; }
+        public string toname { get; set; }
+        public string toemail { get; set; }
+        public string subject { get; set; }
+        public string message { get; set; }
     }
-   public  class EmailBLL
+    public class EmailBLL
     {
-       public static bool SendEmail(EmailModel objData)
+        public static bool SendEmail(EmailModel objData)
         {
             MailMessage mail = new MailMessage();
+            if (objData.isResetPassword)
+            {
+                var pass = "";
+                using (var db = new KeyMoneyEntities())
+                {
+                    var user = db.User.FirstOrDefault(d => d.email == objData.toemail);
+                    if (user != null)
+                        pass = user.id_user;
+                }
+                if (pass == "")
+                {
+                    return false;
+                }
+                objData.message += " " + pass;
+                mail.Body = createEmailPassBody(pass, objData.message);
+
+            }
+            else
+            {
+
+                mail.Body = createEmailBody(objData.toname, objData.message);
+                
+            }
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("statist.project.it@gmail.com");
             mail.To.Add(objData.toemail);
             mail.Subject = objData.subject;
             mail.IsBodyHtml = true;
-            mail.Body = createEmailBody(objData.toname, objData.message);
             SmtpServer.UseDefaultCredentials = false;
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("statist.project.it@gmail.com", "p1stat1r");
@@ -46,6 +70,15 @@ namespace BLL
             if (userName != null)
                 body += "<h1>Dear " + userName + "</h1>";
             body += "<span>" + message + "</span>";
+            body += "</div>";
+            return body;
+        }
+
+        private static string createEmailPassBody(string pass, string message)
+        {
+            var body = "<div>";
+
+            body += "<span>" + message + "<strong>" + pass + "</strong></span>";
             body += "</div>";
             return body;
         }

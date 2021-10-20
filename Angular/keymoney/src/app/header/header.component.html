@@ -61,14 +61,14 @@
                     </div>
 
                     <div class="modal-footer d-flex justify-content-center">
-                        <button mdbBtn class="btn waves-light" mdbWavesEffect (click)="login()" style="background: #f09819">
+                        <button mdbBtn class="btn waves-light" [disabled]="!validatingForm.valid" mdbWavesEffect (click)="login()" style="background: #f09819">
               התחבר
             </button>
                         <label>לא משתמש רשום?
               <a
                 class="a_sign"
                 style="color: #f09819; font-weight: bold"
-                data-toggle="modal"
+                data-toggle="modal" 
                 data-target="#modalRegisterForm"
                 (click)="frame.hide(); frame3.show()"
                 >משתמש חדש</a
@@ -106,37 +106,39 @@
           type="button"
           class="close"
           data-dismiss="modal"
-          aria-label="Close"
+          aria-label="Close" (click)="frame2.hide()"
         >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form [formGroup]="validatingForm">
+             
       <div class="modal-body mx-5">
         <div class="md-form mb-5">
           <div class="md-form mb-4">
             <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
             <input
               type="text"
-              id="defaultForm-name"
+              id="defaultForm-name3"
               [formControl]="loginFormModalName"
               class="form-control"
               mdbInput
               mdbValidate
             />
-            <label for="defaultForm-name">שם משתמש</label>
+            <label for="defaultForm-name3">שם משתמש</label>
           </div>
 
           <div class="md-form mb-5">
             <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
             <input
               type="email"
-              id="defaultForm-email"
+              id="defaultForm-email2"
               [formControl]="loginFormModalEmail"
               class="form-control"
               mdbInput
               mdbValidate
             />
-            <label for="defaultForm-email">דוא"ל</label>
+            <label for="defaultForm-email2">  דוא"ל הרשום במערכת</label>
             <mdb-error
               *ngIf="
                 loginFormModalEmail.invalid &&
@@ -152,16 +154,18 @@
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button
-            mdbBtn
+            mdbBtn    [disabled]="  loginFormModalEmail.invalid"
             class="btn waves-light"
             mdbWavesEffect
             (click)="onForgetSubmit()"
             style="background: #f09819"
           >
-            סיום
+            שלח סיסמא
           </button>
-        </div>
+        </div>  
       </div>
+    </form>
+    
     </div>
   </div>
 </div>
@@ -188,7 +192,7 @@
           type="button"
           class="close"
           data-dismiss="modal"
-          aria-label="Close"
+          aria-label="Close" (click)="frame3.hide()"
         >
           <span aria-hidden="true">&times;</span>
         </button>

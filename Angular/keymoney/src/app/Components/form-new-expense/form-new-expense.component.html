@@ -1,68 +1,53 @@
-<!-- טופס הוספת הוצאה -->
-
-<form class="add_expense" [formGroup]="myForm" (ngSubmit)="save()">
-    <h5>טופס מילוי הוצאה חדשה</h5>
-
-    <div style="margin: 10px;">
-        <mat-form-field style="font-family: 'Arimo', sans-serif;
-        font-size: 14px;">
-            <mat-label>תאריך הוצאה</mat-label>
-            <p>{{todaydate | date:'d/M/y'}}</p>
-        </mat-form-field>
+<form class="add_patient" [formGroup]="myForm" (ngSubmit)="save()">
+  <h5>טופס הוספת הוצאה חדשה</h5>
+ 
+  <div style="margin-top: -5px;">
+    <div class="md-form">
+        <input class="form-control" mdbInput mdbValidate type="date" id="form5"
+         class="form-control" 
+        formControlName="expense_date">
+        <label for="form5" style="font-size: 14px;">תאריך ההוצאה</label>
+       
     </div>
+</div>
 
-    <div style="margin: 10px;">
-        <select class="browser-default custom-select" style="font-size: 14px;" formControlName="expenseCategory"
-            [(ngModel)]="expenseDetails.id_expense">
-            <option value="" selected hidden>פרטי הוצאה</option>
-            <option *ngFor="let expense of allExpense" value="{{expense.id_expense}}">{{expense.expense_name}}</option>
-        </select>
-        <errorMessage [control]="myForm.get('expenseCategory')"></errorMessage>
-    </div>
+  <div style="margin-top: -5px;">
+    <label for="id_kind" style="font-size: 14px;">סוג ההוצאה</label>
+       
+    <select class="browser-default custom-select" style="font-size: 14px;" id="id_kind" formControlName="id_kind">
+        <option value="" selected hidden>סוג הוצאה</option>
+        <option *ngFor="let c of allKinds" value="{{c.id_kind}}">{{c.name_kind}}</option>
+    </select>
+    <errorMessage [control]="myForm.get('id_kind')"></errorMessage>
+</div>
+  <div style="margin-top: -5px;">
+    <label for="id_expense" style="font-size: 14px;">שם ההוצאה</label>
+  
+      <select class="browser-default custom-select" style="font-size: 14px;" id="id_expense"
+       formControlName="id_expense">
+          <option value="" selected hidden>שם הוצאה</option>
+          <option *ngFor="let c of allExpense" value="{{c.id_expense}}">{{c.name_expense}}</option>
+      </select>
+      <errorMessage [control]="myForm.get('id_expense')"></errorMessage>
+  </div>
 
-    <!-- <div style="margin: 10px;">
-        <select class="browser-default custom-select" style="font-size: 14px;" id="expenseKind"
-            ,formControlName="expenseKind" [(ngModel)]="expenseDetails.id_kind" ]>
-            <option value="" selected hidden>סוג הוצאה</option>
-            <option *ngFor="let kind of allKinds" value="{{kind.id_kind}}">{{kind.name_kind}}</option>
-        </select>
-        <errorMessage [control]="myForm.get('expenseKind')"></errorMessage>
-    </div> -->
-    
-    <!-- <div style="margin: 10px;">
-        <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              value="man"
-            />
-            <label class="form-check-label" for="inlineRadio1">הוצאה קבועה</label>
-          </div>
-          
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              value="woman"
-            />
-            <label class="form-check-label" for="inlineRadio2">הוצאה משתנה</label>
-          </div>
-        </div>
-          <errorMessage [control]="myForm.get('expenseKind')"></errorMessage> -->
-
-    <!-- <div style="margin: 10px;">
-        <div class="md-form">
-            <input mdbInput type="number" class="form-control" id="sum" 
-            formControlName="sum" [(ngModel)]="expenseDetails.sum"
-            [ngClass]="{'is-invalid':(submitted||myForm.controls['sum']?.dirty)&&myForm.controls['sum'].errors}">
-            <label for="sum" style="font-size: 14px;">סכום</label>
-        </div>
+  <div style="margin-top: -5px;">
+    <div class="md-form">
+        <input class="form-control" mdbInput mdbValidate type="number" id="form1" 
+        class="form-control" formControlName="sum">
+        <label for="form1" style="font-size: 14px;">סכום</label>
         <errorMessage [control]="myForm.get('sum')"></errorMessage>
-    </div>  -->
 
-    <input type="submit" value="שמירה">
+       
+    </div>
+</div>
+
+  <div class="footer-wrapper">
+      <button class="btn mt-2" mat-raised-button type="submit" 
+      [disabled]="!myForm.valid" color="primary" style=" font-family: 'Rubik', sans-serif;
+  direction: rtl;">הוספה</button>
+
+  </div>
+
 </form>
+

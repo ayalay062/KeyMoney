@@ -53,6 +53,9 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
+                var user = db.User.FirstOrDefault(d => d.id_user == a.id_user);
+                if (user != null)
+                    return null;
                 var ad = UserConvertion.convertToUser(a);
                 var ads = db.User.Add(ad);
                 db.SaveChanges();

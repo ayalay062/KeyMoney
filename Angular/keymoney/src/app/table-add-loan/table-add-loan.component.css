@@ -10,9 +10,9 @@
 
 .close {
     position: absolute;
-    top: -0px;
+    top: -12px;
     float: left;
-    left: 10px;
+    left: -50px;
 }
 
 h5 {

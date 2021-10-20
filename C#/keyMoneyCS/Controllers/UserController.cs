@@ -47,6 +47,7 @@ namespace keyMoneyCS.Controllers
         public IHttpActionResult AddUser(UserDto ad)
         {
             var addedValue = UserBLL.AddUser(ad);
+            if (addedValue == null) return BadRequest("משתמש קיים במערכת");
             return Ok(addedValue);
         }
         [HttpPut]

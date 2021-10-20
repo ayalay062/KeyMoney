@@ -60,7 +60,6 @@ import { TableAddLoanComponent } from './table-add-loan/table-add-loan.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryComponent } from './Diagrams/category/category.component';
 import { EmailServiceService } from './Service/email-service.service';
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

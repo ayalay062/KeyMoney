@@ -3,7 +3,7 @@ export class Email {
     toemail: string;
     subject: string;
     message: string;
-
+isResetPassword:boolean;
     fullName:string;
     tel:string;
     email:string;

@@ -8,7 +8,7 @@ import { User_expense } from '../Models/User_expense';
 })
 export class UserExOrInDetailsService {
 
-  readonly APIUrl = "https://localhost:44327/api";
+  readonly APIUrl = "https://localhost:44327/api/User_expense";
   expenseDetails: User_expense;
 
   constructor(private http: HttpClient) { }
@@ -20,7 +20,7 @@ export class UserExOrInDetailsService {
     return this.http.get<User_expense>(this.APIUrl + '/User_expense?id=' + id)
   }
   addExp(dep: User_expense) {
-    return this.http.post(this.APIUrl + '/', dep)
+    return this.http.post<User_expense>(this.APIUrl + '/AddUserExpense', dep)
   }
   filter(filterBy: string) {
     this._listners.next(filterBy);

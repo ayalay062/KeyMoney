@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Amuta } from 'src/app/Models/Amuta';
+import { User } from 'src/app/Models/User';
 import { Expenses } from 'src/app/Models/Expenses';
 import { Kinds } from 'src/app/Models/Kinds';
 import { User_expense } from 'src/app/Models/User_expense';
 import { AmutaService } from 'src/app/Service/amuta.service';
 import { UserExOrInDetailsService } from 'src/app/Service/user-ex-or-in-details.service';
+import { ValidationService } from 'src/app/Service/validation.service';
+import Swal from 'sweetalert2';
+import { ExpensesService } from 'src/app/Service/expenses.service';
+import { KindsService } from 'src/app/Service/kinds.service';
 
 
 @Component({
@@ -17,59 +21,54 @@ import { UserExOrInDetailsService } from 'src/app/Service/user-ex-or-in-details.
 export class FormNewExpenseComponent implements OnInit {
 
   constructor(private router: Router, private fb: FormBuilder, private amutaSer: AmutaService,
-    private ExInDetails: UserExOrInDetailsService) { }
-
+    private ExInDetails: UserExOrInDetailsService,
+    private kService: KindsService, private expService: ExpensesService) { }
+    userId: string;
   todaydate = new Date();
   submitted = false;
   myForm: FormGroup;
   allExpense: Expenses[];
   allKinds: Kinds[];
-  allAmutot: Amuta[];
   expenseDetails: User_expense;
 
-
   ngOnInit(): void {
-    this.reserForm();
+   
     this.expenseDetails = this.ExInDetails.expenseDetails;
 
     this.myForm = this.fb.group({
-      expenseDate: ['', Validators.required],
-      expenseKind: ['', Validators.required],
-      expenseCategory: ['', Validators.required],
-      sum: ['', Validators.required],
+      id_expense: ['', Validators.required],
+      id_kind: ['', Validators.required],
+           sum: ['',   Validators.compose([
+          Validators.required,
+          ValidationService.numbersValidator,
+        ])],
+      expense_date: ['', Validators.required],
     })
-
-    this.amutaSer.getAmutaList().subscribe(success => {
-      this.allAmutot = success;
-    })
+      
+    this.expService.getExpensesList().subscribe((success) => {
+      this.allExpense = success;
+    });
+    this.kService.getKindsList().subscribe((success) => {
+      this.allKinds = success;
+    });
   }
-
-  reserForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-
-    // this.ExInDetails.expenseDetails = {
-    //   id: 0,
-    //   category: 0,
-    //   dateOf_InOrExp: null,
-    //   description: null,
-    //   user: '',
-    //   kindOfIncome: 0,
-    //   Positive_Negative: 0
-    // }
-  }
-
-  // onSubmit(myForm: NgForm) {
-  //   this.ExInDetails.addVirus_info(myForm.value).subscribe(res => {
-  //     this.reserForm(myForm);
-  //     this.snackBar.open(res.toString(), '', {
-  //       duration: 5000,
-  //       verticalPosition: 'top'
-  //     });
-  //   })
-  // }
 
   save() {
+    this.userId = (<User>JSON.parse(localStorage.getItem('user'))).id_user;
+    var l = <User_expense>this.myForm.value;
+    l.id_user = this.userId;
+    // l.sum = loan.value;
+    // l.ribit = loan.value;
+    // l.prisa = loan.value;
+    // l.date_OfLoan = loan.value;
+    // l.days_toGetMailAlert = loan.value;
+    // l.id_expense = loan.value;
 
+    this.ExInDetails.addExp(l).subscribe((res) => {
+      Swal.fire('הי', 'ההוצאה נוספה בהצלחה', 'success');
+      //this.router.ne
+    });
+    if (this.myForm.valid) this.myForm.reset();
   }
+
 }
