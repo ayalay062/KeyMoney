@@ -3,49 +3,127 @@
 סרגל של שנים
 סה"כ
 התנתק -->
+<div class="div-outer-wrapper row">
 
-<div style="margin: 60px;direction: rtl; ">
-
-    <div style="overflow: auto;">
-        <div class="mat-elevation-z8">
-            <mat-table [dataSource]="ListData" matSort>
-                <mat-header-row *matHeaderRowDef="displayedColumns" style=" font-family: 'Rubik', sans-serif;
-                direction: rtl;"></mat-header-row>
-                <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
-
-                <ng-container matColumnDef="Options">
-                    <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <!-- איזה id מקבל? -->
-                        <mat-icon class="icon" (click)="onEdit(row.id_user)">launch</mat-icon>
-
-                        <mat-icon class="icon" (click)="onDelete(row.id_user)">delete_outline</mat-icon>
-
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="usually_expense">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>הוצאות קבועות</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.usually_expense}}</mat-header-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.date}}</mat-header-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="sum">
-                    <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
-                    <mat-header-cell *matCellDef="let element">{{element.sum}}</mat-header-cell>
-                </ng-container>
-
-            </mat-table>
-        </div>
+    <div class="col-2">
+        <input type="button" *ngFor="let y of years" class="span-wrapper" (click)="changeYearMonth($event.target.value, selectedMonth)" [class.selected]="selectedYear == y" [value]="y" />
     </div>
 
-    <!-- <button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" style=" font-family: 'Rubik', sans-serif;
-    direction: rtl;"> הוספת משתמש</button> -->
+    <div class="col-4" style="direction: rtl;">
 
+        <div style="overflow: auto;">
+            <button class="btn" (click)="onAdd(true);">
+                הוספת הוצאה
+            </button>
+            <h6>הוצאות קבועות</h6>
+
+            <div class="">
+                <mat-table [dataSource]="ListData" matSort>
+                    <mat-header-row *matHeaderRowDef="displayedColumns" style=" font-family: 'Rubik', sans-serif; direction: rtl;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+
+                    <ng-container matColumnDef="Options">
+                        <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <!-- איזה id מקבל? -->
+                            <mat-icon class="icon" (click)="onEdit(row.id,true)">launch</mat-icon>
+
+                            <mat-icon class="icon" (click)="onDelete(row.id,true)">delete_outline</mat-icon>
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="expense_date">
+                        <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.expense_date| date:"dd/MM/yyyy"}}</mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sum">
+                        <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.sum}}</mat-header-cell>
+                    </ng-container>
+
+                </mat-table>
+            </div>
+
+            <h6>הוצאות משתנות</h6>
+            <div class="">
+                <mat-table [dataSource]="ListData2" matSort>
+                    <mat-header-row *matHeaderRowDef="displayedColumns" style=" font-family: 'Rubik', sans-serif; direction: rtl;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+
+                    <ng-container matColumnDef="Options">
+                        <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <!-- איזה id מקבל? -->
+                            <mat-icon class="icon" (click)="onEdit(row.id,true)">launch</mat-icon>
+                            <mat-icon class="icon" (click)="onDelete(row.id,true)">delete_outline</mat-icon>
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="expense_date">
+                        <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.expense_date| date:"dd/MM/yyyy"}}</mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sum">
+                        <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.sum}}</mat-header-cell>
+                    </ng-container>
+
+                </mat-table>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4" style="direction: rtl;">
+
+        <div style="overflow: auto;">
+            <button class="btn" (click)="onAdd(false);">
+                הוספת הכנסה
+            </button>
+            <h6>הכנסות </h6>
+
+
+            <div class="">
+                <mat-table [dataSource]="ListDataIncome" matSort>
+                    <mat-header-row *matHeaderRowDef="displayedColumnsIncome" style=" font-family: 'Rubik', sans-serif; direction: rtl;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns:displayedColumnsIncome;"></mat-row>
+
+                    <ng-container matColumnDef="Options">
+                        <mat-header-cell *matHeaderCellDef>עריכה | מחיקה</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <!-- איזה id מקבל? -->
+                            <mat-icon class="icon" (click)="onEdit(row.id,false)">launch</mat-icon>
+                            <mat-icon class="icon" (click)="onDelete(row.id,false)">delete_outline</mat-icon>
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="income_date">
+                        <mat-header-cell *matHeaderCellDef>תאריך</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.income_date | date:"dd/MM/yyyy"}}</mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sum">
+                        <mat-header-cell *matHeaderCellDef>סכום</mat-header-cell>
+                        <mat-header-cell *matCellDef="let element">{{element.sum}}</mat-header-cell>
+                    </ng-container>
+
+                </mat-table>
+            </div>
+        </div>
+
+        <!-- <button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" style=" font-family: 'Rubik', sans-serif; direction: rtl;"> הוספת משתמש</button> -->
+        <label class="sum-wrapper" *ngIf="calculateSumVal">סה"כ: <span style="unicode-bidi: isolate;">{{calculateSumVal}}</span> ש"ח</label>
+    </div>
+    <div class="row" style="margin-right: 80px;">
+        <input type="button" *ngFor="let m of month" class="span-wrapper-2" (click)="changeYearMonth(  selectedYear,$event.target.value)" [class.selected]="selectedMonth == m" [value]="m" />
+    </div>
 </div>
-
-<label>סה"כ:</label>

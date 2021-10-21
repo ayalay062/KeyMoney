@@ -49,7 +49,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = KindsBLL.AddKinds(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateKinds")]
         public IHttpActionResult UpdateKinds(KindsDto ad)
         {

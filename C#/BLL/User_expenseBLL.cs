@@ -5,12 +5,13 @@ using System.Net;
 using System.Net.Http;
 
 
-using DAL;using DTO;
+using DAL;
+using DTO;
 namespace BLL
 {
-   public static class User_expenseBLL
+    public static class User_expenseBLL
     {
-       public static List<User_expenseDto> GetAll()
+        public static List<User_expenseDto> GetAll()
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -20,7 +21,24 @@ namespace BLL
             }
         }
 
-       public static User_expenseDto GetByUserId(string id)
+
+        public static List<User_expenseDto> GetAllByUserDate(int year, int month, string id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var ads = db.User_expense.Where(r => r.id_user == id && r.expense_date.Value.Year == year && r.expense_date.Value.Month == month)
+                    .OrderBy(x => x.expense_date).ToList();
+                if (ads == null)
+                {
+                    return null;
+                }
+                return User_expenseConvertion.convertToListDto(ads);
+
+            }
+        }
+
+
+        public static User_expenseDto GetByUserId(string id)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -35,9 +53,22 @@ namespace BLL
         }
 
 
+        public static User_expenseDto GetById(int id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var ads = db.User_expense.FirstOrDefault(r => r.id == id);
+                if (ads == null)
+                {
+                    return null;
+                }
+                return User_expenseConvertion.convertToDto(ads);
 
+            }
+        }
 
-       public static User_expenseDto AddUser_expense(User_expenseDto a)
+        
+        public static User_expenseDto AddUser_expense(User_expenseDto a)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -48,7 +79,7 @@ namespace BLL
 
             }
         }
-       public static User_expenseDto UpdateUser_expense(User_expenseDto aa)
+        public static User_expenseDto UpdateUser_expense(User_expenseDto aa)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -64,7 +95,7 @@ namespace BLL
                 return null;
             }
         }
-       public static bool DeleteUser_expense(int id)
+        public static bool DeleteUser_expense(int id)
         {
             using (var db = new KeyMoneyEntities())
             {

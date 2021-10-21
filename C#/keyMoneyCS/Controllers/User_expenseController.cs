@@ -17,6 +17,20 @@ namespace keyMoneyCS.Controllers
             return Ok(User_expenseBLL.GetAll());
 
         }
+
+        [Route("GetAllByUserDate/{year}/{month}/{id}")]
+
+        public IHttpActionResult GetAllByUserDate(int year, int month, string id)
+        {
+            var ad = User_expenseBLL.GetAllByUserDate(year, month, id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The Expenses isn't defined"));
+        }
+
+
         [Route("GetByUserId/{id}")]
 
         public IHttpActionResult GetByUserId(string id)
@@ -29,7 +43,17 @@ namespace keyMoneyCS.Controllers
             return InternalServerError(new Exception("The User income isn't defined"));
         }
 
+        [Route("GetById/{id}")]
 
+        public IHttpActionResult GetById(int id)
+        {
+            var ad = User_expenseBLL.GetById(id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The User income isn't defined"));
+        }
         [HttpPost]
         [Route("AddUserExpense")]
         public IHttpActionResult AddUser_expense(User_expenseDto ad)
@@ -37,7 +61,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = User_expenseBLL.AddUser_expense(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateUserExpense")]
         public IHttpActionResult UpdateUser_expense(User_expenseDto ad)
         {

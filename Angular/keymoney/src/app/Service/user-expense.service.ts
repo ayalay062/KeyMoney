@@ -41,7 +41,7 @@ export class UserExpenseService {
     return this.http.delete(this.APIUrl + '/' + id);
   }
   updateExp(dep: User_expense) {
-    return this.http.put(this.APIUrl + '', dep)
+    return this.http.post(this.APIUrl + '', dep)
   }
   private _listners = new Subject<any>();
   listen(): Observable<any> {

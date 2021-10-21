@@ -5,13 +5,14 @@ using System.Net;
 using System.Net.Http;
 
 
-using DAL;using DTO;
+using DAL;
+using DTO;
 
 namespace BLL
 {
-   public static class ExpensesBLL
+    public static class ExpensesBLL
     {
-       public static List<ExpensesDto> GetAll()
+        public static List<ExpensesDto> GetAll()
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -21,7 +22,9 @@ namespace BLL
             }
         }
 
-       public static ExpensesDto GetById(int id)
+
+    
+        public static ExpensesDto GetById(int id)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -36,7 +39,7 @@ namespace BLL
         }
 
 
-       public static ExpensesDto GetByName(string Expenses_desc)
+        public static ExpensesDto GetByName(string Expenses_desc)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -50,7 +53,7 @@ namespace BLL
             }
         }
 
-       public static ExpensesDto AddExpenses(ExpensesDto a)
+        public static ExpensesDto AddExpenses(ExpensesDto a)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -61,7 +64,7 @@ namespace BLL
 
             }
         }
-       public static ExpensesDto UpdateExpenses(ExpensesDto aa)
+        public static ExpensesDto UpdateExpenses(ExpensesDto aa)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -76,7 +79,7 @@ namespace BLL
                 return null;
             }
         }
-       public static bool DeleteExpenses(int id)
+        public static bool DeleteExpenses(int id)
         {
             using (var db = new KeyMoneyEntities())
             {

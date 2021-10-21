@@ -1,0 +1,38 @@
+.span-wrapper,
+.span-wrapper-2 {
+    height: 30px;
+    width: 80px;
+    display: block;
+    background-color: #191970;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin: 10px auto;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.span-wrapper-2 {
+    margin: 2px;
+}
+
+.span-wrapper.selected,
+.span-wrapper-2.selected {
+    border: 1px solid midnightblue;
+    background-color: yellow;
+    color: midnightblue;
+}
+
+.div-outer-wrapper {
+    margin-top: 80px;
+}
+
+.sum-wrapper {
+    float: left;
+    bottom: 10px;
+    direction: ltr;
+    position: absolute;
+    left: -20px;
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -24,7 +24,7 @@ export class LoansService {
     return this.http.delete(this.APIUrl + '/DeleteLoans/' + id);
   }
   updateLo(dep: Loans) {
-    return this.http.put(this.APIUrl + '/UpdateLoans', dep);
+    return this.http.post(this.APIUrl + '/UpdateLoans', dep);
   }
   getLoansByUserId(userid: string): Observable<Loans[]> {
     return this.http.get<Loans[]>(this.APIUrl + '/GetByUserId/' + userid);

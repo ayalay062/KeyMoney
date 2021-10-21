@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import{HttpClient} from'@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Income } from '../Models/Income';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IncomeService {
+  constructor(private http: HttpClient) {}
+  readonly APIUrl = 'https://localhost:44327/api/Income';
 
-  constructor(private http:HttpClient) { }
-  readonly APIUrl="https://localhost:44327/api";
-
-  getIncomeList():Observable<Income[]>{
-    return this.http.get<Income[]>(this.APIUrl+'/Income')
+  getIncomeList(): Observable<Income[]> {
+    return this.http.get<Income[]>(this.APIUrl + '/GetAll');
   }
-  addIncome(dep:Income){
-    return this.http.post(this.APIUrl+'/Income',dep)
+  addIncome(dep: Income) {
+    return this.http.post(this.APIUrl + '/Income', dep);
   }
-  
 }

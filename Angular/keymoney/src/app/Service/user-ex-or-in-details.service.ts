@@ -13,11 +13,11 @@ export class UserExOrInDetailsService {
 
   constructor(private http: HttpClient) { }
 
-  getExpenseList(): Observable<User_expense[]> {
-    return this.http.get<User_expense[]>(this.APIUrl + '/')
+  getExpenseList(year:number, month:number,userId:string): Observable<User_expense[]> {
+    return this.http.get<User_expense[]>(this.APIUrl + '/GetAllByUserDate/'+year+'/'+month+'/'+ userId)
   }
-  getUserEx_In_details(id: string): Observable<User_expense> {
-    return this.http.get<User_expense>(this.APIUrl + '/User_expense?id=' + id)
+  getById(id: number): Observable<User_expense> {
+    return this.http.get<User_expense>(this.APIUrl + '/GetById/' + id)
   }
   addExp(dep: User_expense) {
     return this.http.post<User_expense>(this.APIUrl + '/AddUserExpense', dep)
@@ -27,10 +27,10 @@ export class UserExOrInDetailsService {
   }
   //למחוק הוצאה לפי id של משתמש
   deleteExp(id: number) {
-    return this.http.delete(this.APIUrl + '/' + id);
+    return this.http.delete(this.APIUrl + '/DeleteUserExpense/' + id);
   }
   updateExp(dep: User_expense) {
-    return this.http.put(this.APIUrl + '', dep)
+    return this.http.post(this.APIUrl + '/UpdateUserExpense', dep)
   }
   private _listners = new Subject<any>();
   listen(): Observable<any> {

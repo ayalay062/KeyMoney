@@ -1,4 +1,5 @@
-﻿using BLL; using DTO;
+﻿using BLL;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,19 @@ namespace keyMoneyCS.Controllers
             return InternalServerError();
         }
 
+
+        [Route("calculateSum/{year}/{month}/{id}")]
+        [HttpGet]
+        public IHttpActionResult CalculateSum(int year, int month, string id)
+        {
+            var ad = UserBLL.CalculateSum(year, month, id);
+
+            return Ok(ad);
+
+        }
+
+
+
         [HttpPost]
         [Route("AddUser")]
         public IHttpActionResult AddUser(UserDto ad)
@@ -50,7 +64,7 @@ namespace keyMoneyCS.Controllers
             if (addedValue == null) return BadRequest("משתמש קיים במערכת");
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateUser")]
         public IHttpActionResult UpdateUser(UserDto ad)
         {
@@ -72,5 +86,4 @@ namespace keyMoneyCS.Controllers
 
 
 
-     
-     
+

@@ -35,11 +35,15 @@ export class ContactComponent implements OnInit {
     let emailData = <Email>(this.myForm.value);
     emailData.message = emailData.msg;
     emailData.toemail = emailData.email;
-    emailData.subject = 'you can login';
+    emailData.subject = 'הודעה מהאתר';
     emailData.toname = emailData.fullName;
     this.service.sendEmail(emailData).subscribe((x) => {
       Swal.fire('הי', 'המייל נשלח בהצלחה', 'success');
       this.myForm.reset();
+    },
+    (err) => {
+      Swal.fire('Oooops', 'שליחת המייל נכשלה, פנה למנהל המערכת', 'error');
+      console.log(err);
     });
   }
 }

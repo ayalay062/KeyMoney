@@ -36,7 +36,7 @@ namespace BLL
                 {
                     return false;
                 }
-                objData.message += " " + pass;
+      
                 mail.Body = createEmailPassBody(pass, objData.message);
 
             }

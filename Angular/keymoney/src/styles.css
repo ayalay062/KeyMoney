@@ -3,8 +3,17 @@
 html,
 body {
     height: 100%;
-    text-align: right;
+    text-align: right!important;
     direction: rtl;
+}
+
+body {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -153,17 +162,15 @@ body .custom-select {
     font-weight: bold;
 }
 
-
 .form-wrapper,
 .form-wrapper-100 {
     text-align: center;
-    margin: 0px auto;
+    margin: 20px auto;
     border: 10px solid #f09819;
     background-color: #fff;
     padding: 30px;
-    direction: ltr;
+    direction: rtl;
     color: #f09819!important;
- 
     -webkit-box-flex: 1;
     flex-grow: 1;
     position: relative;
@@ -174,4 +181,42 @@ body .custom-select {
     opacity: 0.8;
     height: calc(90% - 124px);
     top: 5%;
+}
+
+.md-form label {
+    max-width: 100%;
+    text-align: right!important;
+}
+
+.md-form label:not(.form-check-label).active {
+    width: 123%;
+    max-width: 200%;
+}
+
+.md-form>input[type=date]:not(.browser-default)+label {
+    max-width: 200%;
+}
+
+.div-outer-wrapper .mat-table .mat-row,
+.div-outer-wrapper .mat-table .mat-header-row {
+    height: 32px!important;
+    min-height: 32px!important;
+    line-height: 32px!important;
+}
+
+.div-outer-wrapper .mat-table .mat-header-row .mat-header-cell {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-all {
+    text-align: center;
+    padding: 30px;
+    direction: rtl;
+    color: #f09819!important;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    position: relative;
+    font-size: 16px;
+    line-height: 28px;
 }

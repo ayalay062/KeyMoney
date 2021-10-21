@@ -15,6 +15,11 @@ import { Email } from '../Models/Email';
   providedIn: 'root',
 })
 export class UserService {
+
+ 
+
+
+
   readonly APIUrl = 'https://localhost:44327/api';
   formData: User;
   public user = new BehaviorSubject<User>(null);
@@ -40,7 +45,9 @@ export class UserService {
         })
       );
   }
-
+  calculateSum(year:number, month:number,userId:string): Observable<number> {
+    return this.http.get<number>(this.APIUrl + '/User/calculateSum/'+year+'/'+month+'/'+ userId)
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occured:', error.error.message);
@@ -80,14 +87,14 @@ export class UserService {
     return this.http.delete(this.APIUrl + '/User/' + id);
   }
   updateUser(dep: User) {
-    return this.http.put(this.APIUrl + 'User', dep);
+    return this.http.post(this.APIUrl + 'User', dep);
   }
   getAuthoById(id: number): Observable<User> {
     return this.http.get<User>(this.APIUrl + '/User?id=' + id);
   }
   approveUser(id: number) {
     console.log(id);
-    return this.http.put(this.APIUrl + '/User/ApproveUser', { id: id });
+    return this.http.post(this.APIUrl + '/User/ApproveUser', { id: id });
   }
   private _listners = new Subject<any>();
   listen(): Observable<any> {

@@ -5,7 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using BLL; using DTO;
+using BLL;
+using DTO;
 namespace keyMoneyCS.Controllers
 {
     [RoutePrefix("api/User_income")]
@@ -21,14 +22,38 @@ namespace keyMoneyCS.Controllers
 
         public IHttpActionResult GetByUserId(string id)
         {
-            var ad = User_incomeBLL. GetByUserId(id);
+            var ad = User_incomeBLL.GetByUserId(id);
             if (ad != null)
             {
                 return Ok(ad);
             }
             return InternalServerError(new Exception("The User income isn't defined"));
         }
-    
+
+
+        [Route("GetById/{id}")]
+
+        public IHttpActionResult GetById(int id)
+        {
+            var ad = User_incomeBLL.GetById(id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The User income isn't defined"));
+        }
+
+        [Route("GetAllByUserDate/{year}/{month}/{id}")]
+
+        public IHttpActionResult GetAllByUserDate(int year, int month, string id)
+        {
+            var ad = User_incomeBLL.GetAllByUserDate(year, month, id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The Expenses isn't defined"));
+        }
 
         [HttpPost]
         [Route("AddUserIncome")]
@@ -37,7 +62,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = User_incomeBLL.AddUser_income(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateUserIncome")]
         public IHttpActionResult UpdateUser_income(User_incomeDto ad)
         {

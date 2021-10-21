@@ -63,7 +63,35 @@ namespace BLL
 
             }
         }
-       public static UserDto UpdateUser(UserDto aa)
+
+        public static double CalculateSum(int year, int month, string id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var incVal = 0;
+                var inc = db.User_income.Where(r =>
+                r.id_user == id && r.income_date.HasValue && r.income_date.Value.Year == year &&
+                r.income_date.Value.Month == month).ToList();
+
+                if (inc != null && inc.Any())
+                {
+                    incVal = inc.Sum(x => x.sum);
+                }
+                var exVal = 0;
+                var ex = db.User_expense.Where(r => r.id_user == id &&
+                r.expense_date.HasValue && 
+                r.expense_date.Value.Year == year && r.expense_date.Value.Month == month)
+                .ToList();
+
+                if (ex != null && ex.Any())
+                {
+                    exVal = ex.Sum(x => x.sum);
+                }
+                return incVal - exVal;
+            }
+        }
+
+        public static UserDto UpdateUser(UserDto aa)
         {
             using (var db = new KeyMoneyEntities())
             {

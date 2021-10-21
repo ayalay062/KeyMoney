@@ -50,7 +50,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = IncomeBLL.AddIncome(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateIncome")]
         public IHttpActionResult UpdateIncome(IncomeDto ad)
         {

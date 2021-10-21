@@ -21,6 +21,11 @@ namespace keyMoneyCS.Controllers
             return Ok(ExpensesBLL.GetAll());
 
         }
+
+        
+
+   
+
         [Route("GetById/{id}")]
 
         public IHttpActionResult GetById(int id)
@@ -50,7 +55,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = ExpensesBLL.AddExpenses(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateExpenses")]
         public IHttpActionResult UpdateExpenses(ExpensesDto ad)
         {

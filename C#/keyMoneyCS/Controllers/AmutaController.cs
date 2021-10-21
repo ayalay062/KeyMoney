@@ -40,7 +40,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = AmutaBLL.AddAmuta(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateAmuta")]
         public IHttpActionResult UpdateAmuta(AmutaDto ad)
         {

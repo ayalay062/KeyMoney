@@ -34,10 +34,36 @@ namespace BLL
             }
         }
 
+        public static User_incomeDto GetById(int id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var ads = db.User_income.FirstOrDefault(r => r.id == id);
+                if (ads == null)
+                {
+                    return null;
+                }
+                return User_incomeConvertion.convertToDto(ads);
 
+            }
+        }
 
+        public static List<User_incomeDto> GetAllByUserDate(int year, int month, string id)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                var ads = db.User_income.Where(r => r.id_user == id && r.income_date.Value.Year == year && r.income_date.Value.Month == month)
+                    .OrderBy(x => x.income_date).ToList();
+                if (ads == null)
+                {
+                    return null;
+                }
+                return User_incomeConvertion.convertToListDto(ads);
 
-       public static User_incomeDto AddUser_income(User_incomeDto a)
+            }
+        }
+
+        public static User_incomeDto AddUser_income(User_incomeDto a)
         {
             using (var db = new KeyMoneyEntities())
             {

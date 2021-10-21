@@ -50,7 +50,7 @@ namespace keyMoneyCS.Controllers
             var addedValue = LoansBLL.AddLoans(ad);
             return Ok(addedValue);
         }
-        [HttpPut]
+       [HttpPost]
         [Route("UpdateLoans")]
         public IHttpActionResult UpdateLoans(LoansDto ad)
         {
