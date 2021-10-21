@@ -29,13 +29,12 @@ export class FormNewIncomeComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private amutaSer: AmutaService,
     private userIncService: UserUser_incomeService,
     private kService: KindsService,
     private expService: IncomeService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogbox: MatDialogRef<FormNewIncomeComponent>
-  ) {}
+  ) {   if (!this.data) this.data = [];}
   userId: string;
   todaydate = new Date();
   submitted = false;
@@ -45,7 +44,7 @@ export class FormNewIncomeComponent implements OnInit {
   incomeDetails: User_income;
 
   ngOnInit(): void {
-    //  this.incomeDetails = this.userIncService.;
+    if (!this.data) this.data = [];
 
     this.myForm = this.fb.group({
       id_income: ['', Validators.required],
@@ -75,9 +74,9 @@ export class FormNewIncomeComponent implements OnInit {
     this.expService.getIncomeList().subscribe((success) => {
       this.allIncome = success;
     });
-    this.kService.getKindsList().subscribe((success) => {
-      this.allKinds = success;
-    });
+    // this.kService.getKindsList().subscribe((success) => {
+    //   this.allKinds = success;
+    // });
   }
   OnClose() {
     this.dialogbox.close();

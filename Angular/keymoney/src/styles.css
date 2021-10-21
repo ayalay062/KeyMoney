@@ -190,7 +190,7 @@ body .custom-select {
 
 .md-form label:not(.form-check-label).active {
     width: 123%;
-    max-width: 200%;
+    max-width: 200%!important;
 }
 
 .md-form>input[type=date]:not(.browser-default)+label {

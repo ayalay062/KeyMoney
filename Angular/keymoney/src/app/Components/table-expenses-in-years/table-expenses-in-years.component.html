@@ -121,7 +121,7 @@
         </div>
 
         <!-- <button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" style=" font-family: 'Rubik', sans-serif; direction: rtl;"> הוספת משתמש</button> -->
-        <label class="sum-wrapper" *ngIf="calculateSumVal">סה"כ: <span style="unicode-bidi: isolate;">{{calculateSumVal}}</span> ש"ח</label>
+        <label class="sum-wrapper" *ngIf="calculateSumVal">סה"כ: <span style="unicode-bidi: isolate;direction: ltr;">{{calculateSumVal}}</span> ש"ח</label>
     </div>
     <div class="row" style="margin-right: 80px;">
         <input type="button" *ngFor="let m of month" class="span-wrapper-2" (click)="changeYearMonth(  selectedYear,$event.target.value)" [class.selected]="selectedMonth == m" [value]="m" />
