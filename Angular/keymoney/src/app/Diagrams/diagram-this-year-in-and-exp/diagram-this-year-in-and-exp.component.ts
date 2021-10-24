@@ -35,9 +35,10 @@ export class DiagramThisYearInAndExpComponent implements OnInit {
 
   showGraph(year: number) {
     this.selectedYear = year;
-    this.chart.chart.data.datasets[0].data=[];
-    this.chart.chart.data.datasets[1].data=[];
+
     this.graph.GetMonthsByYear(this.userId, year).subscribe((res) => {
+      this.chart.chart.data.datasets[0].data=[];
+      this.chart.chart.data.datasets[1].data=[];
       res.forEach((resData) => {
         if (resData) {
           var d = resData.split(',');
