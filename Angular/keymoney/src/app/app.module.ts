@@ -47,7 +47,7 @@ import { EditTableExpenseInYearComponent } from './Components/edit-table-expense
 import { AddTableExpenseInYearComponent } from './Components/add-table-expense-in-year/add-table-expense-in-year.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -60,6 +60,9 @@ import { TableAddLoanComponent } from './table-add-loan/table-add-loan.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryComponent } from './Diagrams/category/category.component';
 import { EmailServiceService } from './Service/email-service.service';
+import { ChartsModule } from 'ng2-charts';
+import { DiagramCategoryComponent } from './Diagrams/diagram-category/diagram-category.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -90,7 +93,7 @@ const routs: Routes = [
   { path: 'edit_loan', component: TableEditLoanComponent },
   { path: 'add_loan', component: TableAddLoanComponent },
   
-  {path:'category',component:CategoryComponent},
+  {path:'category',component:DiagramCategoryComponent},
 
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "**", component: NotFoundComponent }
@@ -120,9 +123,10 @@ const routs: Routes = [
     AddTableExpenseInYearComponent,
     DailyExpenseComponent,
     TableEditLoanComponent,
-    TableAddLoanComponent,
+    TableAddLoanComponent, 
     TableLoansComponent,
-    CategoryComponent, 
+    CategoryComponent,
+    DiagramCategoryComponent, 
   ],
   imports: [
     CdkTableModule,
@@ -148,6 +152,7 @@ const routs: Routes = [
     MdbRadioModule,
     MdbRangeModule,
     MdbRippleModule,
+    ChartsModule,
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,
@@ -164,6 +169,9 @@ const routs: Routes = [
     MatFormFieldModule
   ],
   providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+    {  provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LanguageInterceptor,

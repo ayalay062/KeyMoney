@@ -1,0 +1,54 @@
+.subject {
+    background-color: white;
+    color: coral;
+    /* background-image: url('/assets/y.jpg'); */
+    font-family: 'Rubik', sans-serif;
+    direction: rtl;
+    text-align: center;
+    padding: 30px;
+    margin: auto;
+    width: 55%;
+    margin-top: 20px;
+}
+
+p,
+h1 {
+    color: coral;
+    font-family: 'Rubik', sans-serif;
+}
+
+.chart-wrapper {
+    width: 50%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.form-wrapper-lg {
+    direction: rtl;
+}
+
+.span-wrapper,
+.span-wrapper-2 {
+    height: 30px;
+    width: 80px;
+    display: block;
+    background-color: #191970;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin: 10px auto;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.span-wrapper-2 {
+    margin: 2px;
+    display: inline-block;
+}
+
+.span-wrapper.selected,
+.span-wrapper-2.selected {
+    border: 1px solid midnightblue;
+    background-color: yellow;
+    color: midnightblue;
+}

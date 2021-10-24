@@ -3,18 +3,19 @@ import { Expenses } from 'src/app/Models/Expenses';
 import { User } from 'src/app/Models/User';
 import { User_expense } from 'src/app/Models/User_expense';
 import { ExpensesService } from 'src/app/Service/expenses.service';
-// import { GraphService } from 'src/app/Service/graph.service';
+import { GraphService } from 'src/app/Service/graph.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+
 @Component({
-  selector: 'category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
+  selector: 'app-diagram-category',
+  templateUrl: './diagram-category.component.html',
+  styleUrls: ['./diagram-category.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class DiagramCategoryComponent implements OnInit {
+
   constructor(
-    // private graph: GraphService,
-    private userExpSer: User_expense,
+    private graph: GraphService,
     private service: ExpensesService
   ) {}
   // peopleInVirus: number;
@@ -23,26 +24,26 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.userId = (<User>JSON.parse(localStorage.getItem('user'))).id_user;
 
-  //   this.graph.userExpByCategory(this.userId).subscribe((res) => {
-  //     this.barChartData[0].data = res;
-  //     // res.forEach((resData) => {
+    this.graph.userExpByCategory(this.userId).subscribe((res) => {
+      this.barChartData[0].data = res;
+      // res.forEach((resData) => {
 
-  //     //   this.barChartData[0].data.push(resData.value);
-  //     // });
+      //   this.barChartData[0].data.push(resData.value);
+      // });
 
-  //  //   this.chartDatasets = [{ data: res, label: 'מספר הוצאות' }];
-  //   });
+   //   this.chartDatasets = [{ data: res, label: 'מספר הוצאות' }];
+    });
 
-    // this.service.getExpensesList().subscribe((success) => {
-    //   this.allExpenses = success;
-    //   this.barChartLabels = this.allExpenses.map(
-    //     (item: Expenses) => item.name_expense
-    //   );
+    this.service.getExpensesList().subscribe((success) => {
+      this.allExpenses = success;
+      this.barChartLabels = this.allExpenses.map(
+        (item: Expenses) => item.name_expense
+      );
 
-    //   // this.chartLabels = this.allExpenses.map(
-    //   //   (item: Expenses) => item.name_expense
-    //   //    );
-    // });
+      // this.chartLabels = this.allExpenses.map(
+      //   (item: Expenses) => item.name_expense
+      //    );
+    });
   }
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -53,7 +54,7 @@ export class CategoryComponent implements OnInit {
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [], label: 'הקטגוריות ', backgroundColor: 'red' },
+    { data: [], label: 'סך הוצאות ', backgroundColor: 'red' },
   ];
 
   // public chartType: string = 'doughnut';

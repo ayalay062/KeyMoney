@@ -1,8 +1,9 @@
-<div style="margin-top: 10px;">
+<div style="margin-top: 50px;">
     <div class="subject">
-        <h1> שנים</h1>
-        <p> השוואת הכנסות מול הוצאות במהלך חודשי השנה
+        <h1> קטגוריות</h1>
+        <p> מזון, ביגוד, לימודים, תחביבים, קבועות או משתנות? מהן ההוצאות המשמעותיות יותר?
         </p>
+
         <div style="display: block">
             <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
             </canvas>
@@ -11,7 +12,4 @@
             </canvas> -->
         </div>
     </div>
-</div>
-<div class="footer-wrapper">
-    <input type="button" *ngFor="let y of years" class="span-wrapper-2" (click)="showGraph($event.target.value)" [class.selected]="selectedYear == y" [value]="y" />
 </div>

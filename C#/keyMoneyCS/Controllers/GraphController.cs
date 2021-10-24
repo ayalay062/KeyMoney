@@ -13,12 +13,12 @@ namespace keyMoneyCS.Controllers
     {
 
 
-        [Route("GetMonths/{id_user}/{p}")]
+        [Route("GetMonthsByYear/{id_user}/{year}")]
         // הוצאות של משתמש לפי חודשים
-        public IHttpActionResult GetMonths(string id_user, bool p)
+        public IHttpActionResult GetMonthsByYear(string id_user, int year)
         {
          
-            return Ok(GraphBLL.GetMonths(id_user,p));
+            return Ok(GraphBLL.GetMonthsByYear(id_user, year));
         }
 
         [Route("GetCategory/{id_user}/{p}")]
