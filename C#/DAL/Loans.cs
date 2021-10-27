@@ -22,6 +22,7 @@ namespace DAL
         public double ribit { get; set; }
         public int id_expense { get; set; }
         public int days_toGetMailAlert { get; set; }
+        public string loan_info { get; set; }
     
         public virtual Expenses Expenses { get; set; }
         public virtual User User { get; set; }

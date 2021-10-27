@@ -29,6 +29,9 @@ export class LoansService {
   getLoansByUserId(userid: string): Observable<Loans[]> {
     return this.http.get<Loans[]>(this.APIUrl + '/GetByUserId/' + userid);
   }
+  calcLoansByUserIdMonthYear(userid: string,  month:number,  year:number): Observable<Loans[]> {
+    return this.http.get<Loans[]>(this.APIUrl + '/CalculateLoanByMonth/' + userid + '/'+ month+'/'+ year);
+  }
   getLoanById(id: number): Observable<Loans> {
     return this.http.get<Loans>(this.APIUrl + '/GetById/' + id);
   }

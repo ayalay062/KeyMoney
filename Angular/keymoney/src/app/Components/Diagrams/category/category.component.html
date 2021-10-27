@@ -1,0 +1,16 @@
+<div style="margin-top: 50px;">
+    <div class="subject">
+        <h1> קטגוריות</h1>
+        <pre> מזון, ביגוד, לימודים, תחביבים, קבועות או משתנות? 
+            מהן ההוצאות המשמעותיות יותר?
+        </pre>
+
+        <div style="display: block">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+
+            <!-- <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+            </canvas> -->
+        </div>
+    </div>
+</div>

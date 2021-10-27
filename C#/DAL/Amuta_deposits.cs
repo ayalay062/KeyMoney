@@ -18,7 +18,7 @@ namespace DAL
         public int id_amuta { get; set; }
         public string id_user { get; set; }
         public int sum { get; set; }
-        public Nullable<System.DateTime> dateOfDeposit { get; set; }
+        public System.DateTime dateOfDeposit { get; set; }
     
         public virtual Amuta Amuta { get; set; }
         public virtual User User { get; set; }

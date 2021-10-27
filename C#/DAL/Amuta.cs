@@ -18,6 +18,7 @@ namespace DAL
         public Amuta()
         {
             this.Amuta_deposits = new HashSet<Amuta_deposits>();
+            this.User = new HashSet<User>();
         }
     
         public int id_amuta { get; set; }
@@ -26,5 +27,7 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Amuta_deposits> Amuta_deposits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User { get; set; }
     }
 }

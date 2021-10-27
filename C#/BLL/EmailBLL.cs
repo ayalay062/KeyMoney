@@ -68,7 +68,7 @@ namespace BLL
         {
             var body = "<div>";
             if (userName != null)
-                body += "<h1>Dear " + userName + "</h1>";
+                body += "<h3>הי  " + userName + "</h3>";
             body += "<span>" + message + "</span>";
             body += "</div>";
             return body;

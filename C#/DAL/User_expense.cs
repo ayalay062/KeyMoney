@@ -19,7 +19,8 @@ namespace DAL
         public int id_kind { get; set; }
         public string id_user { get; set; }
         public int sum { get; set; }
-        public Nullable<System.DateTime> expense_date { get; set; }
+        public System.DateTime expense_date { get; set; }
+        public string expense_info { get; set; }
     
         public virtual Expenses Expenses { get; set; }
         public virtual Kinds Kinds { get; set; }

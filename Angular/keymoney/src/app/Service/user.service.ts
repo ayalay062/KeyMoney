@@ -15,11 +15,6 @@ import { Email } from '../Models/Email';
   providedIn: 'root',
 })
 export class UserService {
-
- 
-
-
-
   readonly APIUrl = 'https://localhost:44327/api';
   formData: User;
   public user = new BehaviorSubject<User>(null);
@@ -45,8 +40,14 @@ export class UserService {
         })
       );
   }
-  calculateSum(year:number, month:number,userId:string): Observable<number> {
-    return this.http.get<number>(this.APIUrl + '/User/calculateSum/'+year+'/'+month+'/'+ userId)
+  calculateSum(
+    year: number,
+    month: number,
+    userId: string
+  ): Observable<number> {
+    return this.http.get<number>(
+      this.APIUrl + '/User/calculateSum/' + year + '/' + month + '/' + userId
+    );
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -131,6 +132,9 @@ export class UserService {
       id_user: new_user.id_user,
       misgeret: new_user.misgeret,
       email: new_user.email,
+      is_admin: false,
+      is_disabled: false
+
     };
     return this.http.post(this.APIUrl + '/api/User/Register', body);
   }

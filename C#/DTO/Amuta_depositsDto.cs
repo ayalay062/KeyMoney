@@ -10,7 +10,7 @@ namespace DTO
         public int id_amuta { get; set; }
         public string id_user { get; set; }
         public int sum { get; set; }
-        public Nullable<System.DateTime> dateOfDeposit { get; set; }
+        public DateTime dateOfDeposit { get; set; }
     
         public  AmutaDto Amuta { get; set; }
         public UserDto User { get; set; }

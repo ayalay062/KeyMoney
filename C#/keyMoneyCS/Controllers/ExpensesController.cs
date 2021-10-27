@@ -21,11 +21,6 @@ namespace keyMoneyCS.Controllers
             return Ok(ExpensesBLL.GetAll());
 
         }
-
-        
-
-   
-
         [Route("GetById/{id}")]
 
         public IHttpActionResult GetById(int id)

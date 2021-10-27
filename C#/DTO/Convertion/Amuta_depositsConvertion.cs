@@ -14,8 +14,12 @@ namespace DTO
             newAmutaDep.id_user = amutaDep.id_user;
             newAmutaDep.sum = amutaDep.sum;
             newAmutaDep.dateOfDeposit = amutaDep.dateOfDeposit;
-           // newAmutaDep.Amuta = amutaDep.Amuta;
-        //    newAmutaDep.User = amutaDep.User;
+            if (amutaDep.Amuta != null)
+            {
+                newAmutaDep.Amuta = AmutaConvertion.convertToDto(amutaDep.Amuta);
+            }
+
+            //    newAmutaDep.User = amutaDep.User;
             return newAmutaDep;
         }
 
@@ -38,14 +42,14 @@ namespace DTO
             newAmutaDep.id_user = amutaDep.id_user;
             newAmutaDep.sum = amutaDep.sum;
             newAmutaDep.dateOfDeposit = amutaDep.dateOfDeposit;
-           // newAmutaDep.Amuta = amutaDep.Amuta;
-           // newAmutaDep.User = amutaDep.User;
-     
+            // newAmutaDep.Amuta = amutaDep.Amuta;
+            // newAmutaDep.User = amutaDep.User;
+
             return newAmutaDep;
 
         }
 
     }
 
-    
+
 }

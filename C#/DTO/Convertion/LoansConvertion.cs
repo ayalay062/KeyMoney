@@ -17,6 +17,7 @@ namespace DTO
             newLoans.id_expense = loan.id_expense;
             newLoans.days_toGetMailAlert = loan.days_toGetMailAlert;
             newLoans.date_ofLoan = loan.date_ofLoan;
+            newLoans.loan_info = loan.loan_info;
             if (loan.Expenses != null) {
 
                 newLoans.Expenses = ExpensesConvertion.convertToDto(loan.Expenses);
@@ -46,6 +47,7 @@ namespace DTO
             newLoans.id_expense = loan.id_expense;
             newLoans.days_toGetMailAlert = loan.days_toGetMailAlert;
             newLoans.date_ofLoan = loan.date_ofLoan;
+            newLoans.loan_info = loan.loan_info;
             return newLoans;
 
         }

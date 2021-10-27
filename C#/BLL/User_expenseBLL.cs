@@ -26,7 +26,7 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.User_expense.Where(r => r.id_user == id && r.expense_date.Value.Year == year && r.expense_date.Value.Month == month)
+                var ads = db.User_expense.Where(r => r.id_user == id && r.expense_date.Year == year && r.expense_date.Month == month)
                     .OrderBy(x => x.expense_date).ToList();
                 if (ads == null)
                 {
@@ -67,11 +67,35 @@ namespace BLL
             }
         }
 
-        
+
         public static User_expenseDto AddUser_expense(User_expenseDto a)
         {
             using (var db = new KeyMoneyEntities())
             {
+                var exVal = 0;
+                var ex = db.User_expense.Where(r => r.id_user == a.id_user &&
+               r.expense_date.Year == a.expense_date.Year && r.expense_date.Month == a.expense_date.Month)
+                 .ToList();
+
+                if (ex != null && ex.Any())
+                {
+                    exVal = ex.Sum(x => x.sum);
+                }
+                var userMisgeret = db.User.FirstOrDefault(x => x.id_user == a.id_user);
+                if (userMisgeret.misgeret < (exVal + a.sum))
+                {
+                    //send email
+                    EmailBLL.SendEmail(new EmailModel()
+                    {
+                        toemail = userMisgeret.email,
+                        isResetPassword = false,
+                        toname = userMisgeret.name_user,
+                        message = "בוצעה בקשה להוספת הוצאה על סך " + a.sum + ".שח, ההוצאה חורגת ממסגרת התקציב שלך ",
+                        subject = "אזהרה! חריגה מהמסגרת"
+                    });
+
+                }
+
                 var ad = User_expenseConvertion.convertToUser_expense(a);
                 var ads = db.User_expense.Add(ad);
                 db.SaveChanges();
@@ -87,7 +111,9 @@ namespace BLL
                 if (a != null)
                 {
                     a.sum = aa.sum;
-
+                    a.expense_info = aa.expense_info;
+                    a.expense_date = aa.expense_date;
+                    a.id_kind = aa.id_kind;
                     db.SaveChanges();
                     return User_expenseConvertion.convertToDto(a);
                 }

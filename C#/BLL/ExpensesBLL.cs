@@ -57,6 +57,7 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
+              
                 var ad = ExpensesConvertion.convertToExpenses(a);
                 var ads = db.Expenses.Add(ad);
                 db.SaveChanges();

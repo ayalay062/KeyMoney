@@ -40,7 +40,7 @@ namespace keyMoneyCS.Controllers
             var userDB = UserBLL.Login(user);
             if (userDB != null)
                 return Ok(userDB);
-            return InternalServerError();
+            return BadRequest("שם משתמש או סיסמא לא תקינים");
         }
 
 

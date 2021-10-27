@@ -19,27 +19,55 @@ namespace BLL
             {
                 var allUExpenses = db.User_expense
                       .Where(o => o.id_user == id_user &&
-                      o.expense_date.HasValue && o.expense_date.Value.Year == year);
+                     o.expense_date.Year == year);
 
                 var m = from allUexp in allUExpenses
-                        group allUexp by allUexp.expense_date.Value.Month;
+                        group allUexp by allUexp.expense_date.Month;
 
                 var allIncomes = db.User_income
                .Where(o => o.id_user == id_user &&
-               o.income_date.HasValue && o.income_date.Value.Year == year);
+               o.income_date.Year == year);
 
 
                 var n = from alInc in allIncomes
-                        group alInc by alInc.income_date.Value.Month;
+                        group alInc by alInc.income_date.Month;
+
+                var loans = db.Loans.Where(r => r.id_user == id_user).ToList();
+
+                var aDep = db.Amuta_deposits
+      .Where(o => o.id_user == id_user &&
+     o.dateOfDeposit.Year == year);
+
+                var aa = from aDe in aDep
+                         group aDe by aDe.dateOfDeposit.Month;
 
                 string[] months = new string[13];
-
                 for (int i = 1; i < 13; i++)
                 {
                     var e_count = m.FirstOrDefault(allExp => allExp.Key == i);
                     var ex = e_count != null ? e_count.Sum(y => y.sum) : 0;
                     var inc_count = n.FirstOrDefault(a => a.Key == i);
                     var inc = inc_count != null ? inc_count.Sum(y => y.sum) : 0;
+                    var eaa_count = aa.FirstOrDefault(add => add.Key == i);
+                    ex += eaa_count != null ? eaa_count.Sum(y => y.sum) : 0;
+
+
+                    foreach (var loan in loans)
+                    {
+                        var endOfMonth = new DateTime(year,
+                                   i,
+                                   DateTime.DaysInMonth(year,
+                                                        i));
+
+                        if (loan.date_ofLoan.AddMonths(loan.prisa) >= endOfMonth
+                            && loan.date_ofLoan <= endOfMonth)
+                        {
+
+                            ex += (int)(Math.Round((loan.sum * (1 + (loan.ribit / 100))) / loan.prisa));
+                        }
+                    }
+
+
                     months[i - 1] = ex + "," + inc;
                 }
 
@@ -82,7 +110,7 @@ namespace BLL
 
                 //קיבוץ הוצאות לפי שנים
                 var y = from allUexp in allUExpenses
-                        group allUexp by allUexp.expense_date.Value.Year;
+                        group allUexp by allUexp.expense_date.Year;
 
                 //למצוא את השנה המינימלית והמקסימלית של המשתמש, בשביל טווח
                 int maxYear = y.Max(m => m.Key);

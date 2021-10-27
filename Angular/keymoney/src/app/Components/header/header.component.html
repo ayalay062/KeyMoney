@@ -1,0 +1,332 @@
+<ul style="color: #fadf9d; font-family: 'Rubik', sans-serif">
+    <li>
+        <a routerLink="home" routerLinkActive="active-link">
+      |
+      <img src="assets/img/homeIcon.jpg" width="12px" height="10px" />
+      {{ isUser ? "אזור אישי" : "אודות" }}
+    </a>
+    </li>
+    <li>
+        <a routerLink="contact" routerLinkActive="active-link">
+      | <img src="assets/img/contactus.jpg" width="12px" height="10px" />צור
+      קשר</a
+    >
+  </li>
+  <li>
+    <a
+      routerLink=""
+      data-toggle="modal"
+      data-target="#basicExample"
+      (click)="frame.show()"
+      >|
+      <img src="assets/img/loginicon.png" width="12px" height="10px" /> התחבר</a
+    >
+  </li>
+  <li style="float: left">
+    <a routerLink="contact"
+      ><img src="assets/img/lgsIcon.jpg" width="12px" height="10px" />עברית
+    </a>
+    </li>
+    <!-- <li style="float:left">
+    <img src="assets/img/lgsIcon.jpg" width="12px" height="10px" />
+    <select class="custom-select" (change)="changeLang($event.target.value)">
+      <option value="he" [selected]="lang=='he'">עברית</option>
+      <option value="en" [selected]="lang=='en'">English</option>
+    </select>
+  </li> -->
+</ul>
+
+<!-- כניסה -->
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Rubik', sans-serif; font-size: 14px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">כניסה לחשבונך</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body mx-5">
+                <form [formGroup]="validatingForm">
+                    <div class="md-form ">
+                        <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+                        <input type="email" id="defaultForm-name" [formControl]="loginFormModalEmail" mdbValidate class="form-control" mdbInput />
+                        <label for="defaultForm-name">מייל</label>
+                        <mdb-error *ngIf="
+                          loginFormModalEmail.invalid &&
+                          (loginFormModalEmail.dirty || loginFormModalEmail.touched)
+                        ">
+                            חובה להזין מייל תקין
+                        </mdb-error>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                        <input type="password" id="defaultForm-pass" [formControl]="loginFormModalPassword" class="form-control" mdbInput mdbValidate />
+                        <label for="defaultForm-pass">סיסמה</label>
+                        <mdb-error *ngIf="
+                          loginFormModalPassword.invalid &&
+                          (loginFormModalPassword.dirty ||
+                            loginFormModalPassword.touched)
+                        ">
+                            חובה להזין 9 תווים
+                        </mdb-error>
+                    </div>
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button mdbBtn class="btn waves-light" [disabled]="!validatingForm.valid" mdbWavesEffect (click)="login()" style="background: #f09819">
+              התחבר
+            </button>
+                        <label>לא משתמש רשום?
+              <a
+                class="a_sign"
+                style="color: #f09819; font-weight: bold"
+                data-toggle="modal" 
+                data-target="#modalRegisterForm"
+                (click)="frame.hide(); frame3.show();setRegisterForm();"
+                >משתמש חדש</a
+              >
+            </label>
+
+                        <a class="a_sign" style="color: #f09819; font-weight: bold" data-toggle="modal" data-target="#modalForgotPass" (click)="frame.hide(); frame2.show();resetValidForm();">נחסמתי/שכחתי סיסמה ></a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- נחסמתי/שכחתי סיסמה -->
+<!-- #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)"-->
+
+<div
+  mdbModal
+  #frame2="mdbModal"
+  class="modal fade"
+  id="modalForgotPass"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  style="font-family: 'Rubik', sans-serif; font-size: 14px"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">נחסמתי/שכחתי סיסמה</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close" (click)="frame2.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="validatingForm">
+             
+      <div class="modal-body mx-5">
+        <div class="md-form ">
+          <div class="md-form mb-4">
+            <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+            <input
+              type="text"
+              id="defaultForm-name3"
+              [formControl]="loginFormModalName"
+              class="form-control"
+              mdbInput
+              mdbValidate
+            />
+            <label for="defaultForm-name3">שם משתמש</label>
+          </div>
+
+          <div class="md-form ">
+            <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+            <input
+              type="email"
+              id="defaultForm-email2"
+              [formControl]="loginFormModalEmail"
+              class="form-control"
+              mdbInput
+              mdbValidate
+            />
+            <label for="defaultForm-email2">  דוא"ל הרשום במערכת</label>
+            <mdb-error
+              *ngIf="
+                loginFormModalEmail.invalid &&
+                (loginFormModalEmail.dirty || loginFormModalEmail.touched)
+              "
+            >
+            חובה להזין מייל תקין
+            </mdb-error>
+            <!-- <mdb-success *ngIf="loginFormModalEmail.valid && (loginFormModalEmail.dirty || loginFormModalEmail.touched)">
+                            Input valid
+                        </mdb-success> -->
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button
+            mdbBtn    [disabled]="  loginFormModalEmail.invalid"
+            class="btn waves-light"
+            mdbWavesEffect
+            (click)="onForgetSubmit()"
+            style="background: #f09819"
+          >
+            שלח סיסמא
+          </button>
+        </div>  
+      </div>
+    </form>
+    
+    </div>
+  </div>
+</div>
+
+<!-- הרשמה -->
+<!-- #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)"-->
+
+<div
+  mdbModal
+  #frame3="mdbModal"
+  class="modal fade"
+  id="modalRegisterForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  style="font-family: 'Rubik', sans-serif; font-size: 14px"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">כניסה למשתמש חדש</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close" (click)="frame3.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-5">
+        <form [formGroup]="validatingForm">
+          <div class="md-form ">
+            <div class="md-form ">
+              <mdb-icon fas icon="id-card" class="prefix grey-text"></mdb-icon>
+              <input
+                type="text"
+                id="defaultForm-name"
+                [formControl]="loginFormModalName"
+                class="form-control"
+                mdbInput
+              />
+              <label for="defaultForm-name">שם משתמש</label>
+            </div>
+            <div class="md-form ">
+              <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+              <input
+               type="password"
+                id="defaultForm-id"
+                [formControl]="loginFormModalPassword"
+                class="form-control"
+                mdbInput
+              />
+              <label for="defaultForm-id">סיסמא / תעודת זהות</label>
+              <mdb-error
+                *ngIf="
+                  loginFormModalPassword.invalid &&
+                  (loginFormModalPassword.dirty ||
+                    loginFormModalPassword.touched)
+                "
+              >
+                חובה להזין 9 תווים
+              </mdb-error>
+            </div>
+            <div class="md-form ">
+              <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+              <input
+                type="email"
+                id="defaultForm-email"
+                [formControl]="loginFormModalEmail"
+                class="form-control"
+                mdbInput
+                mdbValidate
+              />
+              <label for="defaultForm-email">דוא"ל</label>
+              <mdb-error
+                *ngIf="
+                  loginFormModalEmail.invalid &&
+                  (loginFormModalEmail.dirty || loginFormModalEmail.touched)
+                "
+              >
+                לא תקין
+              </mdb-error>
+            </div>
+            <div class="md-form ">
+              <mdb-icon fas icon="phone" class="prefix grey-text"></mdb-icon>
+              <input
+                type="tel"
+                id="defaultForm-Tel"
+                [formControl]="loginFormModalTel"
+                class="form-control"
+                mdbInput
+              />
+              <label for="defaultForm-Tel">פלאפון</label>
+            </div>
+
+            <div class="md-form ">
+              <mdb-icon
+                fas
+                icon="money-check"
+                class="prefix grey-text"
+              ></mdb-icon>
+              <input
+                type="number"
+                id="defaultForm-misgeret"
+                [formControl]="loginFormModalMisgeret"
+                class="form-control"
+                mdbInput
+              >
+              <label for="defaultForm-misgeret">מסגרת תקציב</label>
+            </div>
+            <!-- <div class="md-form mb-4">
+                            <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                            <input type="password" id="defaultForm-pass" [formControl]="loginFormModalPassword" class="form-control" mdbInput mdbValidate>
+                            <label for="defaultForm-pass">סיסמה</label>
+                            <mdb-error *ngIf="loginFormModalPassword.invalid && (loginFormModalPassword.dirty || loginFormModalPassword.touched)">
+                                סיסמה חייבת להכיל 8 תווים
+                            </mdb-error>
+
+                        </div> -->
+            <div class="md-form ">
+              <mdb-icon
+                fas
+                icon="hand-holding-usd"
+                class="prefix grey-text"
+              ></mdb-icon>
+              <select class="form-control" mdbInput
+              style="font-size: 14px;"id="defaultForm-amuta"  [formControl]="loginFormModalAmuta"
+              >
+                <option *ngFor="let c of allAmutot" value="{{c.id_amuta}}">{{c.name_amuta}}</option>
+            </select>           
+              <label for="defaultForm-amuta">עמותה ברירת מחדל להשקעה</label>
+            </div>
+          </div>
+
+          <div class="modal-footer d-flex justify-content-center">
+            <button
+              class="btn"
+              [disabled]="!validatingForm.valid"
+              (click)="sign()"
+            
+            >
+              הרשם
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

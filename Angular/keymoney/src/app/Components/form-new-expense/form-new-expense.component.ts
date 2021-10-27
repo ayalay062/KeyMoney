@@ -57,6 +57,15 @@ export class FormNewExpenseComponent implements OnInit {
           ValidationService.numbersValidator,
         ]),
       ],
+
+      expense_info:[
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(20),
+        ]),
+      ],
+
       expense_date: [
         '' + new Date().toISOString().substring(0, 10),
         Validators.required,
@@ -91,7 +100,7 @@ export class FormNewExpenseComponent implements OnInit {
     l.id_user = this.userId;
     if (!l.id || l.id === 0) {
       this.ExInDetails.addExp(l).subscribe((res) => {
-        Swal.fire('הי', 'ההכנסה נוספה בהצלחה', 'success');
+        Swal.fire('הי', 'ההוצאה נוספה בהצלחה', 'success');
         if (this.data.isClose) {
           this.OnClose();
         } else {
@@ -100,7 +109,7 @@ export class FormNewExpenseComponent implements OnInit {
       });
     } else {
       this.ExInDetails.updateExp(l).subscribe((res) => {
-        Swal.fire('הי', 'ההכנסה עודכנה בהצלחה', 'success');
+        Swal.fire('הי', 'ההוצאה עודכנה בהצלחה', 'success');
         if (this.data.isClose) {
           this.OnClose();
         } else {

@@ -1,0 +1,23 @@
+.add_expense {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    text-align: right;
+    margin: auto;
+    margin-top: 50px;
+    width: 30%;
+}
+
+.close {
+    position: absolute;
+    top: 0px;
+    float: left;
+    left: 10px;
+}
+
+h5,
+p {
+    color: #f09819;
+    display: block;
+    margin: auto;
+    text-align: center;
+}

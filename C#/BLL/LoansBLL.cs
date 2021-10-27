@@ -6,26 +6,27 @@ using System.Net.Http;
 
 
 
-using DAL;using DTO;
+using DAL;
+using DTO;
 namespace BLL
 {
-   public static class LoansBLL
+    public static class LoansBLL
     {
-       public static List<LoansDto> GetAll()
+        public static List<LoansDto> GetAll()
         {
             using (var db = new KeyMoneyEntities())
             {
                 var ads = db.Loans.Include("Expenses").ToList();
                 return LoansConvertion.convertToListDto(ads);
-     
-    }
+
+            }
         }
 
-       public static List<LoansDto> GetByUserId(string id)
+        public static List<LoansDto> GetByUserId(string id)
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.Loans.Where(r => r.id_user == id).ToList() ;
+                var ads = db.Loans.Where(r => r.id_user == id).ToList();
                 if (ads == null)
                 {
                     return null;
@@ -34,6 +35,12 @@ namespace BLL
 
             }
         }
+
+        public static object GetAllByUserDate(string id, int month, int year)
+        {
+            throw new NotImplementedException();
+        }
+
         public static LoansDto GetById(int id)
         {
             using (var db = new KeyMoneyEntities())
@@ -47,6 +54,37 @@ namespace BLL
 
             }
         }
+
+        public static List<LoansDto> CalculateLoanByMonth(string id, int month, int year)
+        {
+            var resLoans = new List<LoansDto>();
+            var endOfMonth = new DateTime(year,
+                                   month,
+                                   DateTime.DaysInMonth(year,
+                                                        month));
+
+
+            using (var db = new KeyMoneyEntities())
+            {
+                var loans = db.Loans.Where(r => r.id_user == id).ToList();
+                if (loans == null)
+                {
+                    return null;
+                }
+                foreach (var loan in loans)
+                {
+                    if (loan.date_ofLoan.AddMonths(loan.prisa) >= endOfMonth && loan.date_ofLoan <= endOfMonth)
+                    {
+                        var loanDto = LoansConvertion.convertToDto(loan);
+                        loanDto.sum_month =Math.Round( (loan.sum * (1 + (loan.ribit / 100))) / loan.prisa);
+                        resLoans.Add(loanDto);
+                    }
+                }
+                return resLoans;
+
+            }
+        }
+
         public static LoansDto AddLoans(LoansDto a)
         {
             using (var db = new KeyMoneyEntities())
@@ -58,7 +96,7 @@ namespace BLL
 
             }
         }
-       public static LoansDto UpdateLoans(LoansDto loan)
+        public static LoansDto UpdateLoans(LoansDto loan)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -71,6 +109,7 @@ namespace BLL
                     l.date_ofLoan = loan.date_ofLoan;
                     l.days_toGetMailAlert = loan.days_toGetMailAlert;
                     l.id_expense = loan.id_expense;
+                    l.loan_info = loan.loan_info;
                     db.SaveChanges();
                     return LoansConvertion.convertToDto(l);
                 }
@@ -78,8 +117,8 @@ namespace BLL
                 return null;
             }
         }
-   
-       public static bool DeleteLoans(int id)
+
+        public static bool DeleteLoans(int id)
         {
             using (var db = new KeyMoneyEntities())
             {
@@ -93,6 +132,6 @@ namespace BLL
 
                 return false;
             }
-        }      
+        }
     }
 }

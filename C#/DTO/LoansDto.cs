@@ -14,7 +14,13 @@ namespace DTO
         public double ribit { get; set; }
         public int days_toGetMailAlert { get; set; }
         public int id_expense { get; set; }
+        public string loan_info { get; set; }
+
         public  UserDto User { get; set; }
         public  ExpensesDto Expenses { get; set; }
+
+        
+
+        public double sum_month { get; set; }
     }
 }

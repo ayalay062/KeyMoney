@@ -52,7 +52,7 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.User_income.Where(r => r.id_user == id && r.income_date.Value.Year == year && r.income_date.Value.Month == month)
+                var ads = db.User_income.Where(r => r.id_user == id && r.income_date.Year == year && r.income_date.Month == month)
                     .OrderBy(x => x.income_date).ToList();
                 if (ads == null)
                 {
@@ -82,6 +82,9 @@ namespace BLL
                 if (a != null)
                 {
                     a.sum = aa.sum;
+                    a.income_info = aa.income_info;
+                    a.income_date = aa.income_date;
+                    a.id_kind = aa.id_kind;
 
                     db.SaveChanges();
                     return User_incomeConvertion.convertToDto(a);

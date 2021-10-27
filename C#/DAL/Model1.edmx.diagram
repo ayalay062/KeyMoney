@@ -5,25 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="608eb62974e94fbb98a4b273fc948531" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="KeyMoneyModel.Amuta" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Amuta_deposits" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Expenses" Width="1.5" PointX="0.75" PointY="11.875" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Income" Width="1.5" PointX="3.75" PointY="15.25" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Kinds" Width="1.5" PointX="7" PointY="3" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Loans" Width="1.5" PointX="3" PointY="7.375" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User" Width="1.5" PointX="0.75" PointY="7.5" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User_expense" Width="1.5" PointX="3" PointY="11.5" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User_income" Width="1.5" PointX="6" PointY="7.5" />
-        <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_am__33D4B598" />
-        <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_us__34C8D9D1" />
-        <AssociationConnector Association="KeyMoneyModel.FK__Loans__id_expens__36B12243" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_ex__37A5467C" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_in__3A81B327" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_ki__38996AB5" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_ki__3B75D760" />
-        <AssociationConnector Association="KeyMoneyModel.FK__Loans__id_user__35BCFE0A" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_us__398D8EEE" />
-        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_us__3C69FB99" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Amuta" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Amuta_deposits" Width="1.5" PointX="5.25" PointY="9.125" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Expenses" Width="1.5" PointX="6" PointY="6.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Income" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Kinds" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Loans" Width="1.5" PointX="8.25" PointY="5.875" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User" Width="1.5" PointX="3" PointY="9.625" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User_expense" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User_income" Width="1.5" PointX="5.25" PointY="13" />
+        <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_am__35BCFE0A" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User__id_amuta__398D8EEE" />
+        <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_us__36B12243" />
+        <AssociationConnector Association="KeyMoneyModel.FK__Loans__id_expens__37A5467C" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_ex__3A81B327" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_in__3D5E1FD2" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_ki__3B75D760" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_ki__3E52440B" />
+        <AssociationConnector Association="KeyMoneyModel.FK__Loans__id_user__38996AB5" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_expe__id_us__3C69FB99" />
+        <AssociationConnector Association="KeyMoneyModel.FK__User_inco__id_us__3F466844" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,4 +5,5 @@ export class User_income {
   id_user: string;
   sum: number;
   income_date: Date;
+  income_info: string;
 }

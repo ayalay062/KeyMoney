@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.red_col {
+    color: red;
+}
+
 .span-wrapper-2 {
     margin: 2px;
 }
@@ -35,4 +39,22 @@
     left: -20px;
     font-size: 20px;
     font-weight: bold;
+}
+
+small {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    position: relative;
+    display: block;
+    text-align: center;
+}
+
+.download-excel {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
 }

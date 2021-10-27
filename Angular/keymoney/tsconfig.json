@@ -11,11 +11,16 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "types": ["node"] ,
+    "types": [ "node" ],
     "lib": [
       "es2018",
       "dom"
-    ]
+    ] ,
+    "paths": {
+      "exceljs": [
+        "node_modules/exceljs/dist/exceljs.min"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

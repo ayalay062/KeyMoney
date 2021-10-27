@@ -28,7 +28,11 @@ namespace DAL
         public string tel { get; set; }
         public int misgeret { get; set; }
         public string email { get; set; }
+        public Nullable<int> id_amuta { get; set; }
+        public bool is_admin { get; set; }
+        public bool is_disabled { get; set; }
     
+        public virtual Amuta Amuta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Amuta_deposits> Amuta_deposits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

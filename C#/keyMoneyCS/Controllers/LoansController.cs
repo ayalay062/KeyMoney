@@ -32,6 +32,17 @@ namespace keyMoneyCS.Controllers
             }
             return InternalServerError(new Exception("The Loans aren't defined"));
         }
+        [HttpGet]
+        [Route("CalculateLoanByMonth/{id}/{month}/{year}")]
+        public IHttpActionResult CalculateLoanByMonth(string id, int month, int year)
+        {
+            var ad = LoansBLL.CalculateLoanByMonth(id, month, year);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return InternalServerError(new Exception("The Loans aren't defined"));
+        }
         [Route("GetById/{id}")]
 
         public IHttpActionResult GetById(int id)

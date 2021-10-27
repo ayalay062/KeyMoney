@@ -9,10 +9,10 @@ import { Amuta } from '../Models/Amuta';
 export class AmutaService {
 
   constructor(private http:HttpClient) { }
-  readonly APIUrl="https://localhost:44327/api";
+  readonly APIUrl="https://localhost:44327/api/Amuta";
   
   getAmutaList():Observable<Amuta[]>{
-    return this.http.get<Amuta[]>(this.APIUrl+'/Amuta')
+    return this.http.get<Amuta[]>(this.APIUrl+'/GetAll')
   }
   addAmuta(dep:Amuta):Observable<Amuta>{
     return this.http.post<Amuta>(this.APIUrl+'/Amuta',dep)

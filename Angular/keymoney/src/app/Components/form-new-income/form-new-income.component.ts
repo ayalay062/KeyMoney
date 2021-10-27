@@ -55,6 +55,12 @@ export class FormNewIncomeComponent implements OnInit {
           Validators.required,
           ValidationService.numbersValidator,
         ]),
+      ],   income_info:[
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(20),
+        ]),
       ],
       income_date: [
         '' + new Date().toISOString().substring(0, 10),
@@ -97,7 +103,7 @@ export class FormNewIncomeComponent implements OnInit {
       });
     } else {
       this.userIncService.updateUser_income(l).subscribe((res) => {
-        Swal.fire('הי', 'העדכון עודכנה בהצלחה', 'success');
+        Swal.fire('הי', 'העדכון בוצע בהצלחה', 'success');
         if (this.data.isClose) {
           this.OnClose();
         } else {

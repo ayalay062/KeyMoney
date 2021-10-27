@@ -15,8 +15,8 @@ namespace DTO
             newUser_expense.id_user = user_expense.id_user;
             newUser_expense.sum = user_expense.sum;
             newUser_expense.expense_date = user_expense.expense_date;
-           // newUser_expense.User = user_expense.User;
-           // newUser_expense.Kinds = user_expense.Kinds;
+            newUser_expense.expense_info = user_expense.expense_info;
+
             return newUser_expense;
         }
 
@@ -40,9 +40,8 @@ namespace DTO
             newUser_expense.id_user = user_expense.id_user;
             newUser_expense.sum = user_expense.sum;
             newUser_expense.expense_date = user_expense.expense_date;
+            newUser_expense.expense_info = user_expense.expense_info;
 
-            //  newUser_expense.User = user_expense.User;
-            // newUser_expense.Kinds = user_expense.Kinds;
             return newUser_expense;
 
         }

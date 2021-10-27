@@ -1,0 +1,42 @@
+<form class="form-all" [formGroup]="myForm" (ngSubmit)="save()">
+    <br>
+    <h5 *ngIf="data && data.id;else:new"> טופס עדכון השקעה לעמותה </h5>
+    <button type="button" class="close " aria-label="Close " (click)="OnClose() ">
+        <span  class="close " aria-hidden="true ">×</span>
+      </button>
+    <br> <br>
+    <ng-template #new>
+        <h5>טופס הוספת השקעה לעמותה </h5>
+    </ng-template>
+
+    <div style="margin-top: 15px;">
+        <div class="md-form">
+            <input class="form-control" mdbInput mdbValidate type="number" id="form1" class="form-control" formControlName="sum">
+            <label for="form1" style="font-size: 14px;">סכום</label>
+            <errorMessage [control]="myForm.get('sum')"></errorMessage>
+
+
+        </div>
+    </div>
+    <br>
+    <div style="margin-top: 20px;">
+        <label for="id_amuta" style="font-size: 14px;">שם עמותה להשקעה</label>
+
+        <select class="browser-default custom-select" style="font-size: 14px;" id="id_amuta" formControlName="id_amuta">
+          <option value="" selected hidden>שם עמותה</option>
+          <option *ngFor="let c of allAmutot" value="{{c.id_amuta}}">{{c.name_amuta}}</option>
+      </select>
+        <errorMessage [control]="myForm.get('id_amuta')"></errorMessage>
+    </div>
+    <br> <br>
+    <div class="footer-wrapper">
+        <p *ngIf="amutaDefault ">מוגדר לך עמותה ברירת מחדל: {{amutaDefault.name_amuta}}</p>
+    </div>
+    <br>
+    <div class="footer-wrapper">
+        <button class="btn mt-2" mat-raised-button type="submit" [disabled]="!myForm.valid" color="primary" style=" font-family: 'Rubik', sans-serif;
+  direction: rtl;">שמור</button>
+
+    </div>
+
+</form>

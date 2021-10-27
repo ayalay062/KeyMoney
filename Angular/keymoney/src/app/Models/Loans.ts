@@ -11,6 +11,7 @@ export class Loans {
   prisa: number;
   ribit: number; // float?
   days_toGetMailAlert: number; //?להשתמש בחישוב לשליחה?
-
+  sum_month:number;
+  loan_info:string;
   Expenses:Expenses;
 }

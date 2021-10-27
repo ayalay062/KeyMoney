@@ -35,6 +35,16 @@
 
     <div style="margin-top: -5px;">
         <div class="md-form">
+            <input class="form-control" mdbInput mdbValidate type="text" id="expense_info" class="form-control" formControlName="expense_info">
+            <label for="expense_info" style="font-size: 14px;">פרטים</label>
+            <errorMessage [control]="myForm.get('expense_info')"></errorMessage>
+
+
+        </div>
+    </div>
+
+    <div style="margin-top: -5px;">
+        <div class="md-form">
             <input class="form-control" mdbInput mdbValidate type="number" id="form1" class="form-control" formControlName="sum">
             <label for="form1" style="font-size: 14px;">סכום</label>
             <errorMessage [control]="myForm.get('sum')"></errorMessage>

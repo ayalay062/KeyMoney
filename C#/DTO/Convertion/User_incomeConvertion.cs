@@ -15,9 +15,8 @@ namespace DTO
             newUser_income.id_user = user_income.id_user;
             newUser_income.id_income = user_income.id_income;
             newUser_income.sum = user_income.sum;
-          //  newUser_income.User = user_income.User;
-         //   newUser_income.Kinds = user_income.Kinds;
-          //  newUser_income.Income = user_income.Income;
+             newUser_income.income_info = user_income.income_info;
+      
             return newUser_income;
         }
 
@@ -41,9 +40,7 @@ namespace DTO
             newUser_income.id_user = user_income.id_user;
             newUser_income.id_income = user_income.id_income;
             newUser_income.sum = user_income.sum;
-        //    newUser_income.User = user_income.User;
-       //     newUser_income.Kinds = user_income.Kinds;
-        //    newUser_income.Income = user_income.Income;
+            newUser_income.income_info = user_income.income_info;
             return newUser_income;
 
         }
