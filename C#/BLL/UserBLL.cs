@@ -15,7 +15,7 @@ namespace BLL
         {
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.User.ToList();
+                var ads = db.User.Where(x=>x.is_admin == false).ToList();
                 return UserConvertion.convertToListDto(ads);
 
             }
@@ -133,6 +133,22 @@ namespace BLL
                 return null;
             }
         }
+
+        public static UserDto SetStatusUser(string userId, bool isEnable)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                User a = db.User.FirstOrDefault(u => u.id_user == userId);
+                if (a != null)
+                {
+                    a.is_disabled = !isEnable;
+                    db.SaveChanges();
+                    return UserConvertion.convertToDto(a);
+                }
+
+                return null;
+            }
+        }
         public static UserDto Login(UserDto user)
         {
             using (var db = new KeyMoneyEntities())
@@ -145,7 +161,6 @@ namespace BLL
             }
 
         }
-
         public static bool DeleteUser(string id)
         {
             using (var db = new KeyMoneyEntities())

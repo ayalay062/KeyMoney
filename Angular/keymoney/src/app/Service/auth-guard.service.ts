@@ -7,7 +7,9 @@ import {
 } from '@angular/router';
 import { UserService } from './user.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
@@ -16,8 +18,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     var user = this.userService.getU();
-    alert( JSON.stringify(user));
-    if (this.userService.getU() != null) {
+    if (user != null && user.is_admin) {
       return true;
     } else {
       this.router.navigateByUrl('/home');

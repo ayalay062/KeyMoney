@@ -17,16 +17,28 @@ export class HomeComponent implements OnInit {
   lang;
   isUser: boolean;
   user: User;
+  isAdmin = false;
   private id: string;
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en';
-
+    this.isAdmin = false;
     this.user = this.service.getU();
-    if (this.user != null) this.isUser = true;
+    if (this.user != null) {
+      this.isUser = true;
+      this.isAdmin = this.user.is_admin;
+    }
+    else{
+      this.isAdmin = false;
+    }
     this.service.user.subscribe((x) => {
       this.user = this.service.getU();
-      if (this.user != null) this.isUser = true;
+      if (this.user != null) {
+        this.isUser = true;
+        this.isAdmin = this.user.is_admin;
+      }  else{
+        this.isAdmin = false;
+      }
     });
   }
 
