@@ -15,7 +15,7 @@ import { Email } from '../Models/Email';
   providedIn: 'root',
 })
 export class UserService {
-  readonly APIUrl = 'https://localhost:44327/api';
+  readonly APIUrl = 'https://localhost:44327/api/User';
   formData: User;
   public user = new BehaviorSubject<User>(null);
   errorData = {};
@@ -46,7 +46,7 @@ export class UserService {
     userId: string
   ): Observable<number> {
     return this.http.get<number>(
-      this.APIUrl + '/User/calculateSum/' + year + '/' + month + '/' + userId
+      this.APIUrl + '/calculateSum/' + year + '/' + month + '/' + userId
     );
   }
   private handleError(error: HttpErrorResponse) {
@@ -78,25 +78,31 @@ export class UserService {
   deleteU() {
     this.user.next(null);
   }
-  getUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.APIUrl + '/User/GetAll');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.APIUrl + '/GetAll');
   }
   addUser(dep: User) {
-    return this.http.post<User>(this.APIUrl + '/User/AddUser', dep);
+    return this.http.post<User>(this.APIUrl + '/AddUser', dep);
   }
   deleteUser(id: number) {
-    return this.http.delete(this.APIUrl + '/User/' + id);
+    return this.http.delete(this.APIUrl + '/' + id);
   }
   updateUser(dep: User) {
     return this.http.post(this.APIUrl + 'User', dep);
   }
   getAuthoById(id: number): Observable<User> {
-    return this.http.get<User>(this.APIUrl + '/User?id=' + id);
+    return this.http.get<User>(this.APIUrl + '?id=' + id);
   }
   approveUser(id: number) {
     console.log(id);
-    return this.http.post(this.APIUrl + '/User/ApproveUser', { id: id });
+    return this.http.post(this.APIUrl + '/ApproveUser', { id: id });
   }
+  SetStatusUser(id: string, isDisabled: boolean) {
+
+    return this.http.post<User>(this.APIUrl + '/SetStatusUser/'+id+'/'+isDisabled, { });
+  }
+
+
   private _listners = new Subject<any>();
   listen(): Observable<any> {
     return this._listners.asObservable();
@@ -105,7 +111,7 @@ export class UserService {
     this._listners.next(filterBy);
   }
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(this.APIUrl + '/User/Login', {
+    return this.http.post<User>(this.APIUrl + '/Login', {
       id_user: password,
       email,
     });
@@ -136,6 +142,6 @@ export class UserService {
       is_disabled: false
 
     };
-    return this.http.post(this.APIUrl + '/api/User/Register', body);
+    return this.http.post(this.APIUrl + '/api/Register', body);
   }
 }

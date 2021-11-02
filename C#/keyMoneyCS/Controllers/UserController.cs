@@ -42,8 +42,16 @@ namespace keyMoneyCS.Controllers
                 return Ok(userDB);
             return BadRequest("שם משתמש או סיסמא לא תקינים");
         }
-
-
+        [Route("SetStatusUser/{userId}/{isEnable}")]
+        [HttpPost]
+        public IHttpActionResult SetStatusUser(string userId, bool isEnable)
+        {
+            var userDB = UserBLL.SetStatusUser(userId, isEnable);
+            if (userDB != null)
+                return Ok(userDB);
+            return BadRequest("המשתמש לא נמצא");
+        }
+        
         [Route("calculateSum/{year}/{month}/{id}")]
         [HttpGet]
         public IHttpActionResult CalculateSum(int year, int month, string id)

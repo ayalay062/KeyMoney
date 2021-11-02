@@ -176,10 +176,19 @@ export class HeaderComponent implements OnInit {
     var pass = this.validatingForm.get('loginFormModalPassword');
     this.userSer.login(email.value, pass.value).subscribe(
       (data) => {
-        Swal.fire('הי', 'התחברת בהצלחה', 'success');
+        if(data.is_disabled)
+        {
+          Swal.fire('Oooops', ' המשתמש שלך נחסם, פנה למנהל המערכת', 'error');
+      
+          this.userSer.setU(null);
+        }
+        else{
+          Swal.fire('הי', 'התחברת בהצלחה', 'success');
+          this.userSer.setU(data);
 
-        this.userSer.setU(data);
+        }
         this.frame.hide();
+      
         // this.router.navigateByUrl('/user-account');
       },
       (err) => {

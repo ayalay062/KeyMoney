@@ -53,8 +53,13 @@
       </div>
 
       <div class="col-3 ml-5 p-3" style="border-bottom: 1px solid orange">
-        <h5>מידע</h5>
-        <p>עמותות וריבית</p>
+        <h5 *ngIf="!isAdmin">מידע</h5>
+        <p *ngIf="!isAdmin">עמותות וריבית</p>
+        <h5 *ngIf="isAdmin">משתמשים</h5>
+        <p *ngIf="isAdmin">חסימה ושחרור משתמשים</p>
+
+        <a  *ngIf="isAdmin" routerLink="/admin-users">נהל משתמשים *</a>
+     
       </div>
 
       <div class="col-3 ml-5 p-3" style="border-bottom: 1px solid orange">

@@ -70,12 +70,15 @@ import { CategoryComponent } from './Components/Diagrams/category/category.compo
 import { EmailServiceService } from './Service/email-service.service';
 import { ChartsModule } from 'ng2-charts';
 import { DiagramCategoryComponent } from './Components/Diagrams/diagram-category/diagram-category.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatPseudoCheckboxModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AdminUsersComponent } from './Components/Admin/admin-users/admin-users.component';
 import { AuthGuard } from './Service/auth-guard.service';
 import { FormNewAmutaComponent } from './Components/form-new-amuta/form-new-amuta.component';
 import { SpinnerOverlayComponent } from './components/general/spinner-overlay/spinner-overlay.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { AllUsersComponent } from './Components/Admin/all-users/all-users.component';
+import { SetUserComponent } from './Components/Admin/set-user/set-user.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -96,6 +99,10 @@ const routs: Routes = [
   { path: 'edit_loan', component: TableEditLoanComponent },
   { path: 'add_loan', component: TableAddLoanComponent },
 
+
+
+  { path: 'admin-users', canActivate:[AuthGuard], component: AdminUsersComponent },
+  
   { path: 'category', component: DiagramCategoryComponent },
   { path: 'admin-users', component: AdminUsersComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -127,6 +134,8 @@ const routs: Routes = [
     FormNewAmutaComponent,
     DailyExpenseComponent,
     SpinnerOverlayComponent,
+    AllUsersComponent,
+    SetUserComponent,
   ],
   imports: [
     CdkTableModule,
@@ -150,6 +159,7 @@ const routs: Routes = [
     MdbModalModule,
     MdbPopoverModule,
     MdbRadioModule,
+    MatCheckboxModule,
     MdbRangeModule,
     MdbRippleModule,
     ChartsModule,

@@ -1,1 +1,48 @@
-<p>admin-users works!</p>
+<div style="
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 60px;
+    direction: rtl;
+    text-align: right;
+  ">
+    <h1>ניהול משתמשים
+    </h1>
+    <mat-form-field style="font-family: 'Rubik', sans-serif; direction: rtl; text-align: right">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="מסנן" />
+    </mat-form-field>
+    <br>
+
+    <div style="overflow: auto">
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="ListData">
+                <mat-header-row *matHeaderRowDef="displayedColumns" style="font-family: 'Rubik', sans-serif; direction: rtl"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+                <ng-container matColumnDef="Options">
+                    <mat-header-cell *matHeaderCellDef>עריכה </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-checkbox [checked]="!element.is_disabled" (change)="setStatus($event.checked,element.id_user);">&nbsp;פעיל&nbsp;</mat-checkbox>
+
+                        <!-- <mat-icon is_disabled (click)="onEdit(row.id_loan)" class="icon">launch</mat-icon> -->
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name_user">
+                    <mat-header-cell *matHeaderCellDef>שם משתמש</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{ element.name_user }}
+                    </mat-header-cell>
+                </ng-container>
+                <ng-container matColumnDef="tel">
+                    <mat-header-cell *matHeaderCellDef>פלאפון</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{ element.tel }}
+                    </mat-header-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef>מייל</mat-header-cell>
+                    <mat-header-cell *matCellDef="let element">{{ element.email }}
+                    </mat-header-cell>
+                </ng-container>
+            </mat-table>
+        </div>
+    </div>
+</div>
