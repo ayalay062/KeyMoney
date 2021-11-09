@@ -85,8 +85,7 @@ export class HeaderComponent implements OnInit {
       loginFormModalEmail: new FormControl(
         '',
         Validators.compose([
-          Validators.required,
-          ValidationService.emailValidator,
+          Validators.required
         ])
       ),
       loginFormModalPassword: new FormControl(
@@ -114,7 +113,20 @@ export class HeaderComponent implements OnInit {
       ),
     });
   }
-
+  setLoginForm() {
+    this.validatingForm = new FormGroup({
+      loginFormModalEmail: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required
+          ])
+      ),
+      loginFormModalPassword: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(9)])
+      )});
+     
+  }
   setRegisterForm() {
     this.validatingForm = new FormGroup({
       loginFormModalEmail: new FormControl(

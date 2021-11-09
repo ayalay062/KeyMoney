@@ -17,7 +17,7 @@
       routerLink=""
       data-toggle="modal"
       data-target="#basicExample"
-      (click)="frame.show()"
+      (click)="frame.show();setLoginForm();"
       >|
       <img src="assets/img/loginicon.png" width="12px" height="10px" /> התחבר</a
     >
@@ -57,7 +57,7 @@
                         <input type="email" id="defaultForm-name" [formControl]="loginFormModalEmail" mdbValidate class="form-control" mdbInput />
                         <label for="defaultForm-name">מייל</label>
                         <mdb-error *ngIf="
-                          loginFormModalEmail.invalid &&
+                          loginFormModalEmail&&loginFormModalEmail.invalid &&
                           (loginFormModalEmail.dirty || loginFormModalEmail.touched)
                         ">
                             חובה להזין מייל תקין
@@ -69,7 +69,7 @@
                         <input type="password" id="defaultForm-pass" [formControl]="loginFormModalPassword" class="form-control" mdbInput mdbValidate />
                         <label for="defaultForm-pass">סיסמה</label>
                         <mdb-error *ngIf="
-                          loginFormModalPassword.invalid &&
+                          loginFormModalPassword&&loginFormModalPassword.invalid &&
                           (loginFormModalPassword.dirty ||
                             loginFormModalPassword.touched)
                         ">
@@ -150,7 +150,7 @@
             <input
               type="email"
               id="defaultForm-email2"
-              [formControl]="loginFormModalName"
+              [formControl]="loginFormModalEmail"
               class="form-control"
               mdbInput
               mdbValidate
@@ -158,7 +158,7 @@
             <label for="defaultForm-email2">  דוא"ל הרשום במערכת</label>
             <mdb-error
               *ngIf="
-                loginFormModalEmail.invalid &&
+                loginFormModalEmail&&loginFormModalEmail.invalid &&
                 (loginFormModalEmail.dirty || loginFormModalEmail.touched)
               "
             >
@@ -171,7 +171,7 @@
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button
-            mdbBtn    [disabled]="  loginFormModalEmail.invalid"
+            mdbBtn    [disabled]="  loginFormModalEmail&&loginFormModalEmail.invalid"
             class="btn waves-light"
             mdbWavesEffect
             (click)="onForgetSubmit()"
@@ -240,7 +240,7 @@
               <label for="defaultForm-id">סיסמא / תעודת זהות</label>
               <mdb-error
                 *ngIf="
-                  loginFormModalPassword.invalid &&
+                  loginFormModalPassword&&loginFormModalPassword.invalid &&
                   (loginFormModalPassword.dirty ||
                     loginFormModalPassword.touched)
                 "
@@ -261,7 +261,7 @@
               <label for="defaultForm-email">דוא"ל</label>
               <mdb-error
                 *ngIf="
-                  loginFormModalEmail.invalid &&
+                  loginFormModalEmail&&loginFormModalEmail.invalid &&
                   (loginFormModalEmail.dirty || loginFormModalEmail.touched)
                 "
               >

@@ -33,10 +33,9 @@ export class HomeComponent implements OnInit {
       this.isUser = false;
     }
     this.service.user.subscribe((x) => {
-      this.user = this.service.getU();
-      if (this.user != null) {
+      if (x != null) {
         this.isUser = true;
-        this.isAdmin = this.user.is_admin;
+        this.isAdmin = x.is_admin;
       }   else{
         this.isAdmin = false;
         this.isUser = false;
