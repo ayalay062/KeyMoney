@@ -12,7 +12,7 @@
       קשר</a
     >
   </li>
-  <li>
+  <li *ngIf="!isUser">
     <a
       routerLink=""
       data-toggle="modal"
@@ -22,10 +22,14 @@
       <img src="assets/img/loginicon.png" width="12px" height="10px" /> התחבר</a
     >
   </li>
-  <li style="float: left">
-    <a routerLink="contact"
-      ><img src="assets/img/lgsIcon.jpg" width="12px" height="10px" />עברית
-    </a>
+  <li *ngIf="isUser">
+    <a routerLink="home" routerLinkActive="active-link" (click)="logout();">
+  |
+  <img src="assets/img/loginicon.png" width="12px" height="10px" />  התנתק</a>
+    </li>
+    <li style="float: left">
+        <a routerLink="contact"><img src="assets/img/lgsIcon.jpg" width="12px" height="10px" />עברית
+        </a>
     </li>
     <!-- <li style="float:left">
     <img src="assets/img/lgsIcon.jpg" width="12px" height="10px" />
@@ -146,7 +150,7 @@
             <input
               type="email"
               id="defaultForm-email2"
-              [formControl]="loginFormModalEmail"
+              [formControl]="loginFormModalName"
               class="form-control"
               mdbInput
               mdbValidate

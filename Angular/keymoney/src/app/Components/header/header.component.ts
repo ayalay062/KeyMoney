@@ -64,6 +64,12 @@ export class HeaderComponent implements OnInit {
     private amutaSer: AmutaService
   ) {}
 
+
+  logout(){
+
+   this.userSer.setU(null);
+   this.isUser = false;
+  }
   ngOnInit(): void {
     var user = this.userSer.getU();
     if (user != null) this.isUser = true;

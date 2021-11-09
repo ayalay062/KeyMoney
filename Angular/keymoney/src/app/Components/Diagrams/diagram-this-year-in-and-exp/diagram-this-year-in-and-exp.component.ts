@@ -39,11 +39,15 @@ export class DiagramThisYearInAndExpComponent implements OnInit {
     this.graph.GetMonthsByYear(this.userId, year).subscribe((res) => {
       this.chart.chart.data.datasets[0].data=[];
       this.chart.chart.data.datasets[1].data=[];
+      this.chart.chart.data.datasets[2].data=[];
+      this.chart.chart.data.datasets[3].data=[];
       res.forEach((resData) => {
         if (resData) {
           var d = resData.split(',');
           this.chart.chart.data.datasets[0].data.push(+d[0]);
           this.chart.chart.data.datasets[1].data.push(+d[1]);
+          this.chart.chart.data.datasets[2].data.push(+d[2]);
+          this.chart.chart.data.datasets[3].data.push(+d[3]);
         //  this.barChartData[0].data.push(+d[0]);
         //  this.barChartData[1].data.push(+d[1]);
         }
@@ -78,6 +82,8 @@ export class DiagramThisYearInAndExpComponent implements OnInit {
 
   barChartData: ChartDataSets[] = [
     { data: [], label: 'סך הוצאות', backgroundColor: 'red' },
+    { data: [], label: 'סך השקעות', backgroundColor: 'yellow' },
+    { data: [], label: 'סך הלוואות', backgroundColor: 'green' },
     { data: [], label: 'סך הכנסות', backgroundColor: 'blue' },
   ];
 }
