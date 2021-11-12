@@ -49,9 +49,9 @@ namespace BLL
                     var inc_count = n.FirstOrDefault(a => a.Key == i);
                     var inc = inc_count != null ? inc_count.Sum(y => y.sum) : 0;
                     var eaa_count = aa.FirstOrDefault(add => add.Key == i);
-                    ex += eaa_count != null ? eaa_count.Sum(y => y.sum) : 0;
+                   var deps = eaa_count != null ? eaa_count.Sum(y => y.sum) : 0;
 
-
+                    var loansv = 0;
                     foreach (var loan in loans)
                     {
                         var endOfMonth = new DateTime(year,
@@ -63,12 +63,12 @@ namespace BLL
                             && loan.date_ofLoan <= endOfMonth)
                         {
 
-                            ex += (int)(Math.Round((loan.sum * (1 + (loan.ribit / 100))) / loan.prisa));
+                            loansv = (int)(Math.Round((loan.sum * (1 + (loan.ribit / 100))) / loan.prisa));
                         }
                     }
 
 
-                    months[i - 1] = ex + "," + inc;
+                    months[i - 1] = ex + ","+ deps + ","+ loansv + "," + inc;
                 }
 
 
