@@ -54,7 +54,7 @@ export class TableEditLoanComponent implements OnInit {
       ]),
       prisa: new FormControl('', Validators.required),
       ribit: new FormControl('', Validators.required),
-      date_OfLoan: new FormControl(
+      date_ofLoan: new FormControl(
         '' + new Date().toISOString().substring(0, 10),
         Validators.required
       ),
@@ -70,7 +70,7 @@ export class TableEditLoanComponent implements OnInit {
       this.myForm = this.fb.group(res);
       this.myForm.patchValue({
         id_expense: '' + res.id_expense,
-        date_OfLoan: '' + new Date(res.date_OfLoan).toISOString().substring(0,10),
+        date_ofLoan: '' + new Date(res.date_ofLoan).toISOString().substring(0,10),
       });
     });
   }
