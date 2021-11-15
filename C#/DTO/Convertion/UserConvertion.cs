@@ -9,8 +9,6 @@ namespace DTO
     {
         public static UserDto convertToDto(User user)
         {
-
-
             UserDto newUser = new UserDto();
             newUser.id_user = user.id_user;
             newUser.name_user = user.name_user;
@@ -22,17 +20,13 @@ namespace DTO
             newUser.is_disabled = user.is_disabled;
             if (user.Amuta != null)
             {
-                newUser.Amuta = AmutaConvertion.convertToDto( user.Amuta);
+                newUser.Amuta = AmutaConvertion.convertToDto(user.Amuta);
             }
-            
-
-
             return newUser;
         }
 
         public static List<UserDto> convertToListDto(List<User> user)
         {
-
             List<UserDto> newUser = new List<UserDto>();
             user.ForEach(x =>
             {
@@ -54,7 +48,6 @@ namespace DTO
             newUser.is_disabled = user.is_disabled;
 
             return newUser;
-
         }
 
     }

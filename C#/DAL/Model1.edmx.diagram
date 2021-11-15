@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="608eb62974e94fbb98a4b273fc948531" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="KeyMoneyModel.Amuta" Width="1.5" PointX="0.75" PointY="7.375" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Amuta_deposits" Width="1.5" PointX="5.25" PointY="9.125" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Expenses" Width="1.5" PointX="6" PointY="6.5" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Income" Width="1.5" PointX="3" PointY="14.625" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Kinds" Width="1.5" PointX="6" PointY="3.5" />
-        <EntityTypeShape EntityType="KeyMoneyModel.Loans" Width="1.5" PointX="8.25" PointY="5.875" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User" Width="1.5" PointX="3" PointY="9.625" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User_expense" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="KeyMoneyModel.User_income" Width="1.5" PointX="5.25" PointY="13" />
+      <Diagram DiagramId="608eb62974e94fbb98a4b273fc948531" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="KeyMoneyModel.Amuta" Width="1.5" PointX="6.625" PointY="11" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Amuta_deposits" Width="1.5" PointX="6.625" PointY="8.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Expenses" Width="1.5" PointX="8.25" PointY="8.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Income" Width="1.5" PointX="3.375" PointY="11.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Kinds" Width="1.5" PointX="8.25" PointY="10.375" />
+        <EntityTypeShape EntityType="KeyMoneyModel.Loans" Width="1.5" PointX="9.875" PointY="8.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User" Width="1.5" PointX="5" PointY="8.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User_expense" Width="1.5" PointX="11.625" PointY="8.5" />
+        <EntityTypeShape EntityType="KeyMoneyModel.User_income" Width="1.5" PointX="3.375" PointY="8.5" />
         <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_am__35BCFE0A" />
         <AssociationConnector Association="KeyMoneyModel.FK__User__id_amuta__398D8EEE" />
         <AssociationConnector Association="KeyMoneyModel.FK__Amuta_dep__id_us__36B12243" />
