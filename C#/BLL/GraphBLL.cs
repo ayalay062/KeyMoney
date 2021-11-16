@@ -11,36 +11,36 @@ namespace BLL
     {
 
 
-        // הוצאות של משתמש לפי חודשים
+        //  גרף הוצאות של משתמש לפי חודשים 
         public static List<string> GetMonthsByYear(string id_user, int year)
         {
-            //מטבלת ההוצאות של כל המשתמשים, מבקשים לשלוף רק את ההוצאות של המשתמש עם הסיסמה שהתקבלה
+            //
             using (var db = new KeyMoneyEntities())
             {
+                //שליפת ההוצאות של המשתמש לפי שנה
                 var allUExpenses = db.User_expense
                       .Where(o => o.id_user == id_user &&
                      o.expense_date.Year == year);
-
+                //קיבוץ עי החודש בשנה
                 var m = from allUexp in allUExpenses
                         group allUexp by allUexp.expense_date.Month;
-
+                //שליפת ההכנסות של המשתמש לפי שנה
                 var allIncomes = db.User_income
                .Where(o => o.id_user == id_user &&
                o.income_date.Year == year);
-
-
+                //קיבוץ הכנסות ע"י החודש
                 var n = from alInc in allIncomes
                         group alInc by alInc.income_date.Month;
-
+                //שליפת ההלואות של המשתמש
                 var loans = db.Loans.Where(r => r.id_user == id_user).ToList();
-
+                //שליפה של ההשקעות של המשתמש לפי שנה
                 var aDep = db.Amuta_deposits
       .Where(o => o.id_user == id_user &&
      o.dateOfDeposit.Year == year);
-
+                //קיבוץ לפי חודש
                 var aa = from aDe in aDep
                          group aDe by aDe.dateOfDeposit.Month;
-
+                // מעבר על החודשים ושליפת הערכים המתאימים לכל חודש
                 string[] months = new string[13];
                 for (int i = 1; i < 13; i++)
                 {
@@ -49,9 +49,10 @@ namespace BLL
                     var inc_count = n.FirstOrDefault(a => a.Key == i);
                     var inc = inc_count != null ? inc_count.Sum(y => y.sum) : 0;
                     var eaa_count = aa.FirstOrDefault(add => add.Key == i);
-                   var deps = eaa_count != null ? eaa_count.Sum(y => y.sum) : 0;
+                    var deps = eaa_count != null ? eaa_count.Sum(y => y.sum) : 0;
 
                     var loansv = 0;
+                    //שליפה וחישוב הלוואות ששתאריך ההתחלה והסוף מכילים את החודש הנוכחי
                     foreach (var loan in loans)
                     {
                         var endOfMonth = new DateTime(year,
@@ -62,16 +63,13 @@ namespace BLL
                         if (loan.date_ofLoan.AddMonths(loan.prisa) >= endOfMonth
                             && loan.date_ofLoan <= endOfMonth)
                         {
-
+                            //חישוב ההלואה על פי פריסה וריבית
                             loansv = (int)(Math.Round((loan.sum * (1 + (loan.ribit / 100))) / loan.prisa));
                         }
                     }
-
-
-                    months[i - 1] = ex + ","+ deps + ","+ loansv + "," + inc;
+                    //החזרת מערך עם 12 אברים עבור כל חודש המכיל את כל 4 הפרמטרים לכל חודש
+                    months[i - 1] = ex + "," + deps + "," + loansv + "," + inc;
                 }
-
-
                 return months.ToList();
             }
         }

@@ -20,7 +20,7 @@ import { FormNewAmutaComponent } from '../form-new-amuta/form-new-amuta.componen
 import { AmutaDepositService } from 'src/app/Service/amuta-deposit.service';
 import { Amuta_deposits } from 'src/app/Models/Amuta_deposits';
 
-import  { Workbook, Worksheet } from 'exceljs/dist/exceljs.min.js'
+import { Workbook, Worksheet } from 'exceljs/dist/exceljs.min.js';
 import * as fs from 'file-saver';
 @Component({
   selector: 'table-expenses-in-years',
@@ -29,15 +29,15 @@ import * as fs from 'file-saver';
 })
 export class TableExpensesInYearsComponent implements OnInit {
   ListData: MatTableDataSource<User_expense>;
-  lData:User_expense[];
+  lData: User_expense[];
   ListData2: MatTableDataSource<User_expense>;
-  lData2:User_expense[];
+  lData2: User_expense[];
   ListDataLoans: MatTableDataSource<Loans>;
-  lDataLoans:Loans[];
+  lDataLoans: Loans[];
   ListDataAmuta: MatTableDataSource<Amuta_deposits>;
-  lDataAmutaD:Amuta_deposits[];
+  lDataAmutaD: Amuta_deposits[];
   ListDataIncome: MatTableDataSource<User_income>;
-  lDataIncome:User_income[];
+  lDataIncome: User_income[];
   displayedColumns: string[] = [
     'Options',
     'expense_date',
@@ -109,7 +109,6 @@ export class TableExpensesInYearsComponent implements OnInit {
     this.calculateSum(this.selectedYear, this.selectedMonth);
     this.refreshLoansList(this.selectedYear, this.selectedMonth);
     this.refreshAmutaList(this.selectedYear, this.selectedMonth);
- 
   }
 
   onEdit(dep: number, isExpense: boolean) {
@@ -281,7 +280,7 @@ export class TableExpensesInYearsComponent implements OnInit {
     this.refreshLoansList(this.selectedYear, this.selectedMonth);
     this.refreshAmutaList(this.selectedYear, this.selectedMonth);
   }
-  onEditAmuta(id:number) {
+  onEditAmuta(id: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -322,11 +321,11 @@ export class TableExpensesInYearsComponent implements OnInit {
       if (this.month[index] === month) break;
     }
     this.service.getExpenseList(year, ++m, this.userId).subscribe((data) => {
-     this.lData = data.filter((x) => x.id_kind === 1);
-      this.ListData = new MatTableDataSource( this.lData );
+      this.lData = data.filter((x) => x.id_kind === 1);
+      this.ListData = new MatTableDataSource(this.lData);
       this.ListData.sort = this.sort;
-      this.lData2= data.filter((x) => x.id_kind === 2);
-      this.ListData2 = new MatTableDataSource( this.lData2);
+      this.lData2 = data.filter((x) => x.id_kind === 2);
+      this.ListData2 = new MatTableDataSource(this.lData2);
       this.ListData2.sort = this.sort;
 
       this.allExpensesValue = data.reduce((acc, cur) => acc + cur.sum, 0);
@@ -356,7 +355,7 @@ export class TableExpensesInYearsComponent implements OnInit {
       .calcLoansByUserIdMonthYear(this.userId, ++m, year)
       .subscribe((data) => {
         this.lDataLoans = data;
-      
+
         this.ListDataLoans = new MatTableDataSource(data);
         this.ListDataLoans.sort = this.sort;
       });
@@ -371,114 +370,101 @@ export class TableExpensesInYearsComponent implements OnInit {
       .getAmutaDepByUserIdMonthYear(this.userId, year, ++m)
       .subscribe((data) => {
         this.lDataAmutaD = data;
-      
+
         this.ListDataAmuta = new MatTableDataSource(data);
         this.ListDataAmuta.sort = this.sort;
       });
   }
+
+  //הורדת קובץ דוח
   downloadExcel() {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet(
       this.selectedMonth + '-' + this.selectedYear + ''
     );
-  
-      worksheet= worksheetAddTitleRow(worksheet,'  הוצאות קבועות ' );
-      worksheet= worksheetAddHeaderRow(worksheet,[
-        'פרטים',
-        'תאריך',
-        'סכום',
-  
-      ] );
 
-  
+    worksheet = worksheetAddTitleRow(worksheet, '  הוצאות קבועות ');
+    worksheet = worksheetAddHeaderRow(worksheet, ['פרטים', 'תאריך', 'סכום']);
+
+    //שליפת ומילוי ההוצאות הקבועות
     for (let element of this.lData) {
       let temp = [];
       temp.push(element.expense_info);
-      temp.push( new Date(element.expense_date)
-              .toISOString()
-              .substring(0, 16)
-              .replace('T', ' ')
+      temp.push(
+        new Date(element.expense_date)
+          .toISOString()
+          .substring(0, 16)
+          .replace('T', ' ')
       );
       temp.push(element.sum);
       worksheet.addRow(temp);
     }
 
-    worksheet= worksheetAddTitleRow(worksheet,'  הוצאות משתנות ' );
-      worksheet= worksheetAddHeaderRow(worksheet,[
-        'פרטים',
-        'תאריך',
-        'סכום',
-  
-      ] );
-
+    worksheet = worksheetAddTitleRow(worksheet, '  הוצאות משתנות ');
+    worksheet = worksheetAddHeaderRow(worksheet, ['פרטים', 'תאריך', 'סכום']);
+    //שליפת ומילוי ההוצאות המשתנות
     for (let element of this.lData2) {
       let temp = [];
       temp.push(element.expense_info);
-      temp.push( new Date(element.expense_date)
-              .toISOString()
-              .substring(0, 16)
-              .replace('T', ' ')
+      temp.push(
+        new Date(element.expense_date)
+          .toISOString()
+          .substring(0, 16)
+          .replace('T', ' ')
       );
       temp.push(element.sum);
       worksheet.addRow(temp);
     }
-    worksheet= worksheetAddTitleRow(worksheet,'   הלוואות ' );
-    worksheet= worksheetAddHeaderRow(worksheet,[
-      'פרטים',
-      'סכום',
-
-    ] );
+    //שליפת ומילוי ההלוואות
+    worksheet = worksheetAddTitleRow(worksheet, '   הלוואות ');
+    worksheet = worksheetAddHeaderRow(worksheet, ['פרטים', 'סכום']);
     for (let element of this.lDataLoans) {
-
       let temp = [];
       temp.push(element.loan_info);
       temp.push(element.sum_month);
       worksheet.addRow(temp);
     }
-
-    worksheet= worksheetAddTitleRow(worksheet,'   עמותות להשקעה ' );
-    worksheet= worksheetAddHeaderRow(worksheet,[
-      'פרטים',
-      'תאריך',
-      'סכום',
-
-    ] );
+    //שליפת ומילוי עמותות להשקעה
+    worksheet = worksheetAddTitleRow(worksheet, '   עמותות להשקעה ');
+    worksheet = worksheetAddHeaderRow(worksheet, ['פרטים', 'תאריך', 'סכום']);
     for (let element of this.lDataAmutaD) {
       let temp = [];
-      temp.push(element.Amuta? element.Amuta.name_amuta: '');
-      temp.push( new Date(element.dateOfDeposit)
-              .toISOString()
-              .substring(0, 16)
-              .replace('T', ' ')
+      temp.push(element.Amuta ? element.Amuta.name_amuta : '');
+      temp.push(
+        new Date(element.dateOfDeposit)
+          .toISOString()
+          .substring(0, 16)
+          .replace('T', ' ')
       );
       temp.push(element.sum);
       worksheet.addRow(temp);
     }
-    worksheet= worksheetAddTitleRow(worksheet,'   הכנסות ' );
-    worksheet= worksheetAddHeaderRow(worksheet,[
-      'פרטים',
-      'תאריך',
-      'סכום',
-
-    ] );
+    //שליפת ומילוי ההכנסות
+    worksheet = worksheetAddTitleRow(worksheet, '   הכנסות ');
+    worksheet = worksheetAddHeaderRow(worksheet, ['פרטים', 'תאריך', 'סכום']);
     for (let element of this.lDataIncome) {
       let temp = [];
       temp.push(element.income_info);
-      temp.push( new Date(element.income_date)
-              .toISOString()
-              .substring(0, 16)
-              .replace('T', ' ')
+      temp.push(
+        new Date(element.income_date)
+          .toISOString()
+          .substring(0, 16)
+          .replace('T', ' ')
       );
       temp.push(element.sum);
       worksheet.addRow(temp);
     }
+    //חישוב סך היתרה
     let titleRow = worksheet.addRow(['']);
-    worksheet= worksheetAddTitleRow(worksheet,' סך היתרה ' + this.calculateSumVal + ' שח' );
-    
-    //set downloadable file name
+    worksheet = worksheetAddTitleRow(
+      worksheet,
+      ' סך היתרה ' + this.calculateSumVal + ' שח'
+    );
+
+    //שם הקובץ להורדה
     let fname = 'KeyMoney-' + this.selectedYear;
 
-    //add data and file name and download
+    //הורדת קובץ XLSX
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -494,42 +480,42 @@ export class TableExpensesInYearsComponent implements OnInit {
     }
     this.userService.calculateSum(year, ++m, this.userId).subscribe((data) => {
       this.calculateSumVal = data;
-
-
     });
   }
 }
 function worksheetAddTitleRow(worksheet: Worksheet, header: string): Worksheet {
-   // Add new row
-   let titleRow = worksheet.addRow([header]);
-   // Set font, size and style in title row.
-   titleRow.font = {
-     name: 'Comic Sans MS',
-     family: 4,
-     size: 14,
-     underline: 'none',
-     bold: true,
-   };
-   return worksheet;
+  // Add new row
+  let titleRow = worksheet.addRow([header]);
+  // Set font, size and style in title row.
+  titleRow.font = {
+    name: 'Comic Sans MS',
+    family: 4,
+    size: 14,
+    underline: 'none',
+    bold: true,
+  };
+  return worksheet;
 }
 
-function worksheetAddHeaderRow(worksheet: Worksheet, header: string[]): Worksheet {
+function worksheetAddHeaderRow(
+  worksheet: Worksheet,
+  header: string[]
+): Worksheet {
   let headerRow = worksheet.addRow(header);
-    // Cell Style : Fill and Border
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'CCCCCCCC' },
-        bgColor: { argb: 'CCCCCCCC' },
-      };
-      cell.border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' },
-      };
-    });
-    return worksheet;
+  // Cell Style : Fill and Border
+  headerRow.eachCell((cell, number) => {
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'CCCCCCCC' },
+      bgColor: { argb: 'CCCCCCCC' },
+    };
+    cell.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' },
+    };
+  });
+  return worksheet;
 }
-

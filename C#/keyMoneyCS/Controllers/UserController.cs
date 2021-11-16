@@ -14,16 +14,15 @@ namespace keyMoneyCS.Controllers
     public class UserController : ApiController
     {
 
-
-        // GET: מציג רשימה של כל ההפקדות של כל המשתמשים לכל העמותות
+        // שליפת כל המשתמשים
         [Route("GetAll")]
         public IHttpActionResult Get()
         {
             return Ok(UserBLL.GetAll());
 
         }
+        // שליפת משתמש עי המזהה
         [Route("GetByUserId/{id}")]
-
         public IHttpActionResult GetByUserId(string id)
         {
             var ad = UserBLL.GetById(id);
@@ -33,6 +32,7 @@ namespace keyMoneyCS.Controllers
             }
             return InternalServerError(new Exception("The User isn't defined"));
         }
+        //התחברות
         [Route("login")]
         [HttpPost]
         public IHttpActionResult Login(UserDto user)
@@ -42,6 +42,7 @@ namespace keyMoneyCS.Controllers
                 return Ok(userDB);
             return BadRequest("שם משתמש או סיסמא לא תקינים");
         }
+        //שינוי סטטוס
         [Route("SetStatusUser/{userId}/{isEnable}")]
         [HttpPost]
         public IHttpActionResult SetStatusUser(string userId, bool isEnable)
@@ -51,19 +52,16 @@ namespace keyMoneyCS.Controllers
                 return Ok(userDB);
             return BadRequest("המשתמש לא נמצא");
         }
-        
+        //חישוב יתרה על פי חודש ושנה
         [Route("calculateSum/{year}/{month}/{id}")]
         [HttpGet]
         public IHttpActionResult CalculateSum(int year, int month, string id)
         {
             var ad = UserBLL.CalculateSum(year, month, id);
-
             return Ok(ad);
-
         }
 
-
-
+        //הוספת משתמש
         [HttpPost]
         [Route("AddUser")]
         public IHttpActionResult AddUser(UserDto ad)
@@ -72,13 +70,15 @@ namespace keyMoneyCS.Controllers
             if (addedValue == null) return BadRequest("משתמש קיים במערכת");
             return Ok(addedValue);
         }
-       [HttpPost]
+        //עדכון משתמש
+        [HttpPost]
         [Route("UpdateUser")]
         public IHttpActionResult UpdateUser(UserDto ad)
         {
             var addedValue = UserBLL.UpdateUser(ad);
             return Ok(addedValue);
         }
+        //מחיקת משתמש
         [HttpDelete]
         [Route("DeleteUser/{id}")]
         public IHttpActionResult DeleteUser(string id)

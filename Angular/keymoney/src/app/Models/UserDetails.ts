@@ -8,7 +8,7 @@ export class UserDetails {
         public prisa:number,
         public ribit:number,
         public days_toGetMailAlert:number,
-        public date_OfLoan:Date
+        public date_ofLoan:Date
 
     ) { }
 }

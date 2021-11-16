@@ -10,6 +10,9 @@ import { TableEditLoanComponent } from '../table-edit-loan/table-edit-loan.compo
 import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Models/User';
+
+import { Workbook, Worksheet } from 'exceljs/dist/exceljs.min.js';
+import * as fs from 'file-saver';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'table_loans',
@@ -18,6 +21,7 @@ import Swal from 'sweetalert2';
 })
 export class TableLoansComponent implements OnInit {
   userId: string;
+  loans: Loans[];
   constructor(
     private service: LoansService,
     private dialog: MatDialog,
@@ -74,7 +78,7 @@ export class TableLoansComponent implements OnInit {
   }
 
   onDelete(id: string) {
-    var self=this;
+    var self = this;
     Swal.fire({
       title: 'מחיקת הלוואה',
       text: 'האם את/ה בטוח/ה שאת/ה רוצה למחוק את ההלוואה?',
@@ -110,8 +114,96 @@ export class TableLoansComponent implements OnInit {
 
   refreshAuthoList() {
     this.service.getLoansByUserId(this.userId).subscribe((data) => {
+      this.loans = data;
       this.ListData = new MatTableDataSource(data);
       // this.ListData.sort = this.sort;
     });
   }
+  downloadExcel() {
+    let workbook = new Workbook();
+    let worksheet = workbook.addWorksheet(
+      'loans' + new Date().getUTCFullYear()
+    );
+
+    worksheet = worksheetAddTitleRow(worksheet, '  פרטי ההלואות ');
+    worksheet = worksheetAddHeaderRow(worksheet, [
+      'פרטים',
+      'תאריך',
+      'סכום חודשי',
+      'ריבית',
+      'סכום',
+    ]);
+
+    for (let element of this.loans) {
+      let temp = [];
+      temp.push(element.loan_info);
+    
+      temp.push(
+        new Date(element.date_ofLoan)
+          .toISOString()
+          .substring(0, 10)
+          .replace('T', ' ')
+      );
+      temp.push(element.sum_month+ ' שח');
+      temp.push(element.ribit + '%');
+      temp.push(element.sum + ' שח');
+    
+     
+     
+     
+      worksheet.addRow(temp);
+    }
+    var allLoansSum = this.loans.reduce((acc, cur) => acc + cur.sum, 0);
+    worksheet = worksheetAddTitleRow(
+      worksheet,
+      ' סך כל ההלואות ' + allLoansSum + ' שח'
+    );
+
+    //set downloadable file name
+    let fname = 'KeyMoneyLoans';
+
+    //add data and file name and download
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      fs.saveAs(blob, fname + '-' + new Date().valueOf() + '.xlsx');
+    });
+  }
+}
+function worksheetAddTitleRow(worksheet: Worksheet, header: string): Worksheet {
+  // Add new row
+  let titleRow = worksheet.addRow([header]);
+  // Set font, size and style in title row.
+  titleRow.font = {
+    name: 'Comic Sans MS',
+    family: 4,
+    size: 14,
+    underline: 'none',
+    bold: true,
+  };
+  return worksheet;
+}
+
+function worksheetAddHeaderRow(
+  worksheet: Worksheet,
+  header: string[]
+): Worksheet {
+  let headerRow = worksheet.addRow(header);
+  // Cell Style : Fill and Border
+  headerRow.eachCell((cell, number) => {
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'CCCCCCCC' },
+      bgColor: { argb: 'CCCCCCCC' },
+    };
+    cell.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' },
+    };
+  });
+  return worksheet;
 }

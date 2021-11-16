@@ -6,7 +6,7 @@ export class Loans {
   id_loan: number;
   id_expense: number;
   id_user: string;
-  date_OfLoan: Date;
+  date_ofLoan: Date;
   sum: number;
   prisa: number;
   ribit: number; // float?

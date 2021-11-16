@@ -24,14 +24,30 @@ namespace BLL
 
         public static List<LoansDto> GetByUserId(string id)
         {
+            var resLoans = new List<LoansDto>();
+            var endOfMonth = new DateTime(DateTime.Today.Year,
+                                   DateTime.Today.Month,
+                                   DateTime.DaysInMonth(DateTime.Today.Year,
+                                                         DateTime.Today.Month));
+
+
             using (var db = new KeyMoneyEntities())
             {
-                var ads = db.Loans.Where(r => r.id_user == id).ToList();
-                if (ads == null)
+                var loans = db.Loans.Where(r => r.id_user == id).ToList();
+                if (loans == null)
                 {
                     return null;
                 }
-                return LoansConvertion.convertToListDto(ads);
+                foreach (var loan in loans)
+                {
+                    if (loan.date_ofLoan.AddMonths(loan.prisa) >= endOfMonth && loan.date_ofLoan <= endOfMonth)
+                    {
+                        var loanDto = LoansConvertion.convertToDto(loan);
+                        loanDto.sum_month = Math.Round((loan.sum * (1 + (loan.ribit / 100))) / loan.prisa);
+                        resLoans.Add(loanDto);
+                    }
+                }
+                return resLoans;
 
             }
         }

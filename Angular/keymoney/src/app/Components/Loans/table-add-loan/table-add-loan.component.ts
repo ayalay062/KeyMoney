@@ -34,7 +34,7 @@ export class TableAddLoanComponent implements OnInit {
       ]),
       prisa: new FormControl('', Validators.required),
       ribit: new FormControl('', Validators.required),
-      date_OfLoan: new FormControl(
+      date_ofLoan: new FormControl(
         '' + new Date().toISOString().substring(0, 10),
         Validators.required
       ),
