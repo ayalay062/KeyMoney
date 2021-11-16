@@ -73,7 +73,7 @@ namespace BLL
                 var incVal = 0;
                 //שליפה של כל ההכנסות לפי חודש ושנה
                 var inc = db.User_income.Where(r =>
-          r.income_date.Year == year &&
+          r.income_date.Year == year && r.id_user == id &&
                 r.income_date.Month == month).ToList();
 
                 if (inc != null && inc.Any())

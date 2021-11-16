@@ -47,13 +47,13 @@ namespace BLL
                 
             }
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("statist.project.it@gmail.com");
+            mail.From = new MailAddress("keymoney2021.project@gmail.com");
             mail.To.Add(objData.toemail);
             mail.Subject = objData.subject;
             mail.IsBodyHtml = true;
             SmtpServer.UseDefaultCredentials = false;
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("statist.project.it@gmail.com", "p1stat1r");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("keymoney2021.project@gmail.com", "KM123456");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
