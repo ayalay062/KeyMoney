@@ -29,15 +29,15 @@ import * as fs from 'file-saver';
 })
 export class TableExpensesInYearsComponent implements OnInit {
   ListData: MatTableDataSource<User_expense>;
-  lData: User_expense[];
+  lData: User_expense[]=[];
   ListData2: MatTableDataSource<User_expense>;
-  lData2: User_expense[];
+  lData2: User_expense[]=[];
   ListDataLoans: MatTableDataSource<Loans>;
-  lDataLoans: Loans[];
+  lDataLoans: Loans[]=[];
   ListDataAmuta: MatTableDataSource<Amuta_deposits>;
-  lDataAmutaD: Amuta_deposits[];
+  lDataAmutaD: Amuta_deposits[]=[];
   ListDataIncome: MatTableDataSource<User_income>;
-  lDataIncome: User_income[];
+  lDataIncome: User_income[]=[];
   displayedColumns: string[] = [
     'Options',
     'expense_date',
