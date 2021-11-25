@@ -64,6 +64,7 @@ small.s-error {
 
 .mis-wrapper * {
     display: inline-block;
+    vertical-align: middle;
 }
 
 .mis-wrapper input {

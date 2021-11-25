@@ -208,7 +208,7 @@
                 {{calculateSumVal}}</span> ש"ח</label>
             <br>
             <div class="mis-wrapper">
-                <small> מסגרת התקציב שלך {{userMisgeret}} ש"ח</small>
+                <small *ngIf="!editMisgeret"> מסגרת התקציב שלך {{userMisgeret}} ש"ח</small>
                 <mat-icon class="icon" *ngIf="!editMisgeret" (click)="editMisgeret=true;">launch</mat-icon>
                 <input type="number" *ngIf="editMisgeret" [(ngModel)]="userMisgeret">
                 <button class="btn" *ngIf="editMisgeret" (click)="editMisgeretFunc();">
