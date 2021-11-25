@@ -65,6 +65,23 @@ namespace BLL
 
             }
         }
+
+        public static object UpdateMisgeret(string userId, int misgeret)
+        {
+            using (var db = new KeyMoneyEntities())
+            {
+                User a = db.User.FirstOrDefault(u => u.id_user == userId);
+                if (a != null)
+                {
+                    a.misgeret = misgeret;
+                    db.SaveChanges();
+                    return UserConvertion.convertToDto(a);
+                }
+
+                return null;
+            }
+        }
+
         //חישוב סך הוצאות והכנסות למשתמש על פי חודש ושנה
         public static double CalculateSum(int year, int month, string id)
         {

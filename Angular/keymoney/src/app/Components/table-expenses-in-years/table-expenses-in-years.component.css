@@ -41,13 +41,35 @@
     font-weight: bold;
 }
 
-small {
-    color: red;
+small.s-error {
     font-size: 12px;
     margin-top: -10px;
     position: relative;
     display: block;
     text-align: center;
+}
+
+small.s-error {
+    color: red;
+    /* font-size: 12px;
+    margin-top: -10px;
+    position: relative;
+    display: block;
+    text-align: center; */
+}
+
+.mis-wrapper {
+    direction: rtl;
+}
+
+.mis-wrapper * {
+    display: inline-block;
+}
+
+.mis-wrapper input {
+    max-width: 100px;
+    height: 30px;
+    vertical-align: middle;
 }
 
 .download-excel {
@@ -57,4 +79,14 @@ small {
     font-size: 30px;
     height: 30px;
     width: 30px;
+}
+
+.download-excel-label {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    font-size: 12px;
+    height: 30px;
+    width: 80px;
+    padding: 10px;
 }

@@ -52,6 +52,19 @@ namespace keyMoneyCS.Controllers
                 return Ok(userDB);
             return BadRequest("המשתמש לא נמצא");
         }
+        //שינוי סטטוס
+        [Route("UpdateMisgeret/{userId}/{misgeret}")]
+        [HttpPost]
+        public IHttpActionResult UpdateMisgeret(string userId, int misgeret)
+        {
+            var userDB = UserBLL.UpdateMisgeret(userId, misgeret);
+            if (userDB != null)
+                return Ok(userDB);
+            return BadRequest("המשתמש לא נמצא");
+        }
+
+
+
         //חישוב יתרה על פי חודש ושנה
         [Route("calculateSum/{year}/{month}/{id}")]
         [HttpGet]

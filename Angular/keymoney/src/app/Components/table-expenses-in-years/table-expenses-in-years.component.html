@@ -4,6 +4,7 @@
 סה"כ
 התנתק -->
 <div class="div-outer-wrapper row">
+    <label class="download-excel-label">הצאת דוח</label>
     <mat-icon class="icon download-excel" (click)="downloadExcel()">file_copy</mat-icon>
 
     <div class="col-2">
@@ -206,7 +207,15 @@
             <label *ngIf="calculateSumVal" [class.red_col]="allExpensesValue > userMisgeret || calculateSumVal < 0">סה"כ: <span style="unicode-bidi: isolate;direction: ltr;">
                 {{calculateSumVal}}</span> ש"ח</label>
             <br>
-            <small *ngIf="allExpensesValue > userMisgeret">חרגת ממסגרת התקציב שלך*</small>
+            <div class="mis-wrapper">
+                <small> מסגרת התקציב שלך {{userMisgeret}} ש"ח</small>
+                <mat-icon class="icon" *ngIf="!editMisgeret" (click)="editMisgeret=true;">launch</mat-icon>
+                <input type="number" *ngIf="editMisgeret" [(ngModel)]="userMisgeret">
+                <button class="btn" *ngIf="editMisgeret" (click)="editMisgeretFunc();">
+                    שמור
+                    </button>
+            </div>
+            <small class="s-error" *ngIf="allExpensesValue > userMisgeret"> חרגת ממסגרת התקציב שלך *</small>
 
             <button class="btn" *ngIf="calculateSumVal > 0" (click)="addToAmuta();">
                 השקע יתרה בעמותה - חסכון

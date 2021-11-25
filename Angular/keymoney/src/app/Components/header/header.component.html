@@ -66,14 +66,14 @@
 
                     <div class="md-form mb-4">
                         <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
-                        <input type="password" id="defaultForm-pass" [formControl]="loginFormModalPassword" class="form-control" mdbInput mdbValidate />
+                        <input type="password" id="defaultForm-pass" pattern="^[A-Za-z0-9]+$" [formControl]="loginFormModalPassword" class="form-control" mdbInput mdbValidate />
                         <label for="defaultForm-pass">סיסמה</label>
                         <mdb-error *ngIf="
                           loginFormModalPassword&&loginFormModalPassword.invalid &&
                           (loginFormModalPassword.dirty ||
                             loginFormModalPassword.touched)
                         ">
-                            חובה להזין 9 תווים
+                            ( אות או מספר בלבד) חובה להזין 9 תווים
                         </mdb-error>
                     </div>
 
@@ -231,7 +231,7 @@
             <div class="md-form ">
               <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
               <input
-               type="password"
+               type="password"  pattern="^[A-Za-z0-9]+$"
                 id="defaultForm-id"
                 [formControl]="loginFormModalPassword"
                 class="form-control"
@@ -245,7 +245,7 @@
                     loginFormModalPassword.touched)
                 "
               >
-                חובה להזין 9 תווים
+            חובה להזין 9 תווים  ( אות או ספרה בלבד )
               </mdb-error>
             </div>
             <div class="md-form ">

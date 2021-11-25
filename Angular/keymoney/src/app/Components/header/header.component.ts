@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit {
       ),
       loginFormModalPassword: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(9)])
+        Validators.compose([Validators.required, Validators.minLength(9),Validators.pattern('^[A-Za-z0-9]+$')])
       ),
     });
 
@@ -123,7 +123,7 @@ export class HeaderComponent implements OnInit {
       ),
       loginFormModalPassword: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(9)])
+        Validators.compose([Validators.required, Validators.minLength(9),Validators.pattern('^[A-Za-z0-9]+$')])
       )});
      
   }
@@ -138,7 +138,7 @@ export class HeaderComponent implements OnInit {
       ),
       loginFormModalPassword: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(9)])
+        Validators.compose([Validators.required, Validators.minLength(9),Validators.pattern('^[A-Za-z0-9]+$')])
       ),
       // loginFormModalId: new FormControl(
       //   '',

@@ -102,6 +102,10 @@ export class UserService {
     return this.http.post<User>(this.APIUrl + '/SetStatusUser/'+id+'/'+isDisabled, { });
   }
 
+  UpdateMisgeret(id: string, misgeret: number) {
+
+    return this.http.post<User>(this.APIUrl + '/UpdateMisgeret/'+id+'/'+misgeret, { });
+  }
 
   private _listners = new Subject<any>();
   listen(): Observable<any> {

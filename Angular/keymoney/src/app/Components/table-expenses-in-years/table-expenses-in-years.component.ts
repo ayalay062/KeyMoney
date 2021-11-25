@@ -29,15 +29,16 @@ import * as fs from 'file-saver';
 })
 export class TableExpensesInYearsComponent implements OnInit {
   ListData: MatTableDataSource<User_expense>;
-  lData: User_expense[]=[];
+  lData: User_expense[] = [];
   ListData2: MatTableDataSource<User_expense>;
-  lData2: User_expense[]=[];
+  lData2: User_expense[] = [];
   ListDataLoans: MatTableDataSource<Loans>;
-  lDataLoans: Loans[]=[];
+  lDataLoans: Loans[] = [];
   ListDataAmuta: MatTableDataSource<Amuta_deposits>;
-  lDataAmutaD: Amuta_deposits[]=[];
+  lDataAmutaD: Amuta_deposits[] = [];
   ListDataIncome: MatTableDataSource<User_income>;
-  lDataIncome: User_income[]=[];
+  lDataIncome: User_income[] = [];
+  editMisgeret = false;
   displayedColumns: string[] = [
     'Options',
     'expense_date',
@@ -375,7 +376,18 @@ export class TableExpensesInYearsComponent implements OnInit {
         this.ListDataAmuta.sort = this.sort;
       });
   }
-
+  editMisgeretFunc() {
+    this.userService
+      .UpdateMisgeret(this.userId, this.userMisgeret)
+      .subscribe((data) => {
+        this.userService.setU(data);
+        var user = <User>JSON.parse(localStorage.getItem('user'));
+        this.userId = user.id_user;
+        this.userMisgeret = user.misgeret;
+        this.editMisgeret = false;
+        Swal.fire('הי','השמירה בוצעה בהצלחה','success');
+      });
+  }
   //הורדת קובץ דוח
   downloadExcel() {
     let workbook = new Workbook();

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AmutaBLL.cs" />
     <Compile Include="Amuta_depositsBLL.cs" />
+    <Compile Include="Cryptography.cs" />
     <Compile Include="EmailBLL.cs" />
     <Compile Include="ExpensesBLL.cs" />
     <Compile Include="GraphBLL.cs" />
